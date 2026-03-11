@@ -1,0 +1,41 @@
+{
+  "nav": {
+    "home": "Bosh sahifa",
+    "services": "Xizmatlar",
+    "projects": "Loyihalar",
+    "news": "Yangiliklar",
+    "about": "Kompaniya haqida",
+    "contact": "Kontakt"
+  },
+  "topbar": {
+    "phone": "Telefon",
+    "email": "Email",
+    "hours": "Ish vaqti"
+  },
+  "cta": {
+    "orderCall": "Qo‘ng‘iroq buyurtma",
+    "send": "Yuborish"
+  },
+  "hero": {
+    "title": "Sendvich panel va sovutkich kameralar — “pod key”",
+    "subtitle": "Loyiha, ishlab chiqarish, montaj va servis — barchasi bitta jamoada.",
+    "primary": "Konsultatsiya olish",
+    "secondary": "Loyihalarni ko‘rish"
+  },
+  "sections": {
+    "services": "Xizmatlar",
+    "projects": "Loyihalar",
+    "stats": "Natijalar",
+    "catalog": "Katalog",
+    "faq": "Savol-javob"
+  },
+  "form": {
+    "name": "Ism",
+    "phone": "Telefon raqam",
+    "message": "Xabar",
+    "success": "So‘rov yuborildi (demo)."
+  },
+  "footer": {
+    "rights": "Barcha huquqlar himoyalangan."
+  }
+}
