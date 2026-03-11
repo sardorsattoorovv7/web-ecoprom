@@ -42,15 +42,18 @@ export default function Navbar({ onOpenCall }) {
     >
       <div className="container-pad h-16 flex items-center justify-between">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2">
-          <div className="h-9 w-9 rounded-2xl bg-emerald-600 text-white grid place-items-center font-semibold">
-            E
-          </div>
-          <div className="leading-tight">
-            <div className="font-semibold text-slate-900">EcoProm</div>
-          </div>
-        </Link>
-
+       <Link to="/" className="flex items-center gap-2">
+        {/* Div o'rniga rasm qo'yamiz */}
+        <img 
+          src="/logo.png" 
+          alt="EcoProm Logo" 
+          className="h-11 w-11 object-contain rounded-lg" 
+        />
+        
+        <div className="leading-tight">
+          <div className="font-semibold text-slate-900">EcoProm</div>
+        </div>
+      </Link>
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-1">
           <NavLink
