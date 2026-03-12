@@ -158,7 +158,7 @@ export default function AiAssistant() {
   return (
     <>
       {!open && (
-        <div className="fixed bottom-48 right-6 z-[100] flex items-center gap-3">
+        <div className="fixed bottom-28 right-6 z-[100] flex items-center gap-3">
 
             {/* Tooltip */}
             <div className="hidden sm:block rounded-full bg-white px-4 py-2 text-xs font-medium text-slate-700 shadow-lg animate-fadeIn">
