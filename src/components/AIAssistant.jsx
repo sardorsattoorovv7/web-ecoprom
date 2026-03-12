@@ -158,14 +158,34 @@ export default function AiAssistant() {
   return (
     <>
       {!open && (
-        <button
-          onClick={() => setOpen(true)}
-          className="fixed bottom-5 right-5 z-[100] flex h-14 w-14 items-center justify-center rounded-full bg-emerald-600 text-white shadow-xl transition hover:scale-105 hover:bg-emerald-700 hover:shadow-2xl"
-          aria-label="AI assistantni ochish"
-        >
-          <MessageCircle className="h-6 w-6" />
-        </button>
-      )}
+        <div className="fixed bottom-48 right-6 z-[100] flex items-center gap-3">
+
+            {/* Tooltip */}
+            <div className="hidden sm:block rounded-full bg-white px-4 py-2 text-xs font-medium text-slate-700 shadow-lg animate-fadeIn">
+            Savolingiz bormi?
+            </div>
+
+            {/* AI Button */}
+            <div className="relative">
+
+            {/* ripple halo */}
+            <span className="absolute inset-0 rounded-full bg-emerald-400/40 animate-ping"></span>
+            <span className="absolute inset-[-10px] rounded-full border border-emerald-300/40 animate-[ping_2.5s_ease-out_infinite]"></span>
+
+            {/* glow */}
+            <div className="absolute inset-[-12px] rounded-full bg-emerald-500/30 blur-xl"></div>
+
+            <button
+                onClick={() => setOpen(true)}
+                className="relative flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-emerald-500 to-emerald-600 text-white shadow-[0_15px_40px_rgba(16,185,129,0.45)] transition duration-300 hover:scale-110 hover:shadow-[0_20px_55px_rgba(16,185,129,0.55)]"
+            >
+                <MessageCircle className="h-6 w-6 " />
+            </button>
+
+            </div>
+
+        </div>
+)}
 
       {open && (
         <div className="fixed bottom-5 right-5 z-[100] w-[calc(100%-24px)] max-w-[400px] overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-2xl">
