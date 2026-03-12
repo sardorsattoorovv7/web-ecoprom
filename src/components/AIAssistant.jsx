@@ -25,7 +25,7 @@ const QUICK_QUESTIONS = [
 // Qo'shimcha tezkor savollar
 const PRODUCT_QUESTIONS = [
   { icon: Package, text: "PIR va PUR farqi", color: "text-emerald-600" },
-  { icon: Snowflake, text: "Sovutgich kamera hajmi", color: " "text-blue-600" },
+  { icon: Snowflake, text: "Sovutgich kamera hajmi", color: "text-blue-600" }, // Bu yerda bitta " bo'lishi kerak
   { icon: DoorOpen, text: "Eshik turlari", color: "text-amber-600" },
   { icon: Factory, text: "Metall konstruksiya", color: "text-purple-600" },
 ];
