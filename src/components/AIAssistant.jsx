@@ -1,11 +1,19 @@
 import { useEffect, useRef, useState } from "react";
-import { 
-  MessageCircle, X, Send, Phone, Bot, 
-  Sparkles, ChevronDown, History, HelpCircle,
-  Package, Snowflake, DoorOpen, Factory, FileText,
-  AlertCircle
+import {
+  MessageCircle,
+  X,
+  Send,
+  Phone,
+  Bot,
+  Sparkles,
+  History,
+  HelpCircle,
+  Package,
+  Snowflake,
+  DoorOpen,
+  Factory,
+  AlertCircle,
 } from "lucide-react";
-import Groq from "groq-sdk";
 
 const START_MESSAGES = [
   {
@@ -22,67 +30,35 @@ const QUICK_QUESTIONS = [
   "Narxni qanday olsam bo‘ladi?",
 ];
 
-// Qo'shimcha tezkor savollar
 const PRODUCT_QUESTIONS = [
   { icon: Package, text: "PIR va PUR farqi", color: "text-emerald-600" },
-  { icon: Snowflake, text: "Sovutgich kamera hajmi", color: "text-blue-600" }, // Bu yerda bitta " bo'lishi kerak
+  { icon: Snowflake, text: "Sovutgich kamera hajmi", color: "text-blue-600" },
   { icon: DoorOpen, text: "Eshik turlari", color: "text-amber-600" },
   { icon: Factory, text: "Metall konstruksiya", color: "text-purple-600" },
 ];
 
-// FAQ ma'lumotlari
 const FAQ_ITEMS = [
   {
     question: "Yetkazib berish muddati?",
     answer: "5-7 ish kuni",
-    category: "yetkazib"
+    category: "yetkazib",
   },
   {
     question: "Kafolat muddati?",
     answer: "10 yil",
-    category: "kafolat"
+    category: "kafolat",
   },
   {
     question: "Namuna olish mumkinmi?",
     answer: "Bepul namunalar",
-    category: "namuna"
+    category: "namuna",
   },
   {
     question: "To'lov turlari?",
     answer: "Naqd, plastik, bank o'tkazmasi",
-    category: "tolov"
-  }
+    category: "tolov",
+  },
 ];
-
-// EcoProm ma'lumotlari
-const COMPANY_CONTEXT = `
-Kompaniya: EcoProm
-Ma'lumot: 10 yillik tajriba, 500+ muvaffaqiyatli loyiha
-
-ASOSIY MAHSULOTLAR:
-1. PIR SENDVICH PANELLAR (qalinligi 40-200mm, issiqlik o'tkazuvchanlik 0.019-0.022)
-2. PUR SENDVICH PANELLAR (qalinligi 40-200mm, issiqlik o'tkazuvchanlik 0.022-0.026)
-3. MINERAL WOOL PANELLAR (qalinligi 50-200mm, yong'inga chidamli EI240)
-4. SOVUTGICH KAMERALAR (-25°C dan +8°C gacha, hajmi 5-1000 m³)
-5. SANOAT ESHIKLARI (germetik, tez ochilish 1.5 m/s)
-6. METALL KONSTRUKSIYALAR (maydon 100-10000 m², 10 yil kafolat)
-
-QO'LLANISH SOHALARI:
-- Sanoat qurilishi (zavodlar, sexlar, omborlar)
-- Sovutish tizimlari (sovutgich kameralar, muzlatgichlar)
-- Qishloq xo'jaligi (fermalar, issiqxonalar)
-- Savdo va ofis (savdo markazlari, ofislar)
-
-KONTAKT:
-- Telefon: +998 78 555 86 18
-- Manzil: Toshkent va Samarqand
-`;
-
-// Groq API sozlamalari
-const groq = new Groq({
-  apiKey: process.env.REACT_APP_GROQ_API_KEY || "gsk_SizningAPIKalitingiz",
-  dangerouslyAllowBrowser: true // Brauzerda ishlatish uchun
-});
 
 export default function AiAssistant() {
   const [open, setOpen] = useState(false);
@@ -92,6 +68,7 @@ export default function AiAssistant() {
   const [showHistory, setShowHistory] = useState(false);
   const [showFaq, setShowFaq] = useState(false);
   const [error, setError] = useState(null);
+
   const endRef = useRef(null);
   const inputRef = useRef(null);
 
@@ -111,6 +88,7 @@ export default function AiAssistant() {
 
     const userMessage = { role: "user", content: value };
     const nextMessages = [...messages, userMessage];
+
     setMessages(nextMessages);
     setInput("");
     setLoading(true);
@@ -118,69 +96,44 @@ export default function AiAssistant() {
     setShowFaq(false);
 
     try {
-
-      // Groq API ga to'g'ridan-to'g'ri so'rov yuborish
-      const completion = await groq.chat.completions.create({
-        model: "llama-3.3-70b-versatile",
-        temperature: 0.5,
-        max_tokens: 500,
-        messages: [
-          {
-            role: "system",
-            content: `Sen EcoProm kompaniyasining virtual yordamchisisan. 
-            
-            Kompaniya haqida ma'lumot:
-            ${COMPANY_CONTEXT}
-            
-            Qoidalar:
-            - O'zbek tilida javob ber
-            - Qisqa va aniq javob ber
-            - Narx so'ralsa, aniq narx yo'qligini va loyiha asosida hisoblanishini ayt
-            - Telefon raqamini taklif qil: +998 78 555 86 18
-            - Mahsulot tarkibi va texnik xususiyatlarini ayt
-            - Qo'llanish sohalariga misol keltir`
-          },
-          ...messages.slice(-5).map(m => ({
-            role: m.role,
-            content: m.content
-          })),
-          { role: "user", content: value }
-        ]
-      });
-
-      const reply = completion.choices[0]?.message?.content || 
-        "Kechirasiz, javob olishda muammo bo'ldi.";
-
-      setMessages([...nextMessages, { 
-        role: "assistant", 
-        content: reply 
-      }]);
-
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: {
-            "Content-Type": "application/json",
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            messages: nextMessages,
+          messages: nextMessages,
         }),
-        });
+      });
 
-        const data = await res.json();
+      const data = await res.json();
+      console.log("AI API response:", { status: res.status, data });
 
-        if (!res.ok) {
+      if (!res.ok) {
         throw new Error(data?.detail || data?.error || "API xatolik");
-        }
+      }
 
-        setMessages([
+      setMessages([
         ...nextMessages,
         {
-            role: "assistant",
-            content:
+          role: "assistant",
+          content:
             data.reply ||
             "Kechirasiz, hozir javob olinmadi. Biz bilan bog‘laning: +998 78 555 86 18",
         },
-        ]);
+      ]);
+    } catch (err) {
+      console.error("AI API xatolik:", err);
+      setError(err.message);
+
+      setMessages([
+        ...nextMessages,
+        {
+          role: "assistant",
+          content:
+            "Kechirasiz, hozir ulanishda muammo bor. Biz bilan bog‘laning: +998 78 555 86 18",
+        },
+      ]);
     } finally {
       setLoading(false);
     }
@@ -216,7 +169,6 @@ export default function AiAssistant() {
 
       {open && (
         <div className="fixed bottom-5 right-5 z-[100] w-[calc(100%-24px)] max-w-[400px] overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-2xl">
-          {/* Header */}
           <div className="flex items-center justify-between bg-gradient-to-r from-emerald-600 to-emerald-500 px-4 py-3 text-white">
             <div className="flex items-center gap-2">
               <Bot className="h-5 w-5" />
@@ -256,12 +208,13 @@ export default function AiAssistant() {
             </div>
           </div>
 
-          {/* History Panel */}
           {showHistory && (
             <div className="border-b border-slate-200 bg-slate-50 p-3">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-xs font-medium text-slate-500">So'nggi mavzular</span>
-                <button 
+              <div className="mb-2 flex items-center justify-between">
+                <span className="text-xs font-medium text-slate-500">
+                  So'nggi mavzular
+                </span>
+                <button
                   onClick={clearChat}
                   className="text-xs text-emerald-600 hover:text-emerald-700"
                 >
@@ -269,23 +222,25 @@ export default function AiAssistant() {
                 </button>
               </div>
               <div className="space-y-1.5">
-                {messages.filter(m => m.role === "user").slice(-3).map((msg, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => sendMessage(msg.content)}
-                    className="w-full truncate rounded-lg bg-white px-3 py-2 text-left text-xs text-slate-600 shadow-sm hover:bg-emerald-50"
-                  >
-                    {msg.content}
-                  </button>
-                ))}
+                {messages
+                  .filter((m) => m.role === "user")
+                  .slice(-3)
+                  .map((msg, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => sendMessage(msg.content)}
+                      className="w-full truncate rounded-lg bg-white px-3 py-2 text-left text-xs text-slate-600 shadow-sm hover:bg-emerald-50"
+                    >
+                      {msg.content}
+                    </button>
+                  ))}
               </div>
             </div>
           )}
 
-          {/* FAQ Panel */}
           {showFaq && (
             <div className="border-b border-slate-200 bg-slate-50 p-3">
-              <span className="text-xs font-medium text-slate-500 mb-2 block">
+              <span className="mb-2 block text-xs font-medium text-slate-500">
                 Tez-tez so'raladigan savollar
               </span>
               <div className="grid grid-cols-2 gap-2">
@@ -295,15 +250,18 @@ export default function AiAssistant() {
                     onClick={() => handleFaqClick(item.question)}
                     className="rounded-lg bg-white p-2 text-left shadow-sm hover:bg-emerald-50"
                   >
-                    <div className="text-xs font-medium text-slate-700">{item.question}</div>
-                    <div className="text-[10px] text-emerald-600 mt-0.5">{item.answer}</div>
+                    <div className="text-xs font-medium text-slate-700">
+                      {item.question}
+                    </div>
+                    <div className="mt-0.5 text-[10px] text-emerald-600">
+                      {item.answer}
+                    </div>
                   </button>
                 ))}
               </div>
             </div>
           )}
 
-          {/* Messages */}
           <div className="max-h-[380px] space-y-3 overflow-y-auto bg-slate-50 p-4">
             {messages.map((msg, idx) => {
               const isAssistant = msg.role === "assistant";
@@ -311,7 +269,9 @@ export default function AiAssistant() {
               return (
                 <div
                   key={`${msg.role}-${idx}`}
-                  className={`flex ${isAssistant ? "justify-start" : "justify-end"}`}
+                  className={`flex ${
+                    isAssistant ? "justify-start" : "justify-end"
+                  }`}
                 >
                   <div
                     className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-6 ${
@@ -348,9 +308,7 @@ export default function AiAssistant() {
             <div ref={endRef} />
           </div>
 
-          {/* Quick Questions */}
           <div className="border-t border-slate-200 bg-white p-3">
-            {/* Mahsulot bo'yicha tezkor savollar */}
             <div className="mb-3 grid grid-cols-4 gap-2">
               {PRODUCT_QUESTIONS.map((item, idx) => {
                 const Icon = item.icon;
@@ -361,13 +319,14 @@ export default function AiAssistant() {
                     className="flex flex-col items-center gap-1 rounded-xl border border-slate-200 bg-slate-50 p-2 transition hover:border-emerald-300 hover:bg-emerald-50"
                   >
                     <Icon className={`h-4 w-4 ${item.color}`} />
-                    <span className="text-[10px] text-center text-slate-600">{item.text}</span>
+                    <span className="text-center text-[10px] text-slate-600">
+                      {item.text}
+                    </span>
                   </button>
                 );
               })}
             </div>
 
-            {/* Asosiy tezkor savollar */}
             <div className="mb-3 flex flex-wrap gap-2">
               {QUICK_QUESTIONS.map((q) => (
                 <button
@@ -380,7 +339,6 @@ export default function AiAssistant() {
               ))}
             </div>
 
-            {/* Input form */}
             <form onSubmit={onSubmit} className="flex items-center gap-2">
               <a
                 href="tel:+998785558618"
@@ -408,13 +366,12 @@ export default function AiAssistant() {
               </button>
             </form>
 
-            {/* Footer */}
             <div className="mt-3 flex items-center justify-between">
               <div className="flex items-center gap-1.5">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
                 <span className="text-[10px] text-slate-400">Online 24/7</span>
               </div>
-              <a 
+              <a
                 href="tel:+998785558618"
                 className="text-[10px] font-medium text-emerald-600 hover:text-emerald-700"
               >
