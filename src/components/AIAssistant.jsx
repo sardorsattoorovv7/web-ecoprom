@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import axios from "axios";
 import { 
   MessageCircle, X, Send, Phone, Bot, 
   Sparkles, ChevronDown, History, HelpCircle,
@@ -84,17 +83,25 @@ export default function AiAssistant() {
     setShowFaq(false);
 
     try {
-      const res = await axios.post("/api/chat", {
-        messages: nextMessages,
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            messages: nextMessages,
+        }),
         });
 
-      setMessages([
+        const data = await res.json();
+
+        setMessages([
         ...nextMessages,
         {
-          role: "assistant",
-          content: res.data.reply,
+            role: "assistant",
+            content: data.reply,
         },
-      ]);
+        ]);
     } catch (error) {
       console.error("API xatolik:", error);
       setMessages([
