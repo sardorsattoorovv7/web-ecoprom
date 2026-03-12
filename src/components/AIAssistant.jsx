@@ -2,8 +2,10 @@ import { useEffect, useRef, useState } from "react";
 import { 
   MessageCircle, X, Send, Phone, Bot, 
   Sparkles, ChevronDown, History, HelpCircle,
-  Package, Snowflake, DoorOpen, Factory, FileText
+  Package, Snowflake, DoorOpen, Factory, FileText,
+  AlertCircle
 } from "lucide-react";
+import Groq from "groq-sdk";
 
 const START_MESSAGES = [
   {
@@ -23,7 +25,7 @@ const QUICK_QUESTIONS = [
 // Qo'shimcha tezkor savollar
 const PRODUCT_QUESTIONS = [
   { icon: Package, text: "PIR va PUR farqi", color: "text-emerald-600" },
-  { icon: Snowflake, text: "Sovutgich kamera hajmi", color: "text-blue-600" },
+  { icon: Snowflake, text: "Sovutgich kamera hajmi", color: " "text-blue-600" },
   { icon: DoorOpen, text: "Eshik turlari", color: "text-amber-600" },
   { icon: Factory, text: "Metall konstruksiya", color: "text-purple-600" },
 ];
@@ -52,6 +54,36 @@ const FAQ_ITEMS = [
   }
 ];
 
+// EcoProm ma'lumotlari
+const COMPANY_CONTEXT = `
+Kompaniya: EcoProm
+Ma'lumot: 10 yillik tajriba, 500+ muvaffaqiyatli loyiha
+
+ASOSIY MAHSULOTLAR:
+1. PIR SENDVICH PANELLAR (qalinligi 40-200mm, issiqlik o'tkazuvchanlik 0.019-0.022)
+2. PUR SENDVICH PANELLAR (qalinligi 40-200mm, issiqlik o'tkazuvchanlik 0.022-0.026)
+3. MINERAL WOOL PANELLAR (qalinligi 50-200mm, yong'inga chidamli EI240)
+4. SOVUTGICH KAMERALAR (-25°C dan +8°C gacha, hajmi 5-1000 m³)
+5. SANOAT ESHIKLARI (germetik, tez ochilish 1.5 m/s)
+6. METALL KONSTRUKSIYALAR (maydon 100-10000 m², 10 yil kafolat)
+
+QO'LLANISH SOHALARI:
+- Sanoat qurilishi (zavodlar, sexlar, omborlar)
+- Sovutish tizimlari (sovutgich kameralar, muzlatgichlar)
+- Qishloq xo'jaligi (fermalar, issiqxonalar)
+- Savdo va ofis (savdo markazlari, ofislar)
+
+KONTAKT:
+- Telefon: +998 78 555 86 18
+- Manzil: Toshkent va Samarqand
+`;
+
+// Groq API sozlamalari
+const groq = new Groq({
+  apiKey: process.env.REACT_APP_GROQ_API_KEY || "gsk_SizningAPIKalitingiz",
+  dangerouslyAllowBrowser: true // Brauzerda ishlatish uchun
+});
+
 export default function AiAssistant() {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState(START_MESSAGES);
@@ -59,6 +91,7 @@ export default function AiAssistant() {
   const [loading, setLoading] = useState(false);
   const [showHistory, setShowHistory] = useState(false);
   const [showFaq, setShowFaq] = useState(false);
+  const [error, setError] = useState(null);
   const endRef = useRef(null);
   const inputRef = useRef(null);
 
@@ -76,41 +109,60 @@ export default function AiAssistant() {
     const value = (text ?? input).trim();
     if (!value || loading) return;
 
-    const nextMessages = [...messages, { role: "user", content: value }];
+    const userMessage = { role: "user", content: value };
+    const nextMessages = [...messages, userMessage];
     setMessages(nextMessages);
     setInput("");
     setLoading(true);
+    setError(null);
     setShowFaq(false);
 
     try {
-      const res = await fetch("/api/chat", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            messages: nextMessages,
-        }),
-        });
+      // Groq API ga to'g'ridan-to'g'ri so'rov yuborish
+      const completion = await groq.chat.completions.create({
+        model: "llama-3.3-70b-versatile",
+        temperature: 0.5,
+        max_tokens: 500,
+        messages: [
+          {
+            role: "system",
+            content: `Sen EcoProm kompaniyasining virtual yordamchisisan. 
+            
+            Kompaniya haqida ma'lumot:
+            ${COMPANY_CONTEXT}
+            
+            Qoidalar:
+            - O'zbek tilida javob ber
+            - Qisqa va aniq javob ber
+            - Narx so'ralsa, aniq narx yo'qligini va loyiha asosida hisoblanishini ayt
+            - Telefon raqamini taklif qil: +998 78 555 86 18
+            - Mahsulot tarkibi va texnik xususiyatlarini ayt
+            - Qo'llanish sohalariga misol keltir`
+          },
+          ...messages.slice(-5).map(m => ({
+            role: m.role,
+            content: m.content
+          })),
+          { role: "user", content: value }
+        ]
+      });
 
-        const data = await res.json();
+      const reply = completion.choices[0]?.message?.content || 
+        "Kechirasiz, javob olishda muammo bo'ldi.";
 
-        setMessages([
-        ...nextMessages,
-        {
-            role: "assistant",
-            content: data.reply,
-        },
-        ]);
+      setMessages([...nextMessages, { 
+        role: "assistant", 
+        content: reply 
+      }]);
     } catch (error) {
-      console.error("API xatolik:", error);
-      setMessages([
-        ...nextMessages,
-        {
-          role: "assistant",
-          content: "Kechirasiz, hozir ulanishda muammo bor. Biz bilan bog‘laning: +998 78 555 86 18",
-        },
-      ]);
+      console.error("Groq API xatolik:", error);
+      setError("API ga ulanishda xatolik");
+      
+      // Fallback javob
+      setMessages([...nextMessages, { 
+        role: "assistant", 
+        content: "Kechirasiz, hozir ulanishda muammo bor. Biz bilan bog‘laning: +998 78 555 86 18" 
+      }]);
     } finally {
       setLoading(false);
     }
@@ -124,6 +176,7 @@ export default function AiAssistant() {
   function clearChat() {
     setMessages(START_MESSAGES);
     setShowHistory(false);
+    setError(null);
   }
 
   function handleFaqClick(question) {
@@ -261,6 +314,15 @@ export default function AiAssistant() {
                   <div className="h-2 w-2 animate-bounce rounded-full bg-emerald-500 [animation-delay:-0.3s]"></div>
                   <div className="h-2 w-2 animate-bounce rounded-full bg-emerald-500 [animation-delay:-0.15s]"></div>
                   <div className="h-2 w-2 animate-bounce rounded-full bg-emerald-500"></div>
+                </div>
+              </div>
+            )}
+
+            {error && (
+              <div className="flex justify-center">
+                <div className="flex items-center gap-2 rounded-full bg-red-50 px-3 py-1.5 text-xs text-red-600">
+                  <AlertCircle className="h-3 w-3" />
+                  {error}
                 </div>
               </div>
             )}
