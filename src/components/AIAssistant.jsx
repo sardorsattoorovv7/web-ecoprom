@@ -84,9 +84,9 @@ export default function AiAssistant() {
     setShowFaq(false);
 
     try {
-      const res = await axios.post("http://localhost:8787/api/chat", {
+      const res = await axios.post("/api/chat", {
         messages: nextMessages,
-      });
+        });
 
       setMessages([
         ...nextMessages,
