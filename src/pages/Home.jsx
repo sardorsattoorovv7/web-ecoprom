@@ -6,6 +6,7 @@ import WhyChooseUs from "../components/WhyChooseUs";
 import FreeSamples from "../components/FreeSamples";
 import OurProjects from "../components/OurProjects";
 import OurProduction from "../components/OurProduction";
+import AiAssistant from "../components/AIAssistant";
 import {
   ArrowRight,
   Sparkles,
@@ -352,6 +353,7 @@ export default function EcoPromMain({ onOpenCall }) {
         <WhyChooseUs />
         <OurProjects />
         <OurProduction />
+        <AiAssistant />
       </div>
     </>
   );
