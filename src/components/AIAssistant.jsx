@@ -118,6 +118,7 @@ export default function AiAssistant() {
     setShowFaq(false);
 
     try {
+
       // Groq API ga to'g'ridan-to'g'ri so'rov yuborish
       const completion = await groq.chat.completions.create({
         model: "llama-3.3-70b-versatile",
@@ -154,15 +155,32 @@ export default function AiAssistant() {
         role: "assistant", 
         content: reply 
       }]);
-    } catch (error) {
-      console.error("Groq API xatolik:", error);
-      setError("API ga ulanishda xatolik");
-      
-      // Fallback javob
-      setMessages([...nextMessages, { 
-        role: "assistant", 
-        content: "Kechirasiz, hozir ulanishda muammo bor. Biz bilan bog‘laning: +998 78 555 86 18" 
-      }]);
+
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            messages: nextMessages,
+        }),
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+        throw new Error(data?.detail || data?.error || "API xatolik");
+        }
+
+        setMessages([
+        ...nextMessages,
+        {
+            role: "assistant",
+            content:
+            data.reply ||
+            "Kechirasiz, hozir javob olinmadi. Biz bilan bog‘laning: +998 78 555 86 18",
+        },
+        ]);
     } finally {
       setLoading(false);
     }
