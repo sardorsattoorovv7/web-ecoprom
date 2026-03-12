@@ -1,0 +1,342 @@
+import { useEffect, useRef, useState } from "react";
+import axios from "axios";
+import { 
+  MessageCircle, X, Send, Phone, Bot, 
+  Sparkles, ChevronDown, History, HelpCircle,
+  Package, Snowflake, DoorOpen, Factory, FileText
+} from "lucide-react";
+
+const START_MESSAGES = [
+  {
+    role: "assistant",
+    content:
+      "Assalomu alaykum! Men EcoProm virtual yordamchisiman. Sizga PIR panel, sovutkich kamera yoki montaj bo‘yicha yordam beraman.",
+  },
+];
+
+const QUICK_QUESTIONS = [
+  "PIR panel nima?",
+  "Sovutkich kamera uchun qaysi qalinlik kerak?",
+  "Montaj ham qilasizlarmi?",
+  "Narxni qanday olsam bo‘ladi?",
+];
+
+// Qo'shimcha tezkor savollar
+const PRODUCT_QUESTIONS = [
+  { icon: Package, text: "PIR va PUR farqi", color: "text-emerald-600" },
+  { icon: Snowflake, text: "Sovutgich kamera hajmi", color: "text-blue-600" },
+  { icon: DoorOpen, text: "Eshik turlari", color: "text-amber-600" },
+  { icon: Factory, text: "Metall konstruksiya", color: "text-purple-600" },
+];
+
+// FAQ ma'lumotlari
+const FAQ_ITEMS = [
+  {
+    question: "Yetkazib berish muddati?",
+    answer: "5-7 ish kuni",
+    category: "yetkazib"
+  },
+  {
+    question: "Kafolat muddati?",
+    answer: "10 yil",
+    category: "kafolat"
+  },
+  {
+    question: "Namuna olish mumkinmi?",
+    answer: "Bepul namunalar",
+    category: "namuna"
+  },
+  {
+    question: "To'lov turlari?",
+    answer: "Naqd, plastik, bank o'tkazmasi",
+    category: "tolov"
+  }
+];
+
+export default function AiAssistant() {
+  const [open, setOpen] = useState(false);
+  const [messages, setMessages] = useState(START_MESSAGES);
+  const [input, setInput] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [showHistory, setShowHistory] = useState(false);
+  const [showFaq, setShowFaq] = useState(false);
+  const endRef = useRef(null);
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    endRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, loading]);
+
+  useEffect(() => {
+    if (open) {
+      setTimeout(() => inputRef.current?.focus(), 300);
+    }
+  }, [open]);
+
+  async function sendMessage(text) {
+    const value = (text ?? input).trim();
+    if (!value || loading) return;
+
+    const nextMessages = [...messages, { role: "user", content: value }];
+    setMessages(nextMessages);
+    setInput("");
+    setLoading(true);
+    setShowFaq(false);
+
+    try {
+      const res = await axios.post("http://localhost:8787/api/chat", {
+        messages: nextMessages,
+      });
+
+      setMessages([
+        ...nextMessages,
+        {
+          role: "assistant",
+          content: res.data.reply,
+        },
+      ]);
+    } catch (error) {
+      console.error("API xatolik:", error);
+      setMessages([
+        ...nextMessages,
+        {
+          role: "assistant",
+          content: "Kechirasiz, hozir ulanishda muammo bor. Biz bilan bog‘laning: +998 78 555 86 18",
+        },
+      ]);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  function onSubmit(e) {
+    e.preventDefault();
+    sendMessage();
+  }
+
+  function clearChat() {
+    setMessages(START_MESSAGES);
+    setShowHistory(false);
+  }
+
+  function handleFaqClick(question) {
+    sendMessage(question);
+    setShowFaq(false);
+  }
+
+  return (
+    <>
+      {!open && (
+        <button
+          onClick={() => setOpen(true)}
+          className="fixed bottom-5 right-5 z-[100] flex h-14 w-14 items-center justify-center rounded-full bg-emerald-600 text-white shadow-xl transition hover:scale-105 hover:bg-emerald-700 hover:shadow-2xl"
+          aria-label="AI assistantni ochish"
+        >
+          <MessageCircle className="h-6 w-6" />
+        </button>
+      )}
+
+      {open && (
+        <div className="fixed bottom-5 right-5 z-[100] w-[calc(100%-24px)] max-w-[400px] overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-2xl">
+          {/* Header */}
+          <div className="flex items-center justify-between bg-gradient-to-r from-emerald-600 to-emerald-500 px-4 py-3 text-white">
+            <div className="flex items-center gap-2">
+              <Bot className="h-5 w-5" />
+              <div>
+                <div className="flex items-center gap-1.5">
+                  <span className="text-sm font-semibold">EcoProm AI</span>
+                  <Sparkles className="h-3 w-3 text-emerald-200" />
+                </div>
+                <div className="text-xs text-emerald-100">
+                  Savollaringizga tezkor javob
+                </div>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-1">
+              <button
+                onClick={() => setShowHistory(!showHistory)}
+                className="rounded-lg p-1.5 transition hover:bg-white/10"
+                title="Tarix"
+              >
+                <History className="h-4 w-4" />
+              </button>
+              <button
+                onClick={() => setShowFaq(!showFaq)}
+                className="rounded-lg p-1.5 transition hover:bg-white/10"
+                title="Tez so'raladigan savollar"
+              >
+                <HelpCircle className="h-4 w-4" />
+              </button>
+              <button
+                onClick={() => setOpen(false)}
+                className="rounded-lg p-1.5 transition hover:bg-white/10"
+                aria-label="Yopish"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+          </div>
+
+          {/* History Panel */}
+          {showHistory && (
+            <div className="border-b border-slate-200 bg-slate-50 p-3">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-xs font-medium text-slate-500">So'nggi mavzular</span>
+                <button 
+                  onClick={clearChat}
+                  className="text-xs text-emerald-600 hover:text-emerald-700"
+                >
+                  Yangi chat
+                </button>
+              </div>
+              <div className="space-y-1.5">
+                {messages.filter(m => m.role === "user").slice(-3).map((msg, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => sendMessage(msg.content)}
+                    className="w-full truncate rounded-lg bg-white px-3 py-2 text-left text-xs text-slate-600 shadow-sm hover:bg-emerald-50"
+                  >
+                    {msg.content}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* FAQ Panel */}
+          {showFaq && (
+            <div className="border-b border-slate-200 bg-slate-50 p-3">
+              <span className="text-xs font-medium text-slate-500 mb-2 block">
+                Tez-tez so'raladigan savollar
+              </span>
+              <div className="grid grid-cols-2 gap-2">
+                {FAQ_ITEMS.map((item, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => handleFaqClick(item.question)}
+                    className="rounded-lg bg-white p-2 text-left shadow-sm hover:bg-emerald-50"
+                  >
+                    <div className="text-xs font-medium text-slate-700">{item.question}</div>
+                    <div className="text-[10px] text-emerald-600 mt-0.5">{item.answer}</div>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Messages */}
+          <div className="max-h-[380px] space-y-3 overflow-y-auto bg-slate-50 p-4">
+            {messages.map((msg, idx) => {
+              const isAssistant = msg.role === "assistant";
+
+              return (
+                <div
+                  key={`${msg.role}-${idx}`}
+                  className={`flex ${isAssistant ? "justify-start" : "justify-end"}`}
+                >
+                  <div
+                    className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-6 ${
+                      isAssistant
+                        ? "bg-white text-slate-700 shadow-sm"
+                        : "bg-emerald-600 text-white"
+                    }`}
+                  >
+                    {msg.content}
+                  </div>
+                </div>
+              );
+            })}
+
+            {loading && (
+              <div className="flex justify-start">
+                <div className="flex items-center gap-2 rounded-2xl bg-white px-4 py-3 text-sm text-slate-500 shadow-sm">
+                  <div className="h-2 w-2 animate-bounce rounded-full bg-emerald-500 [animation-delay:-0.3s]"></div>
+                  <div className="h-2 w-2 animate-bounce rounded-full bg-emerald-500 [animation-delay:-0.15s]"></div>
+                  <div className="h-2 w-2 animate-bounce rounded-full bg-emerald-500"></div>
+                </div>
+              </div>
+            )}
+
+            <div ref={endRef} />
+          </div>
+
+          {/* Quick Questions */}
+          <div className="border-t border-slate-200 bg-white p-3">
+            {/* Mahsulot bo'yicha tezkor savollar */}
+            <div className="mb-3 grid grid-cols-4 gap-2">
+              {PRODUCT_QUESTIONS.map((item, idx) => {
+                const Icon = item.icon;
+                return (
+                  <button
+                    key={idx}
+                    onClick={() => sendMessage(item.text)}
+                    className="flex flex-col items-center gap-1 rounded-xl border border-slate-200 bg-slate-50 p-2 transition hover:border-emerald-300 hover:bg-emerald-50"
+                  >
+                    <Icon className={`h-4 w-4 ${item.color}`} />
+                    <span className="text-[10px] text-center text-slate-600">{item.text}</span>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Asosiy tezkor savollar */}
+            <div className="mb-3 flex flex-wrap gap-2">
+              {QUICK_QUESTIONS.map((q) => (
+                <button
+                  key={q}
+                  onClick={() => sendMessage(q)}
+                  className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs text-slate-700 transition hover:border-emerald-300 hover:bg-emerald-50"
+                >
+                  {q}
+                </button>
+              ))}
+            </div>
+
+            {/* Input form */}
+            <form onSubmit={onSubmit} className="flex items-center gap-2">
+              <a
+                href="tel:+998785558618"
+                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-emerald-100 text-emerald-600 transition hover:bg-emerald-200"
+                aria-label="Qo‘ng‘iroq qilish"
+              >
+                <Phone className="h-5 w-5" />
+              </a>
+
+              <input
+                ref={inputRef}
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder="Savolingizni yozing..."
+                className="h-11 w-full rounded-xl border border-slate-200 px-4 text-sm outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20"
+              />
+
+              <button
+                type="submit"
+                disabled={loading}
+                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-emerald-600 text-white transition hover:bg-emerald-700 disabled:cursor-not-allowed disabled:opacity-60"
+                aria-label="Yuborish"
+              >
+                <Send className="h-4 w-4" />
+              </button>
+            </form>
+
+            {/* Footer */}
+            <div className="mt-3 flex items-center justify-between">
+              <div className="flex items-center gap-1.5">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+                <span className="text-[10px] text-slate-400">Online 24/7</span>
+              </div>
+              <a 
+                href="tel:+998785558618"
+                className="text-[10px] font-medium text-emerald-600 hover:text-emerald-700"
+              >
+                +998 78 555 86 18
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
