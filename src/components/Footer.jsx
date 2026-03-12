@@ -213,17 +213,7 @@ export default function Footer() {
             <span>Barcha huquqlar himoyalangan</span>
           </div>
 
-          <div className="flex items-center gap-4 text-xs text-slate-400">
-            <a href="/privacy" className="hover:text-emerald-600 transition-colors">Maxfiylik siyosati</a>
-            <span className="w-1 h-1 bg-slate-300 rounded-full" />
-            <a href="/terms" className="hover:text-emerald-600 transition-colors">Foydalanish shartlari</a>
-          </div>
-
-          <div className="flex items-center gap-2 text-xs text-slate-400">
-            <span>Made with</span>
-            <Heart className="h-3 w-3 text-emerald-500 fill-emerald-500" />
-            <span>in Uzbekistan</span>
-          </div>
+          
         </div>
       </div>
     </footer>
