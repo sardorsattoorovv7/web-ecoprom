@@ -19,8 +19,8 @@ export default function TopBar() {
           <ContactItem 
             icon={<Mail size={14} />} 
             label={t("topbar.email")} 
-            value="info@company.uz" 
-            href="mailto:info@company.uz"
+            value="info@ecoprom.uz" 
+            href="mailto:info@ecoprom.uz"
           />
           <ContactItem 
             icon={<Clock size={14} />} 
