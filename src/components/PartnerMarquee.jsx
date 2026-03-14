@@ -1,129 +1,132 @@
+import { motion } from "framer-motion";
+import { Users, Award, Briefcase, Globe2 } from "lucide-react";
+
 const partners = [
-  { name: "EcoProm Group", type: "Asosiy hamkor" },
-  { name: "Artel", type: "Sanoat hamkori" },
-  { name: "AKFA", type: "Strategik hamkor" },
-  { name: "UzAuto Motors", type: "Yirik mijoz" },
-  { name: "Enter Engineering", type: "Qurilish hamkori" },
-  { name: "Texnopark", type: "Ishlab chiqarish" },
-  { name: "Nestlé Uzbekistan", type: "Oziq-ovqat sanoati" },
-  { name: "Coca-Cola Uzbekistan", type: "Sovutish yechimlari" },
-  { name: "Knauf", type: "Qurilish materiali" },
-  { name: "Orient Group", type: "Korporativ hamkor" },
-  { name: "Korona Foods", type: "Oziq-ovqat ishlab chiqarish" },
-  { name: "Agro World", type: "Agro sanoat" },
+  { id: 1, name: "Sevimli Samarqand" },
+  { id: 2, name: "AGROMIR" },
+  { id: 3, name: "Shirin Tabaka" },
+  { id: 4, name: "Eco Dry Food" },
+  { id: 5, name: "Stroy Xolod Tashkent" },
+  { id: 6, name: "Agro Bravo" },
 ];
 
-export default function PartnerMarquee() {
-  const loop = [...partners, ...partners];
-
+export default function OurPartners() {
   return (
-    <section className="section-pad relative overflow-hidden">
-      <div className="container-pad">
+    <section className="py-24 bg-white relative overflow-hidden">
+      {/* Elegant background */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-emerald-50/20 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-emerald-100/10 rounded-full blur-3xl" />
+        
+        {/* Subtle grid pattern */}
+        <div 
+          className="absolute inset-0 opacity-[0.02]"
+          style={{
+            backgroundImage: `
+              linear-gradient(to right, #94a3b8 1px, transparent 1px),
+              linear-gradient(to bottom, #94a3b8 1px, transparent 1px)
+            `,
+            backgroundSize: '48px 48px'
+          }}
+        />
+      </div>
 
+      <div className="container-pad relative z-10">
         {/* Header */}
-        <div className="mx-auto mb-14 max-w-3xl text-center">
-
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-700">
-            <span className="h-2 w-2 rounded-full bg-emerald-500" />
-            Hamkorlar
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center max-w-3xl mx-auto mb-20"
+        >
+          <div className="inline-flex items-center gap-3 px-6 py-2 rounded-full border border-emerald-200/50 bg-white/50 backdrop-blur-sm mb-6">
+            <Award className="h-4 w-4 text-emerald-600" />
+            <span className="text-xs font-medium text-emerald-700 uppercase tracking-wider">Ishonchli hamkorlarimiz</span>
           </div>
-
-          <h2 className="display-3 gradient-text-dark">
-            Ishonch bildirgan
-            <span className="block gradient-text-primary">
-              hamkor kompaniyalar
-            </span>
+          
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-light text-slate-800 mb-6 tracking-tight">
+            Bizning <span className="font-semibold text-emerald-600">Hamkorlarimiz</span>
           </h2>
+          
+      
+        </motion.div>
 
-          <p className="text-body mx-auto mt-5 max-w-2xl">
-            EcoProm mahsulotlari va texnologiyalariga ishonch bildirgan
-            yirik korxonalar bilan uzoq muddatli hamkorlikni yo‘lga qo‘yganmiz.
-          </p>
-
-        </div>
-
-
-        {/* Marquee Container */}
-        <div className="relative overflow-hidden rounded-[32px] bg-white p-8">
-
-          <div className="marquee-fade marquee-fade-left z-20" />
-          <div className="marquee-fade marquee-fade-right z-20" />
-
-          <div className="marquee-container py-4">
-
-            <div className="marquee-track flex items-center">
-
-              {loop.map((partner, idx) => (
-
-                <div key={idx} className="partner-item px-3">
-
-                  {/* CARD */}
-                  <div className="group relative min-w-[280px] rounded-[28px] bg-white p-6 transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl">
-
-                    <div className="relative z-10 flex items-start gap-4">
-
-                      {/* Logo */}
-                      <div className="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-100">
-
-                        <span className="absolute right-0 top-0 h-3 w-3 rounded-full bg-emerald-500"/>
-
-                        <span className="text-lg font-bold text-emerald-700">
-                          {getInitials(partner.name)}
-                        </span>
-
-                      </div>
-
-
-                      {/* Text */}
-                      <div className="flex-1">
-
-                        <h3 className="text-lg font-semibold text-slate-900 group-hover:text-emerald-700 transition">
-                          {partner.name}
-                        </h3>
-
-                        <p className="mt-1 text-sm text-slate-500">
-                          {partner.type}
-                        </p>
-
-                        <div className="mt-4 flex items-center justify-between text-sm">
-
-                          <span className="flex items-center gap-2 text-emerald-600 font-medium">
-                            <span className="h-2 w-2 rounded-full bg-emerald-500"/>
-                            Ishonchli hamkor
-                          </span>
-
-                          <span className="text-xs uppercase text-slate-400">
-                            EcoProm
-                          </span>
-
-                        </div>
-
-                      </div>
-
-                    </div>
-
+        {/* Partners Marquee */}
+        <div className="relative py-8">
+          {/* Gradient overlays */}
+          <div className="absolute left-0 top-0 bottom-0 w-40 bg-gradient-to-r from-white via-white/90 to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-40 bg-gradient-to-l from-white via-white/90 to-transparent z-10 pointer-events-none" />
+          
+          {/* Scrolling container */}
+          <div className="overflow-hidden">
+            <motion.div
+              animate={{ x: ["0%", "-50%"] }}
+              transition={{
+                duration: 40,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+              className="flex whitespace-nowrap"
+            >
+              {/* First row */}
+              <div className="flex gap-16 md:gap-24 px-8">
+                {partners.map((partner) => (
+                  <div
+                    key={partner.id}
+                    className="inline-flex flex-col items-center group cursor-default"
+                  >
+                    <span className="text-lg md:text-xl font-light text-slate-400 group-hover:text-emerald-600 transition-colors duration-500 tracking-wide">
+                      {partner.name}
+                    </span>
+                    <div className="w-12 h-px bg-emerald-200/50 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   </div>
-
-                </div>
-
-              ))}
-
-            </div>
-
+                ))}
+              </div>
+              
+              {/* Duplicate for seamless loop */}
+              <div className="flex gap-16 md:gap-24 px-8">
+                {partners.map((partner) => (
+                  <div
+                    key={`dup-${partner.id}`}
+                    className="inline-flex flex-col items-center group cursor-default"
+                  >
+                    <span className="text-lg md:text-xl font-light text-slate-400 group-hover:text-emerald-600 transition-colors duration-500 tracking-wide">
+                      {partner.name}
+                    </span>
+                    <div className="w-12 h-px bg-emerald-200/50 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  </div>
+                ))}
+              </div>
+            </motion.div>
           </div>
-
         </div>
 
+        {/* Stats */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="flex items-center justify-center gap-12 md:gap-20 mt-20 pt-8 border-t border-slate-100"
+        >
+          <div className="text-center">
+            <div className="text-4xl md:text-5xl font-light text-emerald-600 mb-2">50+</div>
+            <div className="flex items-center gap-2 text-slate-400 text-sm uppercase tracking-wider">
+              <Briefcase className="h-4 w-4" />
+              <span>Hamkorlarimiz</span>
+            </div>
+          </div>
+          
+          <div className="w-px h-12 bg-slate-200" />
+          
+          <div className="text-center">
+            <div className="text-4xl md:text-5xl font-light text-emerald-600 mb-2">15+</div>
+            <div className="flex items-center gap-2 text-slate-400 text-sm uppercase tracking-wider">
+              <Globe2 className="h-4 w-4" />
+              <span>Davlatlar</span>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
-}
-
-function getInitials(name) {
-  return name
-    .split(" ")
-    .slice(0, 2)
-    .map((w) => w[0])
-    .join("")
-    .toUpperCase();
 }

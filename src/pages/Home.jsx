@@ -12,6 +12,7 @@ import {
   Sparkles,
   CheckCircle2,
 } from "lucide-react";
+import PartnerMarquee from "../components/PartnerMarquee";
 
 /* ---------------- 1. DYNAMIK HERO MA'LUMOTLARI ---------------- */
 const SLIDES = [
@@ -527,6 +528,7 @@ export default function EcoPromMain({ onOpenCall }) {
         <WhyChooseUs />
         <OurProjects />
         <OurProduction />
+        <PartnerMarquee />
         <AiAssistant />
       </div>
     </>

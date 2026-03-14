@@ -12,6 +12,7 @@
   import Services from "./pages/Services";
   import ServiceDetail from "./pages/ServiceDetail";
   import Projects from "./pages/Projects";
+  import OurProducts from "./pages/OurProducts";
   import News from "./pages/News";
   import About from "./pages/About";
   import Contact from "./pages/Contact";
@@ -37,6 +38,7 @@
               <Route path="/services" element={<Services />} />
               <Route path="/services/:slug" element={<ServiceDetail />} />
               <Route path="/projects" element={<Projects />} />
+              <Route path="/OurProducts" element={<OurProducts />} />
               <Route path="/news" element={<News />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />

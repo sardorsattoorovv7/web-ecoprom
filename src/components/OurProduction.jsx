@@ -10,46 +10,39 @@ import { useState } from "react";
 const productionImages = [
   {
     id: 1,
-    image: "https://i.ibb.co/LzsjFKLv/24.png",
-    title: "PIR panel ishlab chiqarish liniyasi",
+    image: "https://i.ibb.co/vC01JWC5/unnamed.jpg",
+    title: "Xomashyo uzatish tizimi",
     category: "Ishlab chiqarish",
-    description: "Zamonaviy PIR panellarni ishlab chiqarish liniyasi. Kuniga 5000 m² panel ishlab chiqarish quvvati."
+    description: "Liniyaning yuqori qismida joylashgan maxsus rezervuarlar va xomashyo aralashtirish tizimi. Bu yerda panelning ichki qismi uchun komponentlar tayyorlanadi."
   },
   {
     id: 2,
-    image: "https://i.ibb.co/cKxQGBF7/27.png",
+    image: "https://i.ibb.co/vC01JWC5/unnamed.jpg",
     title: "Sovutgich kameralar yig'ish sexi",
     category: "Yig'ish",
-    description: "Sovutgich kameralarni yig'ish va montaj qilish sexi. Har oyda 50 ta kamera ishlab chiqariladi."
-  },
+    description: "Butun liniyani boshqaruvchi markaziy blok. Ishlab chiqarish jarayoni to'liq raqamlashtirilgan bo'lib, inson omilini minimallashtiradi."  },
   {
     id: 3,
-    image: "https://i.ibb.co/xK8Hk6TM/26.png",
-    title: "Metall konstruksiyalar",
-    category: "Metall",
-    description: "Metall konstruksiyalarni kesish va payvandlash sexi. CNC uskunalari bilan jihozlangan."
+    image: "https://i.ibb.co/zT5DxCg4/unnamed-1.jpg",
+    title: "Konveyer va shakllantirish bo'limi",
+    category: "Ishlab chiqarish",
+    description: "Tayyor panellarning shakllanishi va harakatlanishi uchun mo'ljallangan uzun konveyer liniyasi. Xavfsizlik qoidalariga muvofiq maxsus belgilar bilan jihozlangan." 
   },
   {
     id: 4,
-    image: "https://i.ibb.co/Mxb7XYpz/29.png",
-    title: "Sifat nazorati bo'limi",
-    category: "Sifat",
-    description: "Mahsulot sifatini nazorat qilish laboratoriyasi. Har bir partiya tekshiruvdan o'tkaziladi."
+    image: "https://i.ibb.co/NnWr9K4T/unnamed-2.jpg",
+    title: "Gidravlik presslash tizimi",
+    category: "Sifat nazorati",
+    description: "Panellarni yuqori bosim ostida presslash va zichligini ta'minlash uchun mo'ljallangan gidravlik porshenlar tizimi."
   },
   {
     id: 5,
-    image: "https://i.ibb.co/cKxQGBF7/27.png",
-    title: "Avtomatik liniya",
-    category: "Texnologiya",
-    description: "To'liq avtomatlashtirilgan ishlab chiqarish liniyasi. Robot texnikasi bilan jihozlangan."
+    image: "https://i.ibb.co/TBMC5Gx5/unnamed-3.jpg",
+    title: "Tayyor mahsulot chiqish qismi",
+    category: "Yakuniy bosqich",
+    description: "Tayyor bo'lgan sendvich panellarning qadoqlashga yo'naltiriladigan qismi. Bu yerda panellar belgilangan o'lchamlar bo'yicha nazoratdan o'tadi."
   },
-  {
-    id: 6,
-    image: "https://i.ibb.co/LzsjFKLv/24.png",
-    title: "Tayyor mahsulot ombori",
-    category: "Ombor",
-    description: "Tayyor mahsulotlarni saqlash ombori. 5000 m² maydonga ega."
-  }
+ 
 ];
 
 const stats = [
@@ -286,100 +279,7 @@ export default function OurProduction() {
         </div>
 
         {/* Catalog Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="bg-gradient-to-r from-emerald-50 to-white rounded-3xl p-8 mb-8 border border-emerald-100"
-        >
-          <div className="flex items-center justify-between flex-wrap gap-4 mb-6">
-            <div>
-              <h3 className="text-2xl font-bold text-slate-800 mb-2 flex items-center gap-2">
-                <FileText className="h-6 w-6 text-emerald-600" />
-                Mahsulot kataloglari
-              </h3>
-              <p className="text-slate-500">
-                Barcha mahsulotlar haqida batafsil ma'lumot PDF formatida
-              </p>
-            </div>
-            
-            <button
-              onClick={() => setShowCatalogs(!showCatalogs)}
-              className="flex items-center gap-2 text-emerald-600 font-medium hover:text-emerald-700 transition-colors"
-            >
-              {showCatalogs ? 'Yopish' : 'Barchasini ko\'rish'}
-              <ChevronRight className={`h-5 w-5 transition-transform ${showCatalogs ? 'rotate-90' : ''}`} />
-            </button>
-          </div>
-
-          <AnimatePresence>
-            {showCatalogs && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.3 }}
-                className="overflow-hidden"
-              >
-                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
-                  {catalogs.map((catalog) => {
-                    const Icon = catalog.icon;
-                    return (
-                      <motion.div
-                        key={catalog.id}
-                        whileHover={{ y: -5 }}
-                        className="bg-white rounded-xl border border-slate-100 p-5 hover:shadow-lg transition-all"
-                      >
-                        <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center mb-3">
-                          <Icon className="h-6 w-6 text-emerald-600" />
-                        </div>
-                        <h4 className="font-semibold text-slate-800 mb-1">{catalog.name}</h4>
-                        <p className="text-xs text-slate-500 mb-3">{catalog.description}</p>
-                        <div className="flex items-center justify-between text-xs text-slate-400 mb-3">
-                          <span>{catalog.pages} bet</span>
-                          <span>{catalog.fileSize}</span>
-                        </div>
-                        <button
-                          onClick={() => downloadCatalog(catalog.url, catalog.name)}
-                          className="w-full flex items-center justify-center gap-2 bg-emerald-600 text-white py-2 rounded-lg text-sm font-medium hover:bg-emerald-700 transition-colors"
-                        >
-                          <Download className="h-4 w-4" />
-                          Yuklab olish
-                        </button>
-                      </motion.div>
-                    );
-                  })}
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          {/* Minimal view - faqat 2 ta katalog */}
-          {!showCatalogs && (
-            <div className="grid md:grid-cols-2 gap-4">
-              {catalogs.slice(0, 2).map((catalog) => {
-                const Icon = catalog.icon;
-                return (
-                  <div key={catalog.id} className="flex items-center gap-3 bg-white rounded-xl p-3 border border-slate-100">
-                    <div className="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Icon className="h-5 w-5 text-emerald-600" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <h4 className="text-sm font-semibold text-slate-800 truncate">{catalog.name}</h4>
-                      <p className="text-xs text-slate-400">{catalog.fileSize}</p>
-                    </div>
-                    <button
-                      onClick={() => downloadCatalog(catalog.url, catalog.name)}
-                      className="p-2 hover:bg-emerald-50 rounded-lg transition-colors"
-                    >
-                      <Download className="h-4 w-4 text-emerald-600" />
-                    </button>
-                  </div>
-                );
-              })}
-            </div>
-          )}
-        </motion.div>
+     
 
         {/* View All Button */}
         <motion.div

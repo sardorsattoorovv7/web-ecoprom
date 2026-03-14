@@ -85,6 +85,15 @@ export default function Navbar({ onOpenCall }) {
           </NavLink>
 
           <NavLink
+            to="/OurProducts"
+            className={({ isActive }) =>
+              [linkBase, isActive ? linkActive : linkIdle].join(" ")
+            }
+          >
+            {t("nav.OurProducts")}
+          </NavLink>
+          
+          <NavLink
             to="/news"
             className={({ isActive }) =>
               [linkBase, isActive ? linkActive : linkIdle].join(" ")
@@ -153,6 +162,7 @@ export default function Navbar({ onOpenCall }) {
                 { to: "/", label: t("nav.home"), end: true },
                 { to: "/services", label: t("nav.services") },
                 { to: "/projects", label: t("nav.projects") },
+                { to: "/OurProducts", label: t("nav.OurProducts") },
                 { to: "/news", label: t("nav.news") },
                 { to: "/about", label: t("nav.about") },
                 { to: "/contact", label: t("nav.contact") },

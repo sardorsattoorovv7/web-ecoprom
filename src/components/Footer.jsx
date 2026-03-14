@@ -6,7 +6,21 @@ import {
   ChevronRight, Sparkles, Building2, Package,
   Snowflake, DoorOpen, Factory
 } from "lucide-react";
-
+const TikTokIcon = () => (
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    width="20" 
+    height="20" 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="2" 
+    strokeLinecap="round" 
+    strokeLinejoin="round"
+  >
+    <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
+  </svg>
+);
 export default function Footer() {
   const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
@@ -15,7 +29,7 @@ export default function Footer() {
     { icon: Instagram, href: "https://www.instagram.com/ecoprom_uz", label: "Instagram", color: "hover:text-pink-600" },
     { icon: Facebook, href: "https://www.facebook.com/share/188Fga4yAs/?mibextid=wwXIfr", label: "Facebook", color: "hover:text-blue-600" },
     { icon: Send, href: "https://t.me/ecopromgroup", label: "Telegram", color: "hover:text-sky-500" },
-    { icon: Video, href: "https://www.tiktok.com/@eco.prom8616", label: "TikTok", color: "hover:text-black" }
+    { icon: TikTokIcon, href: "https://www.tiktok.com/@eco.prom8616", label: "TikTok", color: "hover:text-black" },
   ];
 
   const quickLinks = [
@@ -33,7 +47,7 @@ export default function Footer() {
   ];
 
   const contactInfo = [
-    { icon: Phone, text: "+998 (90) 123-45-67", href: "tel:+998901234567" },
+    { icon: Phone, text: "+998 (78) 555-86-16", href: "tel:+998785558616" },
     { icon: Mail, text: "info@ecoprom.uz", href: "mailto:info@ecoprom.uz" },
     { icon: MapPin, text: "Samarkand, O'zbekiston", href: "https://maps.app.goo.gl/tngiRwULxeyuxszT9?g_st=it" }
   ];
