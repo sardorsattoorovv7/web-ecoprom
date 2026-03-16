@@ -7,7 +7,6 @@
   import Footer from "./components/Footer";
   import Modal from "./components/Modal";
   import LeadForm from "./components/LeadForm";
-
   import Home from "./pages/Home";
   import Services from "./pages/Services";
   import ServiceDetail from "./pages/ServiceDetail";
