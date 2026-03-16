@@ -281,22 +281,7 @@ export default function OurProduction() {
         {/* Catalog Section */}
      
 
-        {/* View All Button */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="text-center"
-        >
-          <button 
-            onClick={() => window.open('/catalogs/general.pdf', '_blank')}
-            className="inline-flex items-center gap-2 bg-emerald-600 text-white px-8 py-4 rounded-xl font-semibold hover:bg-emerald-700 transition-colors group shadow-lg hover:shadow-xl"
-          >
-            <Download className="h-5 w-5" />
-            Katalogni yuklab olish
-            <ChevronRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
-          </button>
-        </motion.div>
+      
       </div>
 
       {/* Image Modal */}
