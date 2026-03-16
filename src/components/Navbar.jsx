@@ -90,7 +90,7 @@ export default function Navbar({ onOpenCall }) {
             `${linkBase} ${isActive ? linkActive : linkIdle}`
           }
         >
-          {t("nav.OurProducts")}
+          {t("nav.ourproducts")}
         </NavLink>
           
           <NavLink
