@@ -78,7 +78,7 @@ export default function Footer() {
             
             <p className="text-sm text-slate-500 leading-relaxed">
               Sendvich panellar, sovutgich kameralar va tez quriladigan binolar ishlab chiqarish.
-              10 yillik tajriba, 500+ muvaffaqiyatli loyiha.
+              12 yillik tajriba, 500+ muvaffaqiyatli loyiha.
             </p>
 
             {/* Trust badges */}
@@ -89,7 +89,7 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-1.5 bg-emerald-50 px-3 py-1.5 rounded-full">
                 <Award className="h-4 w-4 text-emerald-600" />
-                <span className="text-xs font-medium text-emerald-700">10 yil</span>
+                <span className="text-xs font-medium text-emerald-700">12 yil</span>
               </div>
             </div>
 

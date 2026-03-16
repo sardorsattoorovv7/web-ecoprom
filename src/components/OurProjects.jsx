@@ -238,7 +238,7 @@ export default function OurProjects({ limit = 6 }) {
             Bizning <span className="text-emerald-600">loyihalar</span>
           </h2>
           <p className="text-lg text-slate-500">
-            500+ muvaffaqiyatli loyihalar | 10 yillik tajriba
+            500+ muvaffaqiyatli loyihalar | 12 yillik tajriba
           </p>
         </motion.div>
 

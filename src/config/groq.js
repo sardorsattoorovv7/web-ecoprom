@@ -8,7 +8,7 @@ export const GROQ_CONFIG = {
   EcoProm - O'zbekistonda sendvich panellar, sovutgich kameralar va sanoat eshiklari ishlab chiqaruvchi kompaniya.
   
   Kompaniya haqida ma'lumot:
-  - 10 yillik tajriba
+  - 12 yillik tajriba
   - 500+ muvaffaqiyatli loyiha
   - PIR sendvich panellar (qalinligi 40-200mm)
   - Sovutgich kameralar (-25°C dan +8°C gacha)

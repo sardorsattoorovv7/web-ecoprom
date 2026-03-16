@@ -129,8 +129,8 @@ const InteractiveBackground = () => {
         className="absolute inset-0"
         style={{
           backgroundImage: `
-            linear-gradient(to right, #e2e8f0 1px, transparent 1px),
-            linear-gradient(to bottom, #e2e8f0 1px, transparent 1px)
+            linear-gradient(to right, #adb4be 1px, transparent 1px),
+            linear-gradient(to bottom, #646464 1px, transparent 1px)
           `,
           backgroundSize: "24px 24px",
           opacity: 0.15,

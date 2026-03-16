@@ -104,7 +104,7 @@ const products = [
       "Energiya tejamkor"
     ],
     advantages: [
-      "10 yil kafolat",
+      "12 yil kafolat",
       "Har qanday iqlim",
       "Modul tizim",
       "Kengaytirish mumkin"
@@ -304,7 +304,7 @@ function ProductDetailModal({ product, onClose }) {
           <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Shield className="h-4 w-4 text-slate-300" />
-              <span className="text-xs text-slate-500">10 yil kafolat</span>
+              <span className="text-xs text-slate-500">12 yil kafolat</span>
             </div>
             <button className="bg-emerald-600 text-white text-sm px-5 py-2.5 rounded-lg font-medium hover:bg-emerald-700 transition-colors flex items-center gap-2">
               Ma'lumot olish
