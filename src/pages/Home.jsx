@@ -42,9 +42,9 @@ const SLIDES = [
 /* ---------------- 2. RANG KONFIGURATORI MA'LUMOTLARI ---------------- */
 const PANEL_COLORS = [
   {
-    id: "silver",
-    name: "Kumush",
-    hex: "#94A3B8",
+    id: "yellow",
+    name: "Sariq",
+    hex: "#ffff08",
     image: "/assets/sariq-panel.png",
     desc: "Klassik sanoat uslubi",
     width: 800,
@@ -315,95 +315,66 @@ export default function EcoPromMain({ onOpenCall }) {
         </section>
 
         {/* ---------------- SECTION 2: COLOR CONFIGURATOR (TO'G'IRLANGAN) ---------------- */}
-        <section 
-          className="relative bg-white/0 py-10 sm:py-12 md:py-20 lg:py-24"
-          aria-label="Rang konfiguratori"
-        >
-          <div className="container-pad relative z-10">
-            <div className="mb-6 text-center sm:mb-8 md:mb-12">
-              <h2 className="mb-3 text-2xl font-bold text-slate-900 sm:text-3xl md:text-4xl">
-                O'z loyihangizni yarating
-              </h2>
-              <p className="text-sm text-slate-600 sm:text-base md:text-lg">
-                Rangni tanlang va natijani ko'ring
-              </p>
-            </div>
+       <section className="py-16 bg-white">
+  <div className="container-pad">
+    <div className="text-center mb-12">
+      <span className="text-emerald-600 font-medium">Ranglar</span>
+      <h2 className="text-4xl font-bold text-slate-900 mt-2">Loyihangiz rangini tanlang</h2>
+    </div>
 
-            <div className="grid items-center gap-6 sm:gap-8 lg:grid-cols-2 lg:gap-12">
-              {/* Visual Display - KATTA QILINGAN */}
-              <div className="flex min-h-[250px] items-center justify-center sm:min-h-[250px] lg:min-h-[400px]">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={selectedColor.id}
-                    initial={{ opacity: 0, scale: 0.97 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.98 }}
-                    transition={{ duration: 0.3 }}
-                    className="w-full flex justify-center"
-                  >
-                    {!imagesLoaded[selectedColor.id] && (
-                      <div className="h-[200px] w-[200px] animate-pulse rounded-2xl bg-slate-200 sm:h-[250px] sm:w-[250px] lg:h-[350px] lg:w-[350px]" />
-                    )}
-                    <img
-                      src={selectedColor.image}
-                      alt={`${selectedColor.name} rangli panel`}
-                      loading="lazy"
-                      width={selectedColor.width}
-                      height={selectedColor.height}
-                      onLoad={() => setImagesLoaded(prev => ({ ...prev, [selectedColor.id]: true }))}
-                      className={`h-auto max-h-[200px] w-auto object-contain sm:max-h-[250px] lg:max-h-[400px] ${
-                        imagesLoaded[selectedColor.id] ? 'opacity-100' : 'opacity-0'
-                      } transition-opacity duration-300`}
-                    />
-                  </motion.div>
-                </AnimatePresence>
-              </div>
-
-              {/* Ranglar paneli */}
-              <div>
-                <div className="mb-5 sm:mb-6">
-                  <h3 className="mb-2 text-xl font-semibold text-slate-900 sm:text-2xl">
-                    {selectedColor.name}
-                  </h3>
-                  <p className="text-sm text-slate-600">
-                    {selectedColor.desc}
-                  </p>
-                </div>
-
-                <div className="mb-6 flex flex-wrap gap-3 sm:mb-8 sm:gap-4">
-                  {PANEL_COLORS.map((color) => (
-                    <button
-                      key={color.id}
-                      onClick={() => handleColorSelect(color)}
-                      aria-label={`${color.name} rangini tanlash`}
-                      aria-pressed={selectedColor.id === color.id}
-                      className={`relative h-11 w-11 rounded-full transition-all sm:h-12 sm:w-12 ${
-                        selectedColor.id === color.id
-                          ? "scale-110 ring-4 ring-emerald-500 ring-offset-4"
-                          : "ring-2 ring-slate-200 hover:scale-105"
-                      }`}
-                      style={{ backgroundColor: color.hex }}
-                    >
-                      {selectedColor.id === color.id && (
-                        <CheckCircle2 className="absolute inset-0 m-auto h-5 w-5 text-white" />
-                      )}
-                    </button>
-                  ))}
-                </div>
-
-                <div className="flex flex-wrap items-center justify-between gap-4 border-t border-slate-100 pt-5 sm:pt-6">
-                  <button
-                    onClick={onOpenCall}
-                    className="flex items-center gap-2 rounded-xl bg-emerald-600 px-5 py-3 text-sm font-semibold text-white transition-all hover:bg-emerald-700 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 sm:px-6"
-                  >
-                    Buyurtma berish
-                    <ArrowRight className="h-4 w-4" />
-                  </button>
-                </div>
-              </div>
-            </div>
+    <div className="flex flex-col lg:flex-row items-center gap-12">
+      {/* Rasm va rang nomi */}
+      <div className="flex-1 text-center">
+        <div className="relative inline-block">
+          <img
+            src={selectedColor.image}
+            alt={selectedColor.name}
+            className="h-64 w-auto object-contain"
+          />
+          <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-white px-6 py-2 rounded-full shadow-lg">
+            <span className="font-medium text-slate-800">{selectedColor.name}</span>
           </div>
-        </section>
+        </div>
+      </div>
+
+      {/* Ranglar ro'yxati */}
+      <div className="flex-1">
+        <div className="space-y-3">
+          {PANEL_COLORS.map((color) => (
+            <button
+              key={color.id}
+              onClick={() => handleColorSelect(color)}
+              className={`w-full flex items-center gap-4 p-4 rounded-xl transition-all ${
+                selectedColor.id === color.id
+                  ? 'bg-emerald-50 border-2 border-emerald-500'
+                  : 'hover:bg-slate-50 border-2 border-transparent'
+              }`}
+            >
+              <div
+                className="h-12 w-12 rounded-lg"
+                style={{ backgroundColor: color.hex }}
+              />
+              <div className="flex-1 text-left">
+                <h4 className="font-semibold text-slate-800">{color.name}</h4>
+                <p className="text-sm text-slate-500">{color.desc}</p>
+              </div>
+              {selectedColor.id === color.id && (
+                <CheckCircle2 className="h-5 w-5 text-emerald-600" />
+              )}
+            </button>
+          ))}
+        </div>
+
+        <button
+          onClick={onOpenCall}
+          className="w-full mt-8 bg-emerald-600 text-white py-4 rounded-xl font-semibold hover:bg-emerald-700 transition-colors"
+        >
+          Loyihani boshlash
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
 
         {/* Komponentlar */}
         <FreeSamples />
