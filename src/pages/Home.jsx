@@ -9,42 +9,33 @@ import OurProduction from "../components/OurProduction";
 import AiAssistant from "../components/AIAssistant";
 import {
   ArrowRight,
-  Sparkles,
+  Sparkles,                                                   
   CheckCircle2,
 } from "lucide-react";
 import PartnerMarquee from "../components/PartnerMarquee";
 
-/* ---------------- 1. DYNAMIK HERO MA'LUMOTLARI ---------------- */
+/* ---------------- 1. HERO MA'LUMOTLARI - FAQAT MATNLAR ---------------- */
 const SLIDES = [
   {
     id: "pir",
     category: "Poliuretan Tizimlari",
     title: "PIR Sendvich panellar",
     desc: "Issiqlik izolyatsiyasi bo'yicha eng yuqori ko'rsatkich. Energiyani 40% gacha tejaydigan zamonaviy panel tizimlari.",
-    image: "https://i.ibb.co/LzsjFKLv/24.png",
     badge: "Premium sifat",
-    width: 800,
-    height: 600,
   },
   {
     id: "cold",
     category: "Sovutish Texnologiyasi",
     title: "Sovutgich Kameralar",
     desc: "Meva-sabzavot va go'sht mahsulotlari uchun maxsus harorat nazorati ostidagi professional omborxonalar.",
-    image: "https://i.ibb.co/cKxQGBF7/27.png",
     badge: "Energiya tejamkor",
-    width: 800,
-    height: 600,
   },
   {
     id: "doors",
     category: "Sanoat qurilishi",
     title: "Sanoat binolari",
     desc: "Tezkor montaj qilinadigan va yillar davomida xizmat qiladigan mustahkam va ishonchli qurilmalar.",
-    image: "https://i.ibb.co/xK8Hk6TM/26.png",
     badge: "Tez montaj",
-    width: 800,
-    height: 600,
   },
 ];
 
@@ -54,7 +45,7 @@ const PANEL_COLORS = [
     id: "silver",
     name: "Kumush",
     hex: "#94A3B8",
-    image: "https://i.ibb.co/1jsNDYx/21.png",
+    image: "/assets/sariq-panel.png",
     desc: "Klassik sanoat uslubi",
     width: 800,
     height: 600,
@@ -63,7 +54,7 @@ const PANEL_COLORS = [
     id: "blue",
     name: "Ko'k",
     hex: "#2563EB",
-    image: "https://i.ibb.co/jXSNfy9/kok.jpg",
+    image: "/assets/kok-panel.png",
     desc: "Sovutish omborlari uchun ideal",
     width: 800,
     height: 600,
@@ -91,7 +82,6 @@ const PANEL_COLORS = [
 /* ---------------- 3. INTERACTIVE BACKGROUND COMPONENT ---------------- */
 const InteractiveBackground = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [hoveredCell, setHoveredCell] = useState(null);
   const bgRef = useRef(null);
 
   useEffect(() => {
@@ -101,24 +91,13 @@ const InteractiveBackground = () => {
         const x = ((e.clientX - rect.left) / rect.width) * 100;
         const y = ((e.clientY - rect.top) / rect.height) * 100;
         setMousePosition({ x, y });
-        
-        // Grid cell hisoblash (24px grid)
-        const cellX = Math.floor((e.clientX - rect.left) / 24);
-        const cellY = Math.floor((e.clientY - rect.top) / 24);
-        setHoveredCell({ x: cellX, y: cellY });
       }
     };
 
-    const handleMouseLeave = () => {
-      setHoveredCell(null);
-    };
-
     window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mouseleave', handleMouseLeave);
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseleave', handleMouseLeave);
     };
   }, []);
 
@@ -137,7 +116,7 @@ const InteractiveBackground = () => {
         }}
       />
       
-      {/* Hover effektli kvadratchalar - mouse atrofida */}
+      {/* Hover effekt */}
       <div
         className="absolute inset-0"
         style={{
@@ -145,13 +124,11 @@ const InteractiveBackground = () => {
         }}
       />
       
-     
-      
-      {/* Qo'shimcha gradient */}
+      {/* Gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-emerald-50/10 via-transparent to-blue-50/10" />
       
       {/* Harakatlanuvchi nuqtalar */}
-      {[...Array(20)].map((_, i) => (
+      {[...Array(15)].map((_, i) => (
         <motion.div
           key={i}
           className="absolute h-1 w-1 rounded-full bg-emerald-400/30"
@@ -179,21 +156,12 @@ export default function EcoPromMain({ onOpenCall }) {
   const [selectedColor, setSelectedColor] = useState(PANEL_COLORS[0]);
   const [imagesLoaded, setImagesLoaded] = useState({});
 
-  // Auto-slide with pause on hover
+  // Auto-slide
   useEffect(() => {
     const timer = setInterval(() => {
       setHeroIndex((prev) => (prev + 1) % SLIDES.length);
     }, 5000);
     return () => clearInterval(timer);
-  }, []);
-
-  // Preload critical images
-  useEffect(() => {
-    const preloadImages = SLIDES.map(slide => {
-      const img = new Image();
-      img.src = slide.image;
-      return img;
-    });
   }, []);
 
   const handleColorSelect = useCallback((color) => {
@@ -204,11 +172,11 @@ export default function EcoPromMain({ onOpenCall }) {
     setHeroIndex(index);
   }, []);
 
-  // SEO data - TO'LIQ SAQLANGAN
+  // SEO data
   const seoData = useMemo(() => ({
     title: "EcoProm — PIR sendvich panellar, sovutgich kameralar va sanoat binolari",
     description: "EcoProm zamonaviy PIR sendvich panellar, sovutgich kameralar va sanoat binolari ishlab chiqaradi. Yuqori issiqlik izolyatsiyasi, tez montaj va ishonchli sifat.",
-    keywords: "PIR sendvich panel, poliuretan panel, sovutgich kamera, sanoat binolari, sendvich panel Uzbekistan, EcoProm, poliuretan tizimlari, sovutish texnologiyasi, Toshkent, Samarqand",
+    keywords: "PIR sendvich panel, poliuretan panel, sovutgich kamera, sanoat binolari, sendvich panel Uzbekistan, EcoProm",
     canonicalUrl: "https://web-ecoprom.vercel.app/",
     ogImage: "https://i.ibb.co/LzsjFKLv/24.png",
   }), []);
@@ -224,7 +192,6 @@ export default function EcoPromMain({ onOpenCall }) {
       sameAs: [
         "https://www.instagram.com/ecoprom_uz",
         "https://t.me/ecopromgroup",
-        "https://www.facebook.com/share/188Fga4yAs/"
       ],
       address: {
         "@type": "PostalAddress",
@@ -244,46 +211,6 @@ export default function EcoPromMain({ onOpenCall }) {
     [seoData]
   );
 
-  const websiteStructuredData = useMemo(
-    () => ({
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      name: "EcoProm",
-      url: seoData.canonicalUrl,
-      potentialAction: {
-        "@type": "SearchAction",
-        target: {
-          "@type": "EntryPoint",
-          urlTemplate: `${seoData.canonicalUrl}?q={search_term_string}`
-        },
-        "query-input": "required name=search_term_string",
-      },
-    }),
-    [seoData]
-  );
-
-  const breadcrumbStructuredData = useMemo(
-    () => ({
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        {
-          "@type": "ListItem",
-          position: 1,
-          name: "Bosh sahifa",
-          item: seoData.canonicalUrl,
-        },
-        {
-          "@type": "ListItem",
-          position: 2,
-          name: "Mahsulotlar",
-          item: `${seoData.canonicalUrl}#mahsulotlar`,
-        },
-      ],
-    }),
-    [seoData]
-  );
-
   return (
     <>
       <Helmet>
@@ -291,134 +218,95 @@ export default function EcoPromMain({ onOpenCall }) {
         <title>{seoData.title}</title>
         <meta name="description" content={seoData.description} />
         <meta name="keywords" content={seoData.keywords} />
-        <meta name="robots" content="index, follow, max-image-preview:large" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+        <meta name="robots" content="index, follow" />
         <link rel="canonical" href={seoData.canonicalUrl} />
         
-        {/* Preconnect to external domains */}
-        <link rel="preconnect" href="https://i.ibb.co" />
-        <link rel="dns-prefetch" href="https://i.ibb.co" />
-        
         {/* Open Graph */}
-        <meta property="og:type" content="website" />
         <meta property="og:title" content={seoData.title} />
         <meta property="og:description" content={seoData.description} />
-        <meta property="og:url" content={seoData.canonicalUrl} />
-        <meta property="og:site_name" content="EcoProm" />
         <meta property="og:image" content={seoData.ogImage} />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:locale" content="uz_UZ" />
-        
-        {/* Twitter */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={seoData.title} />
-        <meta name="twitter:description" content={seoData.description} />
-        <meta name="twitter:image" content={seoData.ogImage} />
         
         {/* Structured Data */}
         <script type="application/ld+json">
           {JSON.stringify(structuredData)}
         </script>
-        <script type="application/ld+json">
-          {JSON.stringify(websiteStructuredData)}
-        </script>
-        <script type="application/ld+json">
-          {JSON.stringify(breadcrumbStructuredData)}
-        </script>
       </Helmet>
 
       <div className="relative bg-white">
-        {/* INTERACTIVE BACKGROUND - YANGI QO'SHILDI */}
+        {/* INTERACTIVE BACKGROUND */}
         <InteractiveBackground />
 
-        {/* ---------------- SECTION 1: HERO ---------------- */}
+        {/* ---------------- SECTION 1: HERO - FAQAT MATNLAR ---------------- */}
         <section 
-          className="relative flex min-h-[600px] items-center overflow-hidden pt-6 sm:min-h-[700px] sm:pt-8 md:min-h-screen"
-          aria-label="Asosiy mahsulotlar slayderi"
+          className="relative flex min-h-[500px] items-center overflow-hidden pt-6 sm:min-h-[600px] md:min-h-[70vh]"
+          aria-label="Asosiy mahsulotlar"
+          style={{
+            backgroundImage: `url(/assets/main-bg.png)`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+          }}
         >
+          {/* Dark overlay for text readability */}
+          <div className="absolute inset-0 bg-black/50" />
+          
+          {/* Gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent" />
+
           <div className="container-pad relative z-10 w-full py-6 sm:py-8 md:py-12">
-            <div className="grid items-center gap-6 sm:gap-8 md:gap-10 lg:grid-cols-2 lg:gap-16">
-              {/* TEXT */}
-              <div className="relative min-h-[260px] sm:min-h-[300px] md:min-h-[420px]">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={SLIDES[heroIndex].id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.4 }}
-                    className="absolute inset-0 flex flex-col justify-center"
-                  >
-                    <div className="mb-4 inline-flex w-fit items-center gap-2 rounded-full bg-emerald-50 px-3 py-1.5 text-xs font-semibold text-emerald-700 sm:px-4 sm:py-2 sm:text-sm">
-                      <Sparkles className="h-4 w-4" aria-hidden="true" />
-                      {SLIDES[heroIndex].category}
-                    </div>
+            <div className="max-w-3xl">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={SLIDES[heroIndex].id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.4 }}
+                >
+                  <div className="mb-4 inline-flex w-fit items-center gap-2 rounded-full bg-emerald-500/20 px-3 py-1.5 text-xs font-semibold text-emerald-100 backdrop-blur-sm sm:px-4 sm:py-2 sm:text-sm">
+                    <Sparkles className="h-4 w-4" aria-hidden="true" />
+                    {SLIDES[heroIndex].category}
+                  </div>
 
-                    <h1 className="mb-4 text-2xl font-bold leading-tight text-slate-900 sm:text-3xl md:mb-5 md:text-5xl xl:text-6xl">
-                      {SLIDES[heroIndex].title}
-                    </h1>
+                  <h1 className="mb-4 text-3xl font-bold leading-tight text-white drop-shadow-lg sm:text-4xl md:text-5xl lg:text-6xl">
+                    {SLIDES[heroIndex].title}
+                  </h1>
 
-                    <p className="mb-5 max-w-lg text-sm leading-6 text-slate-600 sm:text-base sm:leading-7 md:mb-8 md:text-lg">
-                      {SLIDES[heroIndex].desc}
-                    </p>
+                  <p className="mb-6 max-w-2xl text-base leading-7 text-white/90 drop-shadow md:text-lg md:leading-8">
+                    {SLIDES[heroIndex].desc}
+                  </p>
 
-                    <div className="flex flex-wrap items-center gap-3 sm:gap-4">
-                      <button
-                        onClick={onOpenCall}
-                        className="flex items-center gap-2 rounded-xl bg-emerald-600 px-5 py-3 text-sm font-semibold text-white transition-all hover:bg-emerald-700 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 sm:px-6 sm:py-3.5 sm:text-base md:px-8 md:py-4"
-                        aria-label="Ma'lumot olish uchun bog'lanish"
-                      >
-                        Ma'lumot olish
-                        <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5" aria-hidden="true" />
-                      </button>
+                  <div className="flex flex-wrap items-center gap-3 sm:gap-4">
+                    <button
+                      onClick={onOpenCall}
+                      className="flex items-center gap-2 rounded-xl bg-emerald-600 px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-emerald-700 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 sm:px-8 sm:py-4 sm:text-base"
+                      aria-label="Ma'lumot olish uchun bog'lanish"
+                    >
+                      Ma'lumot olish
+                      <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5" aria-hidden="true" />
+                    </button>
 
-                      <span className="rounded-full bg-emerald-50 px-3 py-1.5 text-xs font-medium text-emerald-600 sm:px-4 sm:py-2 sm:text-sm">
-                        {SLIDES[heroIndex].badge}
-                      </span>
-                    </div>
-                  </motion.div>
-                </AnimatePresence>
-              </div>
-
-              {/* IMAGE */}
-              <div className="relative flex min-h-[200px] items-center justify-center sm:min-h-[250px] md:min-h-[350px] lg:min-h-[450px]">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={SLIDES[heroIndex].id}
-                    initial={{ opacity: 0, scale: 0.96 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.98 }}
-                    transition={{ duration: 0.4 }}
-                    className="absolute inset-0 flex items-center justify-center"
-                  >
-                    <img
-                      src={SLIDES[heroIndex].image}
-                      alt={`${SLIDES[heroIndex].title} - EcoProm mahsuloti`}
-                      loading="eager"
-                      fetchPriority="high"
-                      width={SLIDES[heroIndex].width}
-                      height={SLIDES[heroIndex].height}
-                      className="h-auto max-h-[180px] w-auto object-contain sm:max-h-[230px] md:max-h-[360px] lg:max-h-[560px] xl:max-h-[640px]"
-                    />
-                  </motion.div>
-                </AnimatePresence>
-              </div>
+                    <span className="rounded-full bg-white/20 px-4 py-2 text-xs font-medium text-white backdrop-blur-sm sm:px-5 sm:py-2.5 sm:text-sm">
+                      {SLIDES[heroIndex].badge}
+                    </span>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
             </div>
           </div>
 
           {/* Progress Indicators */}
-          <div className="absolute bottom-4 left-0 w-full sm:bottom-6 md:bottom-10">
+          <div className="absolute bottom-6 left-0 w-full sm:bottom-8 md:bottom-10">
             <div className="container-pad flex justify-center gap-2">
               {SLIDES.map((slide, i) => (
                 <button
                   key={slide.id}
                   onClick={() => handleHeroIndexChange(i)}
                   aria-label={`${slide.title} - slayd ${i + 1}/${SLIDES.length}`}
-                  className={`h-2 w-2 rounded-full transition-all sm:h-2.5 sm:w-2.5 ${
+                  className={`h-2 rounded-full transition-all sm:h-2.5 ${
                     heroIndex === i
-                      ? "w-6 bg-emerald-500 sm:w-8"
-                      : "bg-slate-300 hover:bg-slate-400"
+                      ? "w-8 bg-emerald-400 sm:w-10"
+                      : "w-2 bg-white/50 hover:bg-white/80 sm:w-2.5"
                   }`}
                 />
               ))}
@@ -428,11 +316,11 @@ export default function EcoPromMain({ onOpenCall }) {
 
         {/* ---------------- SECTION 2: COLOR CONFIGURATOR ---------------- */}
         <section 
-          className="relative bg-white py-10 sm:py-12 md:py-20 lg:py-24"
+          className="relative bg-white/0 py-10 sm:py-12 md:py-20 lg:py-24"
           aria-label="Rang konfiguratori"
         >
           <div className="container-pad relative z-10">
-            <div className="mb-6 text-center sm:mb-8 md:mb-12 lg:mb-14">
+            <div className="mb-6 text-center sm:mb-8 md:mb-12">
               <h2 className="mb-3 text-2xl font-bold text-slate-900 sm:text-3xl md:text-4xl">
                 O'z loyihangizni yarating
               </h2>
@@ -441,9 +329,9 @@ export default function EcoPromMain({ onOpenCall }) {
               </p>
             </div>
 
-            <div className="grid items-center gap-6 sm:gap-8 md:gap-10 lg:grid-cols-2 lg:gap-12">
+            <div className="grid items-center gap-6 sm:gap-8 lg:grid-cols-2 lg:gap-12">
               {/* Visual Display */}
-              <div className="flex min-h-[200px] items-center justify-center sm:min-h-[250px] md:min-h-[300px] lg:min-h-[400px]">
+              <div className="flex min-h-[200px] items-center justify-center sm:min-h-[250px] lg:min-h-[400px]">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={selectedColor.id}
@@ -451,10 +339,9 @@ export default function EcoPromMain({ onOpenCall }) {
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.98 }}
                     transition={{ duration: 0.3 }}
-                    className="flex items-center justify-center"
                   >
                     {!imagesLoaded[selectedColor.id] && (
-                      <div className="h-[150px] w-[150px] animate-pulse rounded-2xl bg-slate-200 sm:h-[200px] sm:w-[200px] md:h-[250px] md:w-[250px]" />
+                      <div className="h-[150px] w-[150px] animate-pulse rounded-2xl bg-slate-200 sm:h-[200px] sm:w-[200px] lg:h-[300px] lg:w-[300px]" />
                     )}
                     <img
                       src={selectedColor.image}
@@ -463,7 +350,7 @@ export default function EcoPromMain({ onOpenCall }) {
                       width={selectedColor.width}
                       height={selectedColor.height}
                       onLoad={() => setImagesLoaded(prev => ({ ...prev, [selectedColor.id]: true }))}
-                      className={`h-auto max-h-[150px] w-auto object-contain sm:max-h-[200px] md:max-h-[250px] lg:max-h-[400px] ${
+                      className={`h-auto max-h-[150px] w-auto object-contain sm:max-h-[200px] lg:max-h-[350px] ${
                         imagesLoaded[selectedColor.id] ? 'opacity-100' : 'opacity-0'
                       } transition-opacity duration-300`}
                     />
@@ -474,10 +361,10 @@ export default function EcoPromMain({ onOpenCall }) {
               {/* Ranglar paneli */}
               <div>
                 <div className="mb-5 sm:mb-6">
-                  <h3 className="mb-2 text-xl font-semibold text-slate-900 sm:text-2xl md:text-3xl">
+                  <h3 className="mb-2 text-xl font-semibold text-slate-900 sm:text-2xl">
                     {selectedColor.name}
                   </h3>
-                  <p className="text-sm text-slate-600 sm:text-base">
+                  <p className="text-sm text-slate-600">
                     {selectedColor.desc}
                   </p>
                 </div>
@@ -497,7 +384,7 @@ export default function EcoPromMain({ onOpenCall }) {
                       style={{ backgroundColor: color.hex }}
                     >
                       {selectedColor.id === color.id && (
-                        <CheckCircle2 className="absolute inset-0 m-auto h-5 w-5 text-white" aria-hidden="true" />
+                        <CheckCircle2 className="absolute inset-0 m-auto h-5 w-5 text-white" />
                       )}
                     </button>
                   ))}
@@ -507,10 +394,9 @@ export default function EcoPromMain({ onOpenCall }) {
                   <button
                     onClick={onOpenCall}
                     className="flex items-center gap-2 rounded-xl bg-emerald-600 px-5 py-3 text-sm font-semibold text-white transition-all hover:bg-emerald-700 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 sm:px-6"
-                    aria-label="Buyurtma berish"
                   >
                     Buyurtma berish
-                    <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                    <ArrowRight className="h-4 w-4" />
                   </button>
                 </div>
               </div>
@@ -526,7 +412,7 @@ export default function EcoPromMain({ onOpenCall }) {
           }}
         />
         <WhyChooseUs />
-        <OurProjects />
+        {/* <OurProjects /> */}
         <OurProduction />
         <PartnerMarquee />
         <AiAssistant />

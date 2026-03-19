@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   ArrowRight, X, MapPin, Calendar, Package, 
@@ -9,16 +9,16 @@ import { Link } from "react-router-dom";
 const projects = [
   {
     id: 1,
-    name: "Sabzavot ombori",
-    location: "Toshkent viloyati, O'zbekiston",
+    name: "Parrandalar uchun",
+    location: "Sayohat, Samarqand viloyat",
     category: "Qishloq xo'jaligi",
-    image: "https://i.ibb.co/LzsjFKLv/24.png",
+    image: "/assets/parranda.jpg",
     description: "5000 tonna sabzavot saqlash quvvatiga ega zamonaviy sovutgich ombori. Harorat -2°C dan +4°C gacha boshqariladi.",
     details: {
-      area: "2500 m²",
+      area: "10000 m²",
       capacity: "5000 tonna",
-      year: "2024",
-      technology: "PIR panellar, R134a sovutish tizimi",
+      year: "2025",
+      technology: "PIR panellar",
       features: [
         "Avtomatik harorat nazorati",
         "Namlik boshqaruvi",
@@ -174,7 +174,6 @@ export default function OurProjects({ limit = 6 }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [filter, setFilter] = useState("barchasi");
 
-  // Filter options
   const filters = [
     { id: "barchasi", name: "Barchasi" },
     { id: "qishloq", name: "Qishloq xo'jaligi" },
@@ -183,7 +182,6 @@ export default function OurProjects({ limit = 6 }) {
     { id: "logistika", name: "Logistika" }
   ];
 
-  // Filter projects
   const filteredProjects = filter === "barchasi" 
     ? projects 
     : projects.filter(p => 
@@ -193,11 +191,9 @@ export default function OurProjects({ limit = 6 }) {
         (filter === "logistika" && p.category === "Logistika")
       );
 
-  // Limit projects for homepage
   const displayedProjects = limit ? filteredProjects.slice(0, limit) : filteredProjects;
 
-  // Modal scroll ni to'xtatish
-  useState(() => {
+  useEffect(() => {
     if (isModalOpen) {
       document.body.style.overflow = 'hidden';
     } else {
@@ -219,15 +215,8 @@ export default function OurProjects({ limit = 6 }) {
   };
 
   return (
-    <section className="py-24 bg-white relative overflow-hidden">
-      {/* Background decorations */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-40 left-20 w-80 h-80 bg-emerald-100/30 rounded-full blur-3xl" />
-        <div className="absolute bottom-40 right-20 w-96 h-96 bg-emerald-100/20 rounded-full blur-3xl" />
-      </div>
-
+    <section className="py-24 bg-white/0 relative overflow-hidden">
       <div className="container-pad relative z-10">
-        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -238,11 +227,10 @@ export default function OurProjects({ limit = 6 }) {
             Bizning <span className="text-emerald-600">loyihalar</span>
           </h2>
           <p className="text-lg text-slate-500">
-            500+ muvaffaqiyatli loyihalar | 12 yillik tajriba
+            500+ muvaffaqiyatli loyihalar
           </p>
         </motion.div>
 
-        {/* Filter Buttons */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -255,7 +243,7 @@ export default function OurProjects({ limit = 6 }) {
               onClick={() => setFilter(f.id)}
               className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all ${
                 filter === f.id
-                  ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-200'
+                  ? 'bg-emerald-600 text-white'
                   : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
               }`}
             >
@@ -264,7 +252,6 @@ export default function OurProjects({ limit = 6 }) {
           ))}
         </motion.div>
 
-        {/* Projects Grid - 3 ustun, rasmlar kartochkani to'ldiradi */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {displayedProjects.map((project, index) => (
             <motion.div
@@ -276,27 +263,24 @@ export default function OurProjects({ limit = 6 }) {
               className="group bg-white rounded-2xl border border-slate-100 overflow-hidden cursor-pointer hover:shadow-xl transition-all"
               onClick={() => openModal(project)}
             >
-              {/* Image - kartochkani to'ldiradi */}
-              <div className="h-42 bg-slate-50 overflow-hidden">
+              <div className="h-64 bg-slate-50 overflow-hidden relative">
                 <img 
                   src={project.image} 
                   alt={project.name}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                 />
-                {/* Category badge */}
-                <div className="absolute top-3 left-3 bg-emerald-600/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium text-white">
+                <div className="absolute top-3 left-3 bg-emerald-600/90 px-3 py-1 rounded-full text-xs font-medium text-white">
                   {project.category}
                 </div>
               </div>
 
-              {/* Content */}
               <div className="p-5">
-                <h3 className="text-lg font-bold text-slate-800 mb-1 line-clamp-1">
+                <h3 className="text-lg font-bold text-slate-800 mb-1">
                   {project.name}
                 </h3>
                 <div className="flex items-center gap-1 text-slate-400 text-xs mb-3">
                   <MapPin className="h-3.5 w-3.5" />
-                  <span className="line-clamp-1">{project.location}</span>
+                  <span>{project.location}</span>
                 </div>
                 <p className="text-sm text-slate-500 mb-4 line-clamp-2">
                   {project.description}
@@ -306,7 +290,7 @@ export default function OurProjects({ limit = 6 }) {
                     <Calendar className="h-3.5 w-3.5" />
                     <span>{project.details.year}</span>
                   </div>
-                  <span className="text-emerald-600 text-sm font-medium flex items-center gap-1 group-hover:gap-2 transition-all">
+                  <span className="text-emerald-600 text-sm font-medium flex items-center gap-1">
                     Batafsil
                     <ChevronRight className="h-4 w-4" />
                   </span>
@@ -316,7 +300,6 @@ export default function OurProjects({ limit = 6 }) {
           ))}
         </div>
 
-        {/* View All Button - limit bo'lganda ko'rinadi */}
         {limit && filteredProjects.length > limit && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -326,16 +309,15 @@ export default function OurProjects({ limit = 6 }) {
           >
             <Link
               to="/projects"
-              className="inline-flex items-center gap-2 bg-emerald-600 text-white px-8 py-4 rounded-xl font-semibold hover:bg-emerald-700 transition-colors group shadow-lg hover:shadow-xl"
+              className="inline-flex items-center gap-2 bg-emerald-600 text-white px-8 py-4 rounded-xl font-semibold hover:bg-emerald-700 transition-colors"
             >
               Barcha loyihalarni ko'rish
-              <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="h-5 w-5" />
             </Link>
           </motion.div>
         )}
       </div>
 
-      {/* Project Detail Modal */}
       <AnimatePresence>
         {isModalOpen && selectedProject && (
           <ProjectDetailModal project={selectedProject} onClose={closeModal} />
@@ -345,7 +327,6 @@ export default function OurProjects({ limit = 6 }) {
   );
 }
 
-/* Project Detail Modal Component */
 function ProjectDetailModal({ project, onClose }) {
   return (
     <motion.div
@@ -360,11 +341,10 @@ function ProjectDetailModal({ project, onClose }) {
         initial={{ opacity: 0, y: 20, scale: 0.95 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, y: 20, scale: 0.95 }}
-        transition={{ duration: 0.25, ease: "easeOut" }}
+        transition={{ duration: 0.25 }}
         className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Header */}
         <div className="flex items-center justify-between p-5 border-b border-slate-100">
           <div className="flex items-center gap-3">
             <Building2 className="h-5 w-5 text-emerald-600" />
@@ -378,11 +358,9 @@ function ProjectDetailModal({ project, onClose }) {
           </button>
         </div>
 
-        {/* Content */}
         <div className="p-6 overflow-y-auto max-h-[calc(90vh-80px)]">
           <div className="grid md:grid-cols-2 gap-6">
-            {/* Image - katta */}
-            <div className="bg-slate-50 rounded-xl overflow-hidden h-42">
+            <div className="bg-slate-50 rounded-xl overflow-hidden h-64">
               <img 
                 src={project.image} 
                 alt={project.name}
@@ -390,7 +368,6 @@ function ProjectDetailModal({ project, onClose }) {
               />
             </div>
 
-            {/* Info */}
             <div className="space-y-4">
               <div>
                 <h4 className="text-sm font-medium text-slate-400 mb-1">Loyiha haqida</h4>
@@ -416,7 +393,6 @@ function ProjectDetailModal({ project, onClose }) {
             </div>
           </div>
 
-          {/* Technical Details */}
           <div className="mt-6">
             <h4 className="text-sm font-medium text-slate-700 mb-3 flex items-center gap-2">
               <Package className="h-4 w-4 text-emerald-600" />
@@ -438,7 +414,6 @@ function ProjectDetailModal({ project, onClose }) {
             </div>
           </div>
 
-          {/* Features */}
           <div className="mt-6">
             <h4 className="text-sm font-medium text-slate-700 mb-3">Asosiy xususiyatlar</h4>
             <div className="grid grid-cols-2 gap-2">
@@ -451,7 +426,6 @@ function ProjectDetailModal({ project, onClose }) {
             </div>
           </div>
 
-          {/* Action Buttons */}
           <div className="mt-8 pt-4 border-t border-slate-100 flex justify-between items-center">
             <button className="text-emerald-600 text-sm font-medium hover:text-emerald-700 transition-colors flex items-center gap-1">
               <ExternalLink className="h-4 w-4" />

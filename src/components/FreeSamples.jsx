@@ -3,7 +3,7 @@ import { Package, Download, ChevronRight } from "lucide-react";
 
 export default function FreeSamples({ onOrderClick }) {
   return (
-    <section className="py-20 bg-white/50 backdrop-blur-sm overflow-hidden">
+    <section className="py-20 bg-white/0 backdrop-blur-sm overflow-hidden">
       <div className="container-pad">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left side - Text Content */}
@@ -18,9 +18,7 @@ export default function FreeSamples({ onOrderClick }) {
               Bepul namunalar
             </div>
             
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4">
-              Mahsulotlarimizni sinab ko'ring
-            </h2>
+        
             
             <p className="text-lg text-slate-500 mb-8">
               Sifatga o'zingiz baho bering. Bepul namunalar va kataloglarni buyurtma qiling

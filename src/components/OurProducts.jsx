@@ -2,17 +2,26 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   Package, ArrowRight, X,
-  Ruler, Thermometer, Shield, Zap, Droplets, Clock
+  Ruler, Thermometer, Shield, Zap, Droplets, Clock,
+  Maximize2, Minimize2, ZoomIn, ChevronLeft, ChevronRight,
+  Info, Award, CheckCircle, Star, ThumbsUp,
+  Layers, Grid3X3, Box
 } from "lucide-react";
 
 const products = [
   {
     id: 1,
-    name: "PIR Sendvich panellar",
+    name: "Sendvich panellar",
     category: "Devor va tom uchun",
-    fullName: "PIR Sendvich panellar Premier",
-    image: "https://i.ibb.co/LzsjFKLv/24.png",
+    fullName: "Sendvich panellar",
+    image: "/assets/devor.jpg",
+    gallery: [
+      "/assets/devor.jpg",
+      "/assets/tom-devor2.webp",
+      "/assets/devor-tom3.webp",
+    ],
     description: "Yuqori sifatli izolyatsiya, yong'inga chidamli, uzoq xizmat muddati.",
+    longDescription: "PIR sendvich panellar - bu zamonaviy qurilish materiali bo'lib, yuqori issiqlik izolyatsiyasi, yong'in xavfsizligi va uzoq xizmat muddati bilan ajralib turadi.",
     specs: [
       { label: "Qalinlik", value: "40-200 mm", icon: Ruler },
       { label: "Uzunlik", value: "2000-16000 mm", icon: Ruler },
@@ -30,15 +39,27 @@ const products = [
       "CE sertifikati",
       "EN-14509 standarti",
       "20 mm profilli ulanish"
+    ],
+    applications: [
+      "Sanoat binolari",
+      "Sovutgich kameralari",
+      "Omborxonalar",
+      "Savdo markazlari"
     ]
   },
   {
     id: 2,
     name: "Sovutgich Kameralar",
     category: "Go'sht, meva, sut",
-    fullName: "Sovutgich Kameralar Cold Pro",
-    image: "https://i.ibb.co/cKxQGBF7/27.png",
+    fullName: "Sovutgich Kameralar",
+    image: "/assets/sovutgich.jpg",
+    gallery: [
+      "/assets/sovutgich.jpg",
+      "/assets/sovutgich1.webp",
+      "/assets/sovutgich2.webp",
+    ],
     description: "Maxsus harorat rejimi, tez montaj, germetik muhr.",
+    longDescription: "Sovutgich kameralari - bu har xil turdagi mahsulotlarni saqlash uchun mo'ljallangan professional sovutish tizimlari.",
     specs: [
       { label: "Harorat", value: "-25°C dan +8°C", icon: Thermometer },
       { label: "Hajm", value: "5-1000 m³", icon: Package },
@@ -56,41 +77,25 @@ const products = [
       "24/7 monitoring",
       "Zaxira quvvat",
       "GSM signalizatsiya"
+    ],
+    applications: [
+      "Go'sht mahsulotlari",
+      "Meva-sabzavot",
+      "Sut mahsulotlari",
+      "Baliq mahsulotlari"
     ]
   },
   {
     id: 3,
-    name: "Sanoat Eshiklari",
-    category: "Germetik, seksion",
-    fullName: "Sanoat Eshiklari Thermo Door",
-    image: "https://i.ibb.co/xK8Hk6TM/26.png",
-    description: "Avtomatik boshqaruv, haroratni saqlash, tez ochilish.",
-    specs: [
-      { label: "Tezlik", value: "1.5 m/s gacha", icon: Zap },
-      { label: "O'lchamlar", value: "Maxsus", icon: Ruler },
-      { label: "Harorat", value: "-40°C dan +50°C", icon: Thermometer },
-      { label: "Izolyatsiya", value: "0.5-1.0 m²K/Vt", icon: Shield },
-    ],
-    features: [
-      "Germetik muhr",
-      "Tez ochilish",
-      "Haroratga chidamli",
-      "Avtomatik"
-    ],
-    advantages: [
-      "Sovuq o'tkazmaydi",
-      "Shovqinsiz",
-      "Uzoq muddat",
-      "Masofadan boshqaruv"
-    ]
-  },
-  {
-    id: 4,
     name: "Ombor Tizimlari",
     category: "Metall konstruksiyalar",
-    fullName: "Ombor Tizimlari Warehouse Pro",
-    image: "https://i.ibb.co/Mxb7XYpz/29.png",
+    fullName: "Ombor Tizimlari",
+    image: "/assets/ombor.jpg",
+    gallery: [
+      "/assets/ombor.jpg",
+    ],
     description: "Tez quriladigan omborlar, logistika markazlari, sexlar.",
+    longDescription: "Ombor tizimlari - bu tez quriladigan va iqtisodiy jihatdan samarali bo'lgan sanoat binolari.",
     specs: [
       { label: "Maydon", value: "100-10000 m²", icon: Ruler },
       { label: "Balandlik", value: "6-15 m", icon: Ruler },
@@ -108,6 +113,12 @@ const products = [
       "Har qanday iqlim",
       "Modul tizim",
       "Kengaytirish mumkin"
+    ],
+    applications: [
+      "Logistika markazlari",
+      "Ishlab chiqarish sexlari",
+      "Agrosanoat majmualari",
+      "Savdo omborlari"
     ]
   }
 ];
@@ -115,6 +126,10 @@ const products = [
 export default function OurProducts({ onProductClick }) {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isZoomed, setIsZoomed] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [showGallery, setShowGallery] = useState(false);
+  const [activeTab, setActiveTab] = useState('specs');
 
   useEffect(() => {
     if (isModalOpen) {
@@ -130,48 +145,125 @@ export default function OurProducts({ onProductClick }) {
   const handleProductClick = (product) => {
     setSelectedProduct(product);
     setIsModalOpen(true);
+    setCurrentImageIndex(0);
+    setIsZoomed(false);
+    setShowGallery(false);
+    setActiveTab('specs');
     onProductClick?.(product);
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
-    setSelectedProduct(null);
+    setTimeout(() => {
+      setSelectedProduct(null);
+      setCurrentImageIndex(0);
+      setIsZoomed(false);
+      setShowGallery(false);
+    }, 300);
+  };
+
+  const nextImage = () => {
+    if (selectedProduct?.gallery) {
+      setCurrentImageIndex((prev) => 
+        prev === selectedProduct.gallery.length - 1 ? 0 : prev + 1
+      );
+    }
+  };
+
+  const prevImage = () => {
+    if (selectedProduct?.gallery) {
+      setCurrentImageIndex((prev) => 
+        prev === 0 ? selectedProduct.gallery.length - 1 : prev - 1
+      );
+    }
   };
 
   return (
     <>
-      <section className="py-20 bg-white">
-        <div className="container-pad">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-slate-800 mb-4">Bizning mahsulotlar</h2>
-            <p className="text-lg text-slate-500">Sifat va ishonch garovi</p>
-          </div>
+      <section className="py-24 bg-white/0 relative overflow-hidden">
+        <div className="container-pad relative z-10">
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="text-5xl font-bold text-slate-800 mb-4">
+              Bizning <span className="text-emerald-600">mahsulotlar</span>
+            </h2>
+            <p className="text-xl text-slate-500 max-w-2xl mx-auto">
+              Sifat va ishonch garovi - 12 yil kafolat
+            </p>
+          </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {products.map((product) => (
+          {/* 3 ta card - keng va to'liq */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            {products.map((product, index) => (
               <motion.div
                 key={product.id}
-                whileHover={{ y: -4 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className="bg-white rounded-xl border border-slate-100 overflow-hidden cursor-pointer hover:shadow-md transition-all duration-300 group"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1, duration: 0.5 }}
+                whileHover={{ y: -10 }}
+                className="group cursor-pointer w-full"
                 onClick={() => handleProductClick(product)}
               >
-                {/* Rasm to'liq kartochkani egallaydi */}
-                <div className="h-99 bg-white flex items-center justify-center p-6">
-                  <img 
-                    src={product.image} 
-                    alt={product.name} 
-                    className="h-full w-auto object-contain transition-transform duration-300 group-hover:scale-105" 
-                  />
-                </div>
-                <div className="p-4 border-t border-slate-100">
-                  <span className="text-xs text-slate-400 uppercase tracking-wider">
-                    {product.category}
-                  </span>
-                  <h3 className="font-semibold text-base text-slate-800 mt-0.5 mb-2">{product.name}</h3>
-                  <div className="flex items-center justify-end">
-                    <span className="text-xs text-slate-400 mr-2">Batafsil</span>
-                    <ArrowRight className="h-3.5 w-3.5 text-slate-300 group-hover:text-emerald-500 group-hover:translate-x-0.5 transition-all" />
+                <div className="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 h-full flex flex-col">
+                  {/* Image Container - balandligi oshirildi */}
+                  <div className="relative h-96 bg-gradient-to-br from-slate-50 to-white p-8 flex items-center justify-center overflow-hidden">
+                    <motion.img 
+                      src={product.image} 
+                      alt={product.name} 
+                      className="w-full h-full object-contain transition-all duration-700 group-hover:scale-110"
+                    />
+                    
+                    {/* Quick view */}
+                    <motion.div 
+                      className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-emerald-600 text-white px-6 py-3 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-500"
+                      initial={{ y: 20 }}
+                      whileHover={{ y: 0 }}
+                    >
+                      <span className="text-sm font-medium flex items-center gap-2">
+                        <ZoomIn className="h-4 w-4" />
+                        Batafsil
+                      </span>
+                    </motion.div>
+                  </div>
+                  
+                  {/* Content - kengaytirildi */}
+                  <div className="p-8 flex flex-col flex-grow">
+                    <span className="text-sm text-emerald-600 font-semibold mb-2 block uppercase tracking-wider">
+                      {product.category}
+                    </span>
+                    <h3 className="text-2xl font-bold text-slate-800 mb-3">
+                      {product.name}
+                    </h3>
+                    <p className="text-slate-600 mb-6 line-clamp-2 text-base">
+                      {product.description}
+                    </p>
+                    
+                    {/* Features */}
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {product.features.slice(0, 2).map((feature, i) => (
+                        <span key={i} className="text-xs bg-emerald-50 text-emerald-700 px-3 py-1.5 rounded-full font-medium">
+                          {feature}
+                        </span>
+                      ))}
+                    </div>
+                    
+                    {/* View details link */}
+                    <div className="flex items-center justify-between pt-4 border-t border-slate-100 mt-auto">
+                      <span className="text-sm font-medium text-slate-400">Batafsil ma'lumot</span>
+                      <motion.div
+                        animate={{ x: [0, 5, 0] }}
+                        transition={{ duration: 1.5, repeat: Infinity }}
+                        className="bg-emerald-100 p-2 rounded-full"
+                      >
+                        <ArrowRight className="h-5 w-5 text-emerald-600" />
+                      </motion.div>
+                    </div>
                   </div>
                 </div>
               </motion.div>
@@ -183,7 +275,20 @@ export default function OurProducts({ onProductClick }) {
       {/* Mahsulot Detail Modal */}
       <AnimatePresence>
         {isModalOpen && selectedProduct && (
-          <ProductDetailModal product={selectedProduct} onClose={closeModal} />
+          <ProductDetailModal 
+            product={selectedProduct} 
+            onClose={closeModal}
+            currentImageIndex={currentImageIndex}
+            setCurrentImageIndex={setCurrentImageIndex}
+            isZoomed={isZoomed}
+            setIsZoomed={setIsZoomed}
+            showGallery={showGallery}
+            setShowGallery={setShowGallery}
+            activeTab={activeTab}
+            setActiveTab={setActiveTab}
+            nextImage={nextImage}
+            prevImage={prevImage}
+          />
         )}
       </AnimatePresence>
     </>
@@ -191,124 +296,310 @@ export default function OurProducts({ onProductClick }) {
 }
 
 /* Mahsulot Detail Modal Component */
-function ProductDetailModal({ product, onClose }) {
+function ProductDetailModal({ 
+  product, 
+  onClose, 
+  currentImageIndex, 
+  setCurrentImageIndex,
+  isZoomed,
+  setIsZoomed,
+  showGallery,
+  setShowGallery,
+  activeTab,
+  setActiveTab,
+  nextImage,
+  prevImage 
+}) {
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.2 }}
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/20 backdrop-blur-sm"
+      transition={{ duration: 0.3 }}
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-md"
       onClick={onClose}
     >
       <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: 10 }}
-        transition={{ duration: 0.25, ease: "easeOut" }}
-        className="bg-white rounded-2xl max-w-4xl w-full max-h-[85vh] overflow-hidden shadow-xl"
+        initial={{ opacity: 0, scale: 0.95, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.95, y: 20 }}
+        transition={{ duration: 0.4 }}
+        className="bg-white rounded-3xl max-w-6xl w-full max-h-[90vh] overflow-hidden shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-slate-100">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-emerald-50 flex items-center justify-center">
-              <Package className="h-4 w-4 text-emerald-600" />
+        <div className="flex items-center justify-between p-6 border-b border-slate-100">
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center">
+              <Package className="h-6 w-6 text-emerald-600" />
             </div>
             <div>
-              <span className="text-xs text-slate-400">{product.category}</span>
-              <h2 className="text-lg font-semibold text-slate-800">{product.fullName}</h2>
+              <span className="text-sm text-emerald-600 font-medium">{product.category}</span>
+              <h2 className="text-2xl font-bold text-slate-800">{product.fullName}</h2>
             </div>
           </div>
-          <button 
-            onClick={onClose}
-            className="w-8 h-8 rounded-full hover:bg-slate-100 flex items-center justify-center transition-colors"
-          >
-            <X className="h-4 w-4 text-slate-400" />
-          </button>
+          <div className="flex items-center gap-2">
+            <button 
+              onClick={() => setShowGallery(!showGallery)}
+              className="w-10 h-10 rounded-full hover:bg-slate-100 flex items-center justify-center transition-colors"
+            >
+              <Grid3X3 className="h-5 w-5 text-slate-400" />
+            </button>
+            <button 
+              onClick={onClose}
+              className="w-10 h-10 rounded-full hover:bg-slate-100 flex items-center justify-center transition-colors"
+            >
+              <X className="h-5 w-5 text-slate-400" />
+            </button>
+          </div>
         </div>
 
-        {/* Content */}
-        <div className="p-6 overflow-y-auto max-h-[calc(85vh-80px)]">
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Left - Rasm (faqat oq fon) */}
-            <div className="bg-white rounded-xl p-6 flex items-center justify-center min-h-[280px] border border-slate-100">
-              <img 
-                src={product.image} 
-                alt={product.fullName}
-                className="w-full max-w-[200px] h-auto object-contain"
-              />
-            </div>
+        <div className="p-6 overflow-y-auto max-h-[calc(90vh-100px)]">
+          {showGallery ? (
+            <motion.div 
+              className="space-y-6"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <h3 className="text-lg font-semibold text-slate-800">Mahsulot galereyasi</h3>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {product.gallery?.map((img, index) => (
+                  <motion.div
+                    key={index}
+                    className="relative aspect-square bg-slate-50 rounded-xl overflow-hidden cursor-pointer"
+                    whileHover={{ scale: 1.05 }}
+                    onClick={() => {
+                      setCurrentImageIndex(index);
+                      setShowGallery(false);
+                    }}
+                  >
+                    <img 
+                      src={img} 
+                      alt={`${product.name} ${index + 1}`}
+                      className="w-full h-full object-contain p-4"
+                    />
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          ) : (
+            <div className="grid lg:grid-cols-2 gap-8">
+              <div className="space-y-4">
+                <motion.div 
+                  className={`relative bg-slate-50 rounded-2xl overflow-hidden border border-slate-100 transition-all duration-500 ${
+                    isZoomed ? 'fixed inset-10 z-50 cursor-zoom-out' : 'h-[400px] cursor-zoom-in'
+                  }`}
+                  onClick={() => setIsZoomed(!isZoomed)}
+                >
+                  <motion.img 
+                    key={currentImageIndex}
+                    src={product.gallery?.[currentImageIndex] || product.image}
+                    alt={product.fullName}
+                    className={`w-full h-full transition-all duration-500 ${
+                      isZoomed ? 'object-contain p-8' : 'object-contain p-6'
+                    }`}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                  
+                  {!isZoomed && (
+                    <>
+                      <button
+                        className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 shadow-lg flex items-center justify-center hover:bg-white transition-all"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          prevImage();
+                        }}
+                      >
+                        <ChevronLeft className="h-5 w-5 text-slate-600" />
+                      </button>
+                      <button
+                        className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 shadow-lg flex items-center justify-center hover:bg-white transition-all"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          nextImage();
+                        }}
+                      >
+                        <ChevronRight className="h-5 w-5 text-slate-600" />
+                      </button>
+                    </>
+                  )}
+                  
+                  <div className="absolute bottom-4 right-4 w-10 h-10 rounded-full bg-white/90 shadow-lg flex items-center justify-center">
+                    {isZoomed ? (
+                      <Minimize2 className="h-5 w-5 text-slate-600" />
+                    ) : (
+                      <Maximize2 className="h-5 w-5 text-slate-600" />
+                    )}
+                  </div>
+                </motion.div>
+                
+                <div className="flex gap-3 overflow-x-auto pb-2">
+                  {product.gallery?.map((img, index) => (
+                    <button
+                      key={index}
+                      className={`flex-shrink-0 w-20 h-20 rounded-xl overflow-hidden border-2 transition-all ${
+                        currentImageIndex === index 
+                          ? 'border-emerald-500' 
+                          : 'border-transparent hover:border-slate-200'
+                      }`}
+                      onClick={() => setCurrentImageIndex(index)}
+                    >
+                      <img 
+                        src={img} 
+                        alt={`Thumbnail ${index + 1}`}
+                        className="w-full h-full object-cover"
+                      />
+                    </button>
+                  ))}
+                </div>
+              </div>
 
-            {/* Right - Info */}
-            <div className="space-y-5">
-              <p className="text-sm text-slate-600 leading-relaxed">
-                {product.description}
-              </p>
+              <div className="space-y-6">
+                <div>
+                  <h3 className="text-lg font-semibold text-slate-800 mb-3 flex items-center gap-2">
+                    <Info className="h-5 w-5 text-emerald-500" />
+                    Mahsulot haqida
+                  </h3>
+                  <p className="text-slate-600 leading-relaxed">
+                    {product.longDescription}
+                  </p>
+                </div>
 
-              {/* Specifications */}
-              <div>
-                <h3 className="text-sm font-medium text-slate-700 mb-3 flex items-center gap-2">
-                  <Ruler className="h-4 w-4 text-emerald-500" />
-                  Texnik xususiyatlar
-                </h3>
-                <div className="grid grid-cols-2 gap-2">
-                  {product.specs.map((spec, index) => {
-                    const Icon = spec.icon;
+                <div className="flex gap-2 border-b border-slate-100">
+                  {[
+                    { id: 'specs', label: 'Texnik xususiyatlar', icon: Ruler },
+                    { id: 'features', label: 'Xususiyatlar', icon: Layers },
+                    { id: 'advantages', label: 'Afzalliklar', icon: Award },
+                    { id: 'applications', label: 'Qo\'llanish', icon: Box }
+                  ].map((tab) => {
+                    const Icon = tab.icon;
                     return (
-                      <div key={index} className="bg-slate-50 p-2.5 rounded-lg border border-slate-100">
-                        <div className="flex items-center gap-1.5 text-slate-500 mb-0.5">
-                          <Icon className="h-3.5 w-3.5" />
-                          <span className="text-xs">{spec.label}</span>
-                        </div>
-                        <span className="text-sm font-medium text-slate-700">{spec.value}</span>
-                      </div>
+                      <button
+                        key={tab.id}
+                        className={`px-4 py-2 text-sm font-medium rounded-t-lg transition-all ${
+                          activeTab === tab.id
+                            ? 'text-emerald-600 border-b-2 border-emerald-600 bg-emerald-50/50'
+                            : 'text-slate-500 hover:text-slate-700'
+                        }`}
+                        onClick={() => setActiveTab(tab.id)}
+                      >
+                        <Icon className="h-4 w-4 inline-block mr-2" />
+                        {tab.label}
+                      </button>
                     );
                   })}
                 </div>
-              </div>
 
-              {/* Features & Advantages */}
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <h4 className="text-xs font-medium text-slate-500 uppercase tracking-wider mb-2">
-                    Xususiyatlar
-                  </h4>
-                  <ul className="space-y-1">
-                    {product.features.map((feature, i) => (
-                      <li key={i} className="text-xs text-slate-600 flex items-start gap-1.5">
-                        <span className="text-slate-300 text-xs">•</span>
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div>
-                  <h4 className="text-xs font-medium text-slate-500 uppercase tracking-wider mb-2">
-                    Afzalliklar
-                  </h4>
-                  <ul className="space-y-1">
-                    {product.advantages.map((adv, i) => (
-                      <li key={i} className="text-xs text-slate-600 flex items-start gap-1.5">
-                        <span className="text-slate-300 text-xs">•</span>
-                        {adv}
-                      </li>
-                    ))}
-                  </ul>
+                <div className="min-h-[300px]">
+                  <AnimatePresence mode="wait">
+                    {activeTab === 'specs' && (
+                      <motion.div
+                        key="specs"
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -20 }}
+                        transition={{ duration: 0.3 }}
+                        className="grid grid-cols-2 gap-4"
+                      >
+                        {product.specs.map((spec, index) => {
+                          const Icon = spec.icon;
+                          return (
+                            <div key={index} className="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                              <div className="flex items-center gap-2 text-slate-500 mb-2">
+                                <Icon className="h-4 w-4" />
+                                <span className="text-xs uppercase">{spec.label}</span>
+                              </div>
+                              <span className="text-base font-semibold text-slate-800">{spec.value}</span>
+                            </div>
+                          );
+                        })}
+                      </motion.div>
+                    )}
+
+                    {activeTab === 'features' && (
+                      <motion.div
+                        key="features"
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -20 }}
+                        transition={{ duration: 0.3 }}
+                        className="grid grid-cols-2 gap-4"
+                      >
+                        {product.features.map((feature, index) => (
+                          <div key={index} className="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <div className="flex items-start gap-2">
+                              <CheckCircle className="h-5 w-5 text-emerald-500 flex-shrink-0 mt-0.5" />
+                              <span className="text-sm text-slate-700">{feature}</span>
+                            </div>
+                          </div>
+                        ))}
+                      </motion.div>
+                    )}
+
+                    {activeTab === 'advantages' && (
+                      <motion.div
+                        key="advantages"
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -20 }}
+                        transition={{ duration: 0.3 }}
+                        className="grid grid-cols-2 gap-4"
+                      >
+                        {product.advantages.map((adv, index) => (
+                          <div key={index} className="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <div className="flex items-start gap-2">
+                              <ThumbsUp className="h-5 w-5 text-emerald-500 flex-shrink-0 mt-0.5" />
+                              <span className="text-sm text-slate-700">{adv}</span>
+                            </div>
+                          </div>
+                        ))}
+                      </motion.div>
+                    )}
+
+                    {activeTab === 'applications' && (
+                      <motion.div
+                        key="applications"
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -20 }}
+                        transition={{ duration: 0.3 }}
+                        className="grid grid-cols-2 gap-4"
+                      >
+                        {product.applications.map((app, index) => (
+                          <div key={index} className="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                            <div className="flex items-start gap-2">
+                              <Box className="h-5 w-5 text-emerald-500 flex-shrink-0 mt-0.5" />
+                              <span className="text-sm text-slate-700">{app}</span>
+                            </div>
+                          </div>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               </div>
             </div>
-          </div>
+          )}
+        </div>
 
-          {/* Footer */}
-          <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <Shield className="h-4 w-4 text-slate-300" />
-              <span className="text-xs text-slate-500">12 yil kafolat</span>
+        <div className="p-6 border-t border-slate-100">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2">
+                <Shield className="h-5 w-5 text-emerald-500" />
+                <span className="text-sm text-slate-600 font-medium">12 yil kafolat</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Award className="h-5 w-5 text-emerald-500" />
+                <span className="text-sm text-slate-600 font-medium">ISO 9001</span>
+              </div>
             </div>
-            <button className="bg-emerald-600 text-white text-sm px-5 py-2.5 rounded-lg font-medium hover:bg-emerald-700 transition-colors flex items-center gap-2">
+            
+            <button className="bg-emerald-600 text-white px-8 py-3 rounded-xl font-semibold hover:bg-emerald-700 transition-colors flex items-center gap-3">
               Ma'lumot olish
-              <ArrowRight className="h-3.5 w-3.5" />
+              <ArrowRight className="h-4 w-4" />
             </button>
           </div>
         </div>

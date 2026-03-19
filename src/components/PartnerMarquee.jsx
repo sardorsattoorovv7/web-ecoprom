@@ -1,18 +1,42 @@
 import { motion } from "framer-motion";
-import { Users, Award, Briefcase, Globe2 } from "lucide-react";
+import { Award, Briefcase, Globe2 } from "lucide-react";
 
 const partners = [
-  { id: 1, name: "Sevimli Samarqand" },
-  { id: 2, name: "AGROMIR" },
-  { id: 3, name: "Shirin Tabaka" },
-  { id: 4, name: "Eco Dry Food" },
-  { id: 5, name: "Stroy Xolod Tashkent" },
-  { id: 6, name: "Agro Bravo" },
+  { 
+    id: 1, 
+    name: "Sevimli Samarqand",
+    logo: "/assets/logo-partners/sevimli-samarqand.png"
+  },
+  { 
+    id: 2, 
+    name: "AGROMIR",
+    logo: "/assets/logo-partners/agromir.png"
+  },
+  { 
+    id: 3, 
+    name: "Shirin Tabaka",
+    logo: "/assets/logo-partners/shirintabaka.png"
+  },
+  { 
+    id: 4, 
+    name: "Eco Dry Food",
+    logo: "/assets/logo-partners/ecodry.png"
+  },
+  { 
+    id: 5, 
+    name: "Stroy Xolod Tashkent",
+    logo: "/assets/logo-partners/stroyxolod.png"
+  },
+  { 
+    id: 6, 
+    name: "Agro Bravo",
+    logo: "/assets/logo-partners/agrobravo.png"
+  },
 ];
 
 export default function OurPartners() {
   return (
-    <section className="py-24 bg-white relative overflow-hidden">
+    <section className="py-24 bg-white/0 relative overflow-hidden">
       {/* Elegant background */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-emerald-50/20 rounded-full blur-3xl" />
@@ -41,14 +65,14 @@ export default function OurPartners() {
         >
           <div className="inline-flex items-center gap-3 px-6 py-2 rounded-full border border-emerald-200/50 bg-white/50 backdrop-blur-sm mb-6">
             <Award className="h-4 w-4 text-emerald-600" />
-            <span className="text-xs font-medium text-emerald-700 uppercase tracking-wider">Ishonchli hamkorlarimiz</span>
+            <span className="text-xs font-medium text-emerald-700 uppercase tracking-wider">
+              Ishonchli hamkorlarimiz
+            </span>
           </div>
           
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-light text-slate-800 mb-6 tracking-tight">
             Bizning <span className="font-semibold text-emerald-600">Hamkorlarimiz</span>
           </h2>
-          
-      
         </motion.div>
 
         {/* Partners Marquee */}
@@ -69,13 +93,23 @@ export default function OurPartners() {
               className="flex whitespace-nowrap"
             >
               {/* First row */}
-              <div className="flex gap-16 md:gap-24 px-8">
+              <div className="flex gap-16 md:gap-24 px-8 items-center">
                 {partners.map((partner) => (
                   <div
                     key={partner.id}
                     className="inline-flex flex-col items-center group cursor-default"
                   >
-                    <span className="text-lg md:text-xl font-light text-slate-400 group-hover:text-emerald-600 transition-colors duration-500 tracking-wide">
+                    <img 
+                      src={partner.logo}
+                      alt={partner.name}
+                      className="h-45 md:h-65 w-auto object-contain grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.style.display = 'none';
+                        e.target.nextSibling.style.display = 'block';
+                      }}
+                    />
+                    <span className="text-xs text-slate-400 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                       {partner.name}
                     </span>
                     <div className="w-12 h-px bg-emerald-200/50 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -84,13 +118,23 @@ export default function OurPartners() {
               </div>
               
               {/* Duplicate for seamless loop */}
-              <div className="flex gap-16 md:gap-24 px-8">
+              <div className="flex gap-16 md:gap-24 px-8 items-center">
                 {partners.map((partner) => (
                   <div
                     key={`dup-${partner.id}`}
                     className="inline-flex flex-col items-center group cursor-default"
                   >
-                    <span className="text-lg md:text-xl font-light text-slate-400 group-hover:text-emerald-600 transition-colors duration-500 tracking-wide">
+                    <img 
+                      src={partner.logo}
+                      alt={partner.name}
+                      className="h-12 md:h-16 w-auto object-contain grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.style.display = 'none';
+                        e.target.nextSibling.style.display = 'block';
+                      }}
+                    />
+                    <span className="text-xs text-slate-400 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                       {partner.name}
                     </span>
                     <div className="w-12 h-px bg-emerald-200/50 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
