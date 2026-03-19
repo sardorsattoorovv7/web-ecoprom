@@ -314,7 +314,7 @@ export default function EcoPromMain({ onOpenCall }) {
           </div>
         </section>
 
-        {/* ---------------- SECTION 2: COLOR CONFIGURATOR ---------------- */}
+        {/* ---------------- SECTION 2: COLOR CONFIGURATOR (TO'G'IRLANGAN) ---------------- */}
         <section 
           className="relative bg-white/0 py-10 sm:py-12 md:py-20 lg:py-24"
           aria-label="Rang konfiguratori"
@@ -330,8 +330,8 @@ export default function EcoPromMain({ onOpenCall }) {
             </div>
 
             <div className="grid items-center gap-6 sm:gap-8 lg:grid-cols-2 lg:gap-12">
-              {/* Visual Display */}
-              <div className="flex min-h-[200px] items-center justify-center sm:min-h-[250px] lg:min-h-[400px]">
+              {/* Visual Display - KATTA QILINGAN */}
+              <div className="flex min-h-[250px] items-center justify-center sm:min-h-[250px] lg:min-h-[400px]">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={selectedColor.id}
@@ -339,9 +339,10 @@ export default function EcoPromMain({ onOpenCall }) {
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.98 }}
                     transition={{ duration: 0.3 }}
+                    className="w-full flex justify-center"
                   >
                     {!imagesLoaded[selectedColor.id] && (
-                      <div className="h-[150px] w-[150px] animate-pulse rounded-2xl bg-slate-200 sm:h-[200px] sm:w-[200px] lg:h-[300px] lg:w-[300px]" />
+                      <div className="h-[200px] w-[200px] animate-pulse rounded-2xl bg-slate-200 sm:h-[250px] sm:w-[250px] lg:h-[350px] lg:w-[350px]" />
                     )}
                     <img
                       src={selectedColor.image}
@@ -350,7 +351,7 @@ export default function EcoPromMain({ onOpenCall }) {
                       width={selectedColor.width}
                       height={selectedColor.height}
                       onLoad={() => setImagesLoaded(prev => ({ ...prev, [selectedColor.id]: true }))}
-                      className={`h-auto max-h-[150px] w-auto object-contain sm:max-h-[200px] lg:max-h-[350px] ${
+                      className={`h-auto max-h-[200px] w-auto object-contain sm:max-h-[250px] lg:max-h-[400px] ${
                         imagesLoaded[selectedColor.id] ? 'opacity-100' : 'opacity-0'
                       } transition-opacity duration-300`}
                     />
