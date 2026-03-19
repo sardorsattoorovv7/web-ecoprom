@@ -78,8 +78,8 @@ export default function OurPartners() {
         {/* Partners Marquee */}
         <div className="relative py-8">
           {/* Gradient overlays */}
-          <div className="absolute left-0 top-0 bottom-0 w-40 bg-gradient-to-r from-white via-white/90 to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-40 bg-gradient-to-l from-white via-white/90 to-transparent z-10 pointer-events-none" />
+          <div className="absolute left-0 top-0 bottom-0 w-40 bg-gradient-to-r from-white via-white/0 to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-40 bg-gradient-to-l from-white via-white/0 to-transparent z-10 pointer-events-none" />
           
           {/* Scrolling container */}
           <div className="overflow-hidden">
