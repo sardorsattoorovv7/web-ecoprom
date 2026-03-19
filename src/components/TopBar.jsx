@@ -22,11 +22,7 @@ export default function TopBar() {
             value="info@ecoprom.uz" 
             href="mailto:info@ecoprom.uz"
           />
-          <ContactItem 
-            icon={<Clock size={14} />} 
-            label={t("topbar.hours")} 
-            value="08:00 – 18:00" 
-          />
+         
         </div>
 
         {/* Til o'zgartirgich */}
