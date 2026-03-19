@@ -30,10 +30,7 @@ export default function TopBar() {
         </div>
 
         {/* Til o'zgartirgich */}
-        <div className="flex items-center gap-3">
-          <div className="hidden xs:block h-4 w-[1px] bg-slate-200 mx-1"></div>
-          <LanguageSwitch />
-        </div>
+       
       </div>
     </div>
   );
