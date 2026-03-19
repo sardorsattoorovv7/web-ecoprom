@@ -46,9 +46,9 @@ const productionImages = [
 ];
 
 const stats = [
-  { id: 1, value: "5000 m²", label: "Ishlab chiqarish maydoni", icon: Factory },
-  { id: 2, value: "120+", label: "Malakali xodimlar", icon: Users },
-  { id: 3, value: "2", label: "Ishlab chiqarish liniyasi", icon: Settings },
+  { id: 1, value: "7140 m²", label: "Ishlab chiqarish maydoni", icon: Factory },
+  { id: 2, value: "50+", label: "Malakali xodimlar", icon: Users },
+  { id: 3, value: "5", label: "Ishlab chiqarish liniyasi", icon: Settings },
   { id: 4, value: "ISO 9001", label: "Sifat sertifikati", icon: Shield }
 ];
 

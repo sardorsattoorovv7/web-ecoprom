@@ -15,7 +15,7 @@ const reasons = [
   {
     id: 2,
     title: "Muddat",
-    description: "2 ta uzluksiz ishlab chiqarish liniyasi mahsulot yetkazib berish muddatini aniq rejalashtirish imkonini beradi",
+    description: "5 ta uzluksiz ishlab chiqarish liniyasi mahsulot yetkazib berish muddatini aniq rejalashtirish imkonini beradi",
     icon: Clock,
     stats: "2 ta liniya",
   },
