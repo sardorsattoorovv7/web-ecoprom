@@ -17,8 +17,6 @@ const products = [
     image: "/assets/devor.jpg",
     gallery: [
       "/assets/devor.jpg",
-      "/assets/tom-devor2.webp",
-      "/assets/devor-tom3.webp",
     ],
     description: "Yuqori sifatli izolyatsiya, yong'inga chidamli, uzoq xizmat muddati.",
     longDescription: "PIR sendvich panellar - bu zamonaviy qurilish materiali bo'lib, yuqori issiqlik izolyatsiyasi, yong'in xavfsizligi va uzoq xizmat muddati bilan ajralib turadi.",
@@ -55,8 +53,7 @@ const products = [
     image: "/assets/sovutgich.jpg",
     gallery: [
       "/assets/sovutgich.jpg",
-      "/assets/sovutgich1.webp",
-      "/assets/sovutgich2.webp",
+      
     ],
     description: "Maxsus harorat rejimi, tez montaj, germetik muhr.",
     longDescription: "Sovutgich kameralari - bu har xil turdagi mahsulotlarni saqlash uchun mo'ljallangan professional sovutish tizimlari.",
@@ -384,62 +381,66 @@ function ProductDetailModal({
             </motion.div>
           ) : (
             <div className="grid lg:grid-cols-2 gap-8">
+              {/* Left - Image Gallery - TO'G'IRLANGAN */}
               <div className="space-y-4">
                 <motion.div 
                   className={`relative bg-slate-50 rounded-2xl overflow-hidden border border-slate-100 transition-all duration-500 ${
-                    isZoomed ? 'fixed inset-10 z-50 cursor-zoom-out' : 'h-[400px] cursor-zoom-in'
+                    isZoomed ? 'fixed inset-4 md:inset-10 z-50 cursor-zoom-out' : 'h-[300px] md:h-[400px] cursor-zoom-in'
                   }`}
                   onClick={() => setIsZoomed(!isZoomed)}
                 >
-                  <motion.img 
-                    key={currentImageIndex}
-                    src={product.gallery?.[currentImageIndex] || product.image}
-                    alt={product.fullName}
-                    className={`w-full h-full transition-all duration-500 ${
-                      isZoomed ? 'object-contain p-8' : 'object-contain p-6'
-                    }`}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.3 }}
-                  />
+                  <div className="w-full h-full flex items-center justify-center p-4 md:p-6">
+                    <motion.img 
+                      key={currentImageIndex}
+                      src={product.gallery?.[currentImageIndex] || product.image}
+                      alt={product.fullName}
+                      className={`w-full h-full transition-all duration-500 ${
+                        isZoomed ? 'object-contain' : 'object-contain'
+                      }`}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                  </div>
                   
                   {!isZoomed && (
                     <>
                       <button
-                        className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 shadow-lg flex items-center justify-center hover:bg-white transition-all"
+                        className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/90 shadow-lg flex items-center justify-center hover:bg-white transition-all"
                         onClick={(e) => {
                           e.stopPropagation();
                           prevImage();
                         }}
                       >
-                        <ChevronLeft className="h-5 w-5 text-slate-600" />
+                        <ChevronLeft className="h-4 w-4 md:h-5 md:w-5 text-slate-600" />
                       </button>
                       <button
-                        className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 shadow-lg flex items-center justify-center hover:bg-white transition-all"
+                        className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/90 shadow-lg flex items-center justify-center hover:bg-white transition-all"
                         onClick={(e) => {
                           e.stopPropagation();
                           nextImage();
                         }}
                       >
-                        <ChevronRight className="h-5 w-5 text-slate-600" />
+                        <ChevronRight className="h-4 w-4 md:h-5 md:w-5 text-slate-600" />
                       </button>
                     </>
                   )}
                   
-                  <div className="absolute bottom-4 right-4 w-10 h-10 rounded-full bg-white/90 shadow-lg flex items-center justify-center">
+                  <div className="absolute bottom-2 right-2 md:bottom-4 md:right-4 w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/90 shadow-lg flex items-center justify-center">
                     {isZoomed ? (
-                      <Minimize2 className="h-5 w-5 text-slate-600" />
+                      <Minimize2 className="h-4 w-4 md:h-5 md:w-5 text-slate-600" />
                     ) : (
-                      <Maximize2 className="h-5 w-5 text-slate-600" />
+                      <Maximize2 className="h-4 w-4 md:h-5 md:w-5 text-slate-600" />
                     )}
                   </div>
                 </motion.div>
                 
-                <div className="flex gap-3 overflow-x-auto pb-2">
+                {/* Thumbnails */}
+                <div className="flex gap-2 md:gap-3 overflow-x-auto pb-2 justify-center">
                   {product.gallery?.map((img, index) => (
                     <button
                       key={index}
-                      className={`flex-shrink-0 w-20 h-20 rounded-xl overflow-hidden border-2 transition-all ${
+                      className={`flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden border-2 transition-all ${
                         currentImageIndex === index 
                           ? 'border-emerald-500' 
                           : 'border-transparent hover:border-slate-200'
@@ -456,20 +457,21 @@ function ProductDetailModal({
                 </div>
               </div>
 
-              <div className="space-y-6">
+              {/* Right - Info */}
+              <div className="space-y-4 md:space-y-6">
                 <div>
-                  <h3 className="text-lg font-semibold text-slate-800 mb-3 flex items-center gap-2">
-                    <Info className="h-5 w-5 text-emerald-500" />
+                  <h3 className="text-base md:text-lg font-semibold text-slate-800 mb-2 md:mb-3 flex items-center gap-2">
+                    <Info className="h-4 w-4 md:h-5 md:w-5 text-emerald-500" />
                     Mahsulot haqida
                   </h3>
-                  <p className="text-slate-600 leading-relaxed">
+                  <p className="text-sm md:text-base text-slate-600 leading-relaxed">
                     {product.longDescription}
                   </p>
                 </div>
 
-                <div className="flex gap-2 border-b border-slate-100">
+                <div className="flex flex-wrap gap-1 md:gap-2 border-b border-slate-100">
                   {[
-                    { id: 'specs', label: 'Texnik xususiyatlar', icon: Ruler },
+                    { id: 'specs', label: 'Texnik', icon: Ruler },
                     { id: 'features', label: 'Xususiyatlar', icon: Layers },
                     { id: 'advantages', label: 'Afzalliklar', icon: Award },
                     { id: 'applications', label: 'Qo\'llanish', icon: Box }
@@ -478,21 +480,21 @@ function ProductDetailModal({
                     return (
                       <button
                         key={tab.id}
-                        className={`px-4 py-2 text-sm font-medium rounded-t-lg transition-all ${
+                        className={`px-3 py-1.5 md:px-4 md:py-2 text-xs md:text-sm font-medium rounded-t-lg transition-all ${
                           activeTab === tab.id
                             ? 'text-emerald-600 border-b-2 border-emerald-600 bg-emerald-50/50'
                             : 'text-slate-500 hover:text-slate-700'
                         }`}
                         onClick={() => setActiveTab(tab.id)}
                       >
-                        <Icon className="h-4 w-4 inline-block mr-2" />
-                        {tab.label}
+                        <Icon className="h-3 w-3 md:h-4 md:w-4 inline-block mr-1" />
+                        <span className="hidden sm:inline">{tab.label}</span>
                       </button>
                     );
                   })}
                 </div>
 
-                <div className="min-h-[300px]">
+                <div className="min-h-[250px] md:min-h-[300px]">
                   <AnimatePresence mode="wait">
                     {activeTab === 'specs' && (
                       <motion.div
@@ -501,17 +503,17 @@ function ProductDetailModal({
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -20 }}
                         transition={{ duration: 0.3 }}
-                        className="grid grid-cols-2 gap-4"
+                        className="grid grid-cols-2 gap-2 md:gap-4"
                       >
                         {product.specs.map((spec, index) => {
                           const Icon = spec.icon;
                           return (
-                            <div key={index} className="bg-slate-50 p-4 rounded-xl border border-slate-100">
-                              <div className="flex items-center gap-2 text-slate-500 mb-2">
-                                <Icon className="h-4 w-4" />
+                            <div key={index} className="bg-slate-50 p-2 md:p-4 rounded-lg md:rounded-xl border border-slate-100">
+                              <div className="flex items-center gap-1 md:gap-2 text-slate-500 mb-1 md:mb-2">
+                                <Icon className="h-3 w-3 md:h-4 md:w-4" />
                                 <span className="text-xs uppercase">{spec.label}</span>
                               </div>
-                              <span className="text-base font-semibold text-slate-800">{spec.value}</span>
+                              <span className="text-xs md:text-base font-semibold text-slate-800">{spec.value}</span>
                             </div>
                           );
                         })}
@@ -525,13 +527,13 @@ function ProductDetailModal({
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -20 }}
                         transition={{ duration: 0.3 }}
-                        className="grid grid-cols-2 gap-4"
+                        className="grid grid-cols-2 gap-2 md:gap-4"
                       >
                         {product.features.map((feature, index) => (
-                          <div key={index} className="bg-slate-50 p-4 rounded-xl border border-slate-100">
-                            <div className="flex items-start gap-2">
-                              <CheckCircle className="h-5 w-5 text-emerald-500 flex-shrink-0 mt-0.5" />
-                              <span className="text-sm text-slate-700">{feature}</span>
+                          <div key={index} className="bg-slate-50 p-2 md:p-4 rounded-lg md:rounded-xl border border-slate-100">
+                            <div className="flex items-start gap-1 md:gap-2">
+                              <CheckCircle className="h-3 w-3 md:h-5 md:w-5 text-emerald-500 flex-shrink-0 mt-0.5" />
+                              <span className="text-xs md:text-sm text-slate-700">{feature}</span>
                             </div>
                           </div>
                         ))}
@@ -545,13 +547,13 @@ function ProductDetailModal({
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -20 }}
                         transition={{ duration: 0.3 }}
-                        className="grid grid-cols-2 gap-4"
+                        className="grid grid-cols-2 gap-2 md:gap-4"
                       >
                         {product.advantages.map((adv, index) => (
-                          <div key={index} className="bg-slate-50 p-4 rounded-xl border border-slate-100">
-                            <div className="flex items-start gap-2">
-                              <ThumbsUp className="h-5 w-5 text-emerald-500 flex-shrink-0 mt-0.5" />
-                              <span className="text-sm text-slate-700">{adv}</span>
+                          <div key={index} className="bg-slate-50 p-2 md:p-4 rounded-lg md:rounded-xl border border-slate-100">
+                            <div className="flex items-start gap-1 md:gap-2">
+                              <ThumbsUp className="h-3 w-3 md:h-5 md:w-5 text-emerald-500 flex-shrink-0 mt-0.5" />
+                              <span className="text-xs md:text-sm text-slate-700">{adv}</span>
                             </div>
                           </div>
                         ))}
@@ -565,13 +567,13 @@ function ProductDetailModal({
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -20 }}
                         transition={{ duration: 0.3 }}
-                        className="grid grid-cols-2 gap-4"
+                        className="grid grid-cols-2 gap-2 md:gap-4"
                       >
                         {product.applications.map((app, index) => (
-                          <div key={index} className="bg-slate-50 p-4 rounded-xl border border-slate-100">
-                            <div className="flex items-start gap-2">
-                              <Box className="h-5 w-5 text-emerald-500 flex-shrink-0 mt-0.5" />
-                              <span className="text-sm text-slate-700">{app}</span>
+                          <div key={index} className="bg-slate-50 p-2 md:p-4 rounded-lg md:rounded-xl border border-slate-100">
+                            <div className="flex items-start gap-1 md:gap-2">
+                              <Box className="h-3 w-3 md:h-5 md:w-5 text-emerald-500 flex-shrink-0 mt-0.5" />
+                              <span className="text-xs md:text-sm text-slate-700">{app}</span>
                             </div>
                           </div>
                         ))}
@@ -584,22 +586,22 @@ function ProductDetailModal({
           )}
         </div>
 
-        <div className="p-6 border-t border-slate-100">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2">
-                <Shield className="h-5 w-5 text-emerald-500" />
-                <span className="text-sm text-slate-600 font-medium">12 yil kafolat</span>
+        <div className="p-4 md:p-6 border-t border-slate-100">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 md:gap-4">
+              <div className="flex items-center gap-1 md:gap-2">
+                <Shield className="h-4 w-4 md:h-5 md:w-5 text-emerald-500" />
+                <span className="text-xs md:text-sm text-slate-600 font-medium">12 yil kafolat</span>
               </div>
-              <div className="flex items-center gap-2">
-                <Award className="h-5 w-5 text-emerald-500" />
-                <span className="text-sm text-slate-600 font-medium">ISO 9001</span>
+              <div className="flex items-center gap-1 md:gap-2">
+                <Award className="h-4 w-4 md:h-5 md:w-5 text-emerald-500" />
+                <span className="text-xs md:text-sm text-slate-600 font-medium">ISO 9001</span>
               </div>
             </div>
             
-            <button className="bg-emerald-600 text-white px-8 py-3 rounded-xl font-semibold hover:bg-emerald-700 transition-colors flex items-center gap-3">
+            <button className="w-full sm:w-auto bg-emerald-600 text-white px-6 md:px-8 py-2.5 md:py-3 rounded-xl text-sm md:text-base font-semibold hover:bg-emerald-700 transition-colors flex items-center justify-center gap-2 md:gap-3">
               Ma'lumot olish
-              <ArrowRight className="h-4 w-4" />
+              <ArrowRight className="h-3 w-3 md:h-4 md:w-4" />
             </button>
           </div>
         </div>
