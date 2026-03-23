@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://web-ecoprom.vercel.app/sitemap.xml
