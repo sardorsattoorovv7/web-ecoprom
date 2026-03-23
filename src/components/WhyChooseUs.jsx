@@ -84,7 +84,7 @@ export default function WhyChooseUs() {
             Nega <span className="text-emerald-600">bizni</span> tanlashadi
           </h2>
           <p className="text-lg text-slate-500">
-            12 yillik tajriba va 500+ muvaffaqiyatli loyihalar
+            13 yillik tajriba va 500+ muvaffaqiyatli loyihalar
           </p>
         </motion.div>
 

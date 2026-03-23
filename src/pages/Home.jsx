@@ -319,9 +319,9 @@ export default function EcoPromMain({ onOpenCall }) {
 
   // Statistika ma'lumotlari
   const stats = [
-    { value: 12, label: "Yillik tajriba", suffix: "+" },
+    { value: 13, label: "Yillik tajriba", suffix: "+" },
     { value: 500, label: "Muvaffaqiyatli loyiha", suffix: "+" },
-    { value: 50, label: "Malakali xodimlar", suffix: "+" },
+    { value: 100, label: "Malakali xodimlar", suffix: "+" },
     { value: 5, label: "Ishlab chiqarish liniyasi", suffix: "" },
   ];
 

@@ -163,7 +163,7 @@ export default function OurPartners() {
           <div className="w-px h-12 bg-slate-200" />
           
           <div className="text-center">
-            <div className="text-4xl md:text-5xl font-light text-emerald-600 mb-2">15+</div>
+            <div className="text-4xl md:text-5xl font-light text-emerald-600 mb-2">10+</div>
             <div className="flex items-center gap-2 text-slate-400 text-sm uppercase tracking-wider">
               <Globe2 className="h-4 w-4" />
               <span>Davlatlar</span>

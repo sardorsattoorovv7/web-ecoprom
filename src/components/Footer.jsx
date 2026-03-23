@@ -71,7 +71,7 @@ export default function Footer() {
             </div>
             
             <p className="text-sm text-slate-300 leading-relaxed">
-              12 yillik tajriba, 500+ muvaffaqiyatli loyiha
+              13 yillik tajriba, 500+ muvaffaqiyatli loyiha
             </p>
 
             <div className="flex items-center gap-3">
@@ -81,7 +81,7 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-1.5 bg-white/10 px-2.5 py-1 rounded-full">
                 <Award className="h-3 w-3 text-emerald-400" />
-                <span className="text-xs">12 yil</span>
+                <span className="text-xs">13 yil</span>
               </div>
             </div>
 
