@@ -45,7 +45,7 @@ const FAQ_ITEMS = [
   },
   {
     question: "Kafolat muddati?",
-    answer: "12 yil",
+    answer: "13 yil",
     category: "kafolat",
   },
   {

@@ -106,7 +106,7 @@ const products = [
       "Energiya tejamkor"
     ],
     advantages: [
-      "12 yil kafolat",
+      "13 yil kafolat",
       "Har qanday iqlim",
       "Modul tizim",
       "Kengaytirish mumkin"
@@ -190,7 +190,7 @@ export default function OurProducts({ onProductClick }) {
               Bizning <span className="text-emerald-600">mahsulotlar</span>
             </h2>
             <p className="text-xl text-slate-500 max-w-2xl mx-auto">
-              Sifat va ishonch garovi - 12 yil kafolat
+              Sifat va ishonch garovi - 13 yil kafolat
             </p>
           </motion.div>
 
@@ -591,7 +591,7 @@ function ProductDetailModal({
             <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 md:gap-4">
               <div className="flex items-center gap-1 md:gap-2">
                 <Shield className="h-4 w-4 md:h-5 md:w-5 text-emerald-500" />
-                <span className="text-xs md:text-sm text-slate-600 font-medium">12 yil kafolat</span>
+                <span className="text-xs md:text-sm text-slate-600 font-medium">13 yil kafolat</span>
               </div>
               <div className="flex items-center gap-1 md:gap-2">
                 <Award className="h-4 w-4 md:h-5 md:w-5 text-emerald-500" />

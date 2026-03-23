@@ -269,7 +269,7 @@ const PRODUCTS = {
       height: "6-15 m",
       load: "5 t/m² gacha",
       constructionTime: "30-90 kun",
-      warranty: "12 yil"
+      warranty: "13 yil"
     },
     applications: [
       {
@@ -305,7 +305,7 @@ const PRODUCTS = {
  */
 const COMPANY_CONTEXT = `
 Kompaniya: EcoProm
-Ma'lumot: 12 yillik tajriba, 500+ muvaffaqiyatli loyiha
+Ma'lumot: 13 yillik tajriba, 500+ muvaffaqiyatli loyiha
 
 ASOSIY MAHSULOTLAR:
 
