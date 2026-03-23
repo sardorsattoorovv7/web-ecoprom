@@ -5,9 +5,18 @@ export default function Projects() {
   const { t } = useTranslation();
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-white">
-      {/* Background */}
-      <div className="pointer-events-none absolute inset-0 bg-ielts-grid opacity-40" />
+    <div className="relative min-h-screen overflow-hidden bg-white/0">
+      {/* Kvadratcha grid background */}
+      <div 
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, #e2e8f0 1px, transparent 1px),
+            linear-gradient(to bottom, #e2e8f0 1px, transparent 1px)
+          `,
+          backgroundSize: "32px 32px",
+        }}
+      />
 
       <div className="relative z-10">
         <section className="container-pad pb-6 pt-16">
@@ -30,7 +39,7 @@ export default function Projects() {
         </section>
 
         <section className="container-pad pb-20">
-          <div className="rounded-3xl border border-slate-200 bg-white/80 p-6 shadow-sm backdrop-blur md:p-8">
+          <div className="rounded-3xl border border-slate-200 bg-white/0 backdrop-blur-sm p-6 shadow-sm md:p-8">
             <ProjectTabs />
           </div>
         </section>

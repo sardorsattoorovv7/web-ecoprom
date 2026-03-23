@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Package, X } from "lucide-react";
 
 const products = [
-  // ESHIKLAR
+  // ESHIKLAR (o'zgarishsiz)
   {
     id: 2,
     name: "F1 Eshik",
@@ -269,7 +269,19 @@ export default function OurProducts() {
   };
 
   return (
-    <section className="py-20 bg-white relative overflow-hidden">
+    <section className="py-20 relative overflow-hidden">
+      {/* Kvadratcha grid background */}
+      <div 
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, #e2e8f0 1px, transparent 1px),
+            linear-gradient(to bottom, #e2e8f0 1px, transparent 1px)
+          `,
+          backgroundSize: "32px 32px",
+        }}
+      />
+
       {/* Background decorations */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-40 right-20 w-96 h-96 bg-emerald-100/30 rounded-full blur-3xl" />
@@ -313,7 +325,7 @@ export default function OurProducts() {
           ))}
         </div>
 
-        {/* Products grid */}
+        {/* Products grid - FONLAR O'CHIRILDI */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {filteredProducts.map((product, index) => (
             <motion.div
@@ -323,10 +335,10 @@ export default function OurProducts() {
               transition={{ duration: 0.5, delay: index * 0.05 }}
               whileHover={{ y: -5 }}
               onClick={() => openModal(product)}
-              className="group bg-white rounded-xl border border-slate-100 overflow-hidden cursor-pointer hover:shadow-xl transition-all"
+              className="group rounded-xl border border-slate-200 overflow-hidden cursor-pointer hover:shadow-xl transition-all bg-white/0 backdrop-blur-sm"
             >
               {/* Image */}
-              <div className="h-48 bg-gradient-to-br from-slate-50 to-white p-4 flex items-center justify-center relative overflow-hidden">
+              <div className="h-48 bg-white/0 p-4 flex items-center justify-center relative overflow-hidden">
                 <img
                   src={product.images[0]}
                   alt={product.name}
@@ -338,9 +350,9 @@ export default function OurProducts() {
               </div>
 
               {/* Content */}
-              <div className="p-5">
+              <div className="p-5 bg-white/20 backdrop-blur-sm">
                 <h3 className="text-lg font-semibold text-slate-800 mb-2">{product.name}</h3>
-                <p className="text-sm text-slate-500 line-clamp-2 mb-3">
+                <p className="text-sm text-slate-600 line-clamp-2 mb-3">
                   {product.description.substring(0, 80)}...
                 </p>
                 <div className="flex items-center justify-end">
@@ -354,7 +366,7 @@ export default function OurProducts() {
         </div>
       </div>
 
-      {/* Product Modal */}
+      {/* Product Modal (o'zgarishsiz) */}
       {selectedProduct && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/30 backdrop-blur-sm"
@@ -367,7 +379,6 @@ export default function OurProducts() {
             className="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-hidden shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Header */}
             <div className="flex items-center justify-between p-5 border-b border-slate-100">
               <h3 className="text-xl font-semibold text-slate-800">{selectedProduct.name}</h3>
               <button
@@ -377,11 +388,8 @@ export default function OurProducts() {
                 <X className="h-4 w-4 text-slate-400" />
               </button>
             </div>
-
-            {/* Content */}
             <div className="p-6 overflow-y-auto max-h-[calc(90vh-80px)]">
               <div className="grid md:grid-cols-2 gap-6">
-                {/* Image slider */}
                 <div>
                   <div className="bg-slate-50 rounded-xl p-4 flex items-center justify-center mb-3">
                     <img
@@ -406,14 +414,10 @@ export default function OurProducts() {
                     </div>
                   )}
                 </div>
-
-                {/* Info */}
                 <div className="space-y-4">
                   <p className="text-slate-600 whitespace-pre-line">
                     {selectedProduct.description}
                   </p>
-
-                  {/* Specifications */}
                   <div className="bg-slate-50 rounded-xl p-4">
                     <h4 className="font-semibold text-slate-800 mb-3">Texnik xususiyatlar</h4>
                     <div className="space-y-2">
@@ -425,8 +429,6 @@ export default function OurProducts() {
                       ))}
                     </div>
                   </div>
-
-                  {/* Additional info */}
                   <div className="bg-emerald-50 rounded-xl p-4">
                     <p className="text-sm text-emerald-700">
                       Kategoriya: {selectedProduct.category === "eshik" ? "Eshiklar" : 

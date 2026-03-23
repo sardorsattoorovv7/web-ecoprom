@@ -77,8 +77,17 @@ export default function Services() {
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-white">
-      {/* Background */}
-      <div className="pointer-events-none absolute inset-0 bg-ielts-grid opacity-40" />
+      {/* Kvadratcha grid background - gradient YO'Q, faqat grid */}
+      <div 
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, #e2e8f0 1px, transparent 1px),
+            linear-gradient(to bottom, #e2e8f0 1px, transparent 1px)
+          `,
+          backgroundSize: "32px 32px",
+        }}
+      />
 
       <div className="relative z-10">
         {/* Header */}
@@ -118,7 +127,7 @@ export default function Services() {
                 >
                   <Link
                     to={`/services/${s.slug}`}
-                    className="group block h-full rounded-3xl border border-slate-200 bg-white/85 p-7 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-emerald-200 hover:shadow-2xl"
+                    className="group block h-full rounded-3xl border border-slate-200 bg-white p-7 transition-all duration-300 hover:-translate-y-1 hover:border-emerald-200 hover:shadow-2xl"
                   >
                     {/* Icon */}
                     <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-600 transition duration-300 group-hover:scale-110 group-hover:bg-emerald-100">

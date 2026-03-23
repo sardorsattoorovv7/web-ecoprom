@@ -66,14 +66,14 @@ export default function Navbar({ onOpenCall }) {
             {t("nav.home")}
           </NavLink>
 
-          <NavLink
+          {/* <NavLink
             to="/services"
             className={({ isActive }) =>
               [linkBase, isActive ? linkActive : linkIdle].join(" ")
             }
           >
             {t("nav.services")}
-          </NavLink>
+          </NavLink> */}
 
           <NavLink
             to="/projects"
@@ -93,14 +93,14 @@ export default function Navbar({ onOpenCall }) {
           {t("nav.ourproducts")}
         </NavLink>
           
-          <NavLink
+          {/* <NavLink
             to="/news"
             className={({ isActive }) =>
               [linkBase, isActive ? linkActive : linkIdle].join(" ")
             }
           >
             {t("nav.news")}
-          </NavLink>
+          </NavLink> */}
 
           <NavLink
             to="/about"

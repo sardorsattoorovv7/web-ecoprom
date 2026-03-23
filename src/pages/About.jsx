@@ -22,9 +22,21 @@ export default function About() {
       : "Bu demo sahifa. Bu yerda kompaniya tarixi, missiya, qadriyatlar, sertifikatlar va ishlab chiqarish rasmlari bo‘ladi.";
 
   return (
-    <div className="relative min-h-screen bg-white overflow-hidden">
-      {/* dotted bg */}
-      <div className="pointer-events-none absolute inset-0 bg-ielts-grid opacity-50" />
+    <div className="relative min-h-screen overflow-hidden">
+      {/* Kvadratcha grid background */}
+      <div 
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, #e2e8f0 1px, transparent 1px),
+            linear-gradient(to bottom, #e2e8f0 1px, transparent 1px)
+          `,
+          backgroundSize: "32px 32px",
+        }}
+      />
+
+      {/* dotted bg overlay */}
+      <div className="pointer-events-none absolute inset-0 bg-ielts-grid opacity-40" />
 
       <div className="relative z-10">
         {/* Header */}
@@ -47,7 +59,7 @@ export default function About() {
               whileInView="visible"
               viewport={{ once: true, amount: 0.2 }}
               variants={fade}
-              className="lg:col-span-7 rounded-3xl border border-slate-200 bg-white/80 backdrop-blur p-7"
+              className="lg:col-span-7 rounded-3xl border border-slate-200 bg-white/0 backdrop-blur-sm p-7"
             >
               <h2 className="text-2xl font-semibold text-slate-900">
                 {lang === "ru" ? "Кто мы" : "Biz kimmiz"}
@@ -55,7 +67,7 @@ export default function About() {
               <p className="mt-3 text-slate-600 leading-relaxed">{story}</p>
 
               <div className="mt-6 grid sm:grid-cols-3 gap-4">
-                <MiniStat title="10+" subtitle={lang === "ru" ? "лет опыта" : "yil tajriba"} />
+                <MiniStat title="12+" subtitle={lang === "ru" ? "лет опыта" : "yil tajriba"} />
                 <MiniStat title="3k+" subtitle={lang === "ru" ? "проектов" : "loyiha"} />
                 <MiniStat title="24/7" subtitle={lang === "ru" ? "сервис" : "servis"} />
               </div>
@@ -66,7 +78,7 @@ export default function About() {
               whileInView="visible"
               viewport={{ once: true, amount: 0.2 }}
               variants={fade}
-              className="lg:col-span-5 rounded-3xl border border-slate-200 bg-white/80 backdrop-blur p-7"
+              className="lg:col-span-5 rounded-3xl border border-slate-200 bg-white/80 backdrop-blur-sm p-7"
             >
               <h3 className="text-xl font-semibold text-slate-900">
                 {lang === "ru" ? "Миссия и подход" : "Missiya va yondashuv"}
@@ -88,7 +100,7 @@ export default function About() {
               </div>
 
               <div className="mt-6">
-                <a href="/contact" className="btn-primary w-full py-3">
+                <a href="/contact" className="btn-primary w-full py-3 inline-block text-center">
                   {lang === "ru" ? "Связаться с нами" : "Bog‘lanish"}
                 </a>
               </div>
@@ -117,7 +129,7 @@ export default function About() {
 
           {/* CTA */}
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={fade} className="mt-10">
-            <div className="rounded-[2rem] border border-slate-200 bg-white/80 backdrop-blur p-8 md:p-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div className="rounded-[2rem] border border-slate-200 bg-white/80 backdrop-blur-sm p-8 md:p-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
               <div>
                 <div className="text-sm font-semibold text-emerald-700">
                   {lang === "ru" ? "Хотите узнать больше?" : "Batafsil bilmoqchimisiz?"}
@@ -132,7 +144,7 @@ export default function About() {
                 </p>
               </div>
 
-              <a className="btn-primary px-8 py-3" href="/contact">
+              <a className="btn-primary px-8 py-3 inline-block" href="/contact">
                 {lang === "ru" ? "Оставить заявку" : "So‘rov qoldirish"}
               </a>
             </div>
@@ -145,8 +157,10 @@ export default function About() {
 
 function MiniStat({ title, subtitle }) {
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white/70 backdrop-blur p-4 text-center">
-      <div className="text-2xl font-bold gradient-text">{title}</div>
+    <div className="rounded-2xl border border-slate-200 bg-white/70 backdrop-blur-sm p-4 text-center">
+      <div className="text-2xl font-bold bg-gradient-to-r from-emerald-600 to-emerald-500 bg-clip-text text-transparent">
+        {title}
+      </div>
       <div className="text-[11px] font-bold text-slate-500 uppercase tracking-widest mt-2">
         {subtitle}
       </div>
@@ -156,7 +170,7 @@ function MiniStat({ title, subtitle }) {
 
 function InfoRow({ title, text }) {
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white/70 backdrop-blur p-4">
+    <div className="rounded-2xl border border-slate-200 bg-white/70 backdrop-blur-sm p-4">
       <div className="text-sm font-semibold text-slate-900">{title}</div>
       <div className="text-sm text-slate-600 mt-1">{text}</div>
     </div>
@@ -165,14 +179,15 @@ function InfoRow({ title, text }) {
 
 function FeatureCard({ title, text }) {
   return (
-    <div className="rounded-3xl border border-slate-200 bg-white/80 backdrop-blur p-7 hover:shadow-2xl transition">
-      <div className="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-100 grid place-items-center text-emerald-700 font-bold">
+    <div className="rounded-3xl border border-slate-200 bg-white/80 backdrop-blur-sm p-7 hover:shadow-2xl transition-all hover:-translate-y-1">
+      <div className="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-100 grid place-items-center text-emerald-700 font-bold text-xl">
         ✓
       </div>
       <div className="text-xl font-semibold text-slate-900 mt-5">{title}</div>
       <p className="text-slate-600 mt-2 leading-relaxed">{text}</p>
-      <div className="mt-5 text-emerald-700 font-semibold text-sm">
-        {title} →
+      <div className="mt-5 text-emerald-700 font-semibold text-sm group flex items-center gap-1">
+        {title} → 
+        <span className="inline-block transition-transform group-hover:translate-x-1">→</span>
       </div>
     </div>
   );
