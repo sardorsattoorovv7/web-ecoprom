@@ -87,7 +87,7 @@ const products = [
     name: "Ombor Tizimlari",
     category: "Metall konstruksiyalar",
     fullName: "Ombor Tizimlari",
-    image: "/assets/ombor.jpg",
+    image: "/assets/omborr.jpg",
     gallery: [
       "/assets/ombor.jpg",
     ],

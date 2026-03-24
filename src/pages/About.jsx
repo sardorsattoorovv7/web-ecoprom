@@ -51,7 +51,7 @@ export default function About() {
           </motion.div>
         </section>
 
-        {/* Story + Stats */}
+        {/* Story + Video */}
         <section className="container-pad pb-10">
           <div className="grid lg:grid-cols-12 gap-6 items-stretch">
             <motion.div
@@ -67,43 +67,41 @@ export default function About() {
               <p className="mt-3 text-slate-600 leading-relaxed">{story}</p>
 
               <div className="mt-6 grid sm:grid-cols-3 gap-4">
-                <MiniStat title="12+" subtitle={lang === "ru" ? "лет опыта" : "yil tajriba"} />
+                <MiniStat title="13+" subtitle={lang === "ru" ? "лет опыта" : "yil tajriba"} />
                 <MiniStat title="3k+" subtitle={lang === "ru" ? "проектов" : "loyiha"} />
                 <MiniStat title="24/7" subtitle={lang === "ru" ? "сервис" : "servis"} />
               </div>
             </motion.div>
 
+            {/* YouTube Video Section */}
             <motion.div
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.2 }}
               variants={fade}
-              className="lg:col-span-5 rounded-3xl border border-slate-200 bg-white/80 backdrop-blur-sm p-7"
+              className="lg:col-span-5 rounded-3xl border border-slate-200 bg-white/80 backdrop-blur-sm p-7 overflow-hidden"
             >
-              <h3 className="text-xl font-semibold text-slate-900">
-                {lang === "ru" ? "Миссия и подход" : "Missiya va yondashuv"}
+              <h3 className="text-xl font-semibold text-slate-900 mb-4">
+                {lang === "ru" ? "Видео о нас" : "Biz haqimizda video"}
               </h3>
-
-              <div className="mt-4 grid gap-3">
-                <InfoRow
-                  title={lang === "ru" ? "Качество" : "Sifat"}
-                  text={lang === "ru" ? "Контроль на каждом этапе." : "Har bir bosqichda nazorat."}
-                />
-                <InfoRow
-                  title={lang === "ru" ? "Сроки" : "Muddat"}
-                  text={lang === "ru" ? "Точное планирование и доставка." : "Aniq reja va yetkazib berish."}
-                />
-                <InfoRow
-                  title={lang === "ru" ? "Сервис" : "Servis"}
-                  text={lang === "ru" ? "Поддержка после монтажа." : "Montajdan keyin ham yordam."}
-                />
+              
+              <div className="relative w-full pt-[56.25%] rounded-xl overflow-hidden">
+                <iframe
+                  className="absolute top-0 left-0 w-full h-full"
+                  src="https://www.youtube.com/embed/SJ7EhMYrMW0"
+                  title="YouTube video player"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                ></iframe>
               </div>
 
-              <div className="mt-6">
-                <a href="/contact" className="btn-primary w-full py-3 inline-block text-center">
-                  {lang === "ru" ? "Связаться с нами" : "Bog‘lanish"}
-                </a>
-              </div>
+              <p className="text-sm text-slate-500 mt-4 text-center">
+                {lang === "ru" 
+                  ? "Узнайте больше о нашей работе и подходах" 
+                  : "Ishimiz va yondashuvlarimiz haqida ko'proq bilib oling"}
+              </p>
             </motion.div>
           </div>
         </section>

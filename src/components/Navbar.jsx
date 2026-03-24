@@ -160,10 +160,10 @@ export default function Navbar({ onOpenCall }) {
             <div className="mt-4 grid gap-2">
               {[
                 { to: "/", label: t("nav.home"), end: true },
-                { to: "/services", label: t("nav.services") },
+                // { to: "/services", label: t("nav.services") },
                 { to: "/projects", label: t("nav.projects") },
                 { to: "/ourproducts", label: t("nav.ourproducts") },
-                { to: "/news", label: t("nav.news") },
+                // { to: "/news", label: t("nav.news") },
                 { to: "/about", label: t("nav.about") },
                 { to: "/contact", label: t("nav.contact") },
               ].map((x) => (
