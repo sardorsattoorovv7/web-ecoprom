@@ -399,7 +399,7 @@ export default function Contact() {
                 <div className="rounded-xl overflow-hidden h-64">
                   <iframe
                     title="Google Maps - Samarqand"
-                    src="https://maps.app.goo.gl/La43CVjS4HoD54yd6"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1464.2852444275106!2d67.03178332354027!3d39.636242143498464!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f4d2136f7295ebd%3A0x32d2e979277cef32!2sEcoProm%20-%20production%20of%20sandwich%20panels%20and%20refrigeration%20chambers!5e1!3m2!1suz!2sus!4v1774357118606!5m2!1suz!2sus"
                     width="100%"
                     height="100%"
                     style={{ border: 0 }}
