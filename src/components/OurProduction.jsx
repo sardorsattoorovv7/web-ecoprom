@@ -49,7 +49,7 @@ const stats = [
   { id: 1, value: "10 000 m²", label: "Ishlab chiqarish maydoni", icon: Factory },
   { id: 2, value: "100+", label: "Malakali xodimlar", icon: Users },
   { id: 3, value: "5", label: "Ishlab chiqarish liniyasi", icon: Settings },
-  { id: 4, value: "ISO 9001", label: "Sifat sertifikati", icon: Shield }
+  // { id: 4, value: "ISO 9001", label: "Sifat sertifikati", icon: Shield }
 ];
 
 // Kataloglar ro'yxati

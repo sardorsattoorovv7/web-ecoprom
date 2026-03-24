@@ -595,7 +595,7 @@ function ProductDetailModal({
               </div>
               <div className="flex items-center gap-1 md:gap-2">
                 <Award className="h-4 w-4 md:h-5 md:w-5 text-emerald-500" />
-                <span className="text-xs md:text-sm text-slate-600 font-medium">ISO 9001</span>
+                {/* <span className="text-xs md:text-sm text-slate-600 font-medium">ISO 9001</span> */}
               </div>
             </div>
             

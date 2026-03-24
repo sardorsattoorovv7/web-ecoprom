@@ -93,7 +93,7 @@ export default function Footer() {
               13 yillik tajriba, 500+ muvaffaqiyatli loyiha
             </p>
 
-            <div className="flex items-center gap-3">
+            {/* <div className="flex items-center gap-3">
               <div className="flex items-center gap-1.5 bg-white/10 px-2.5 py-1 rounded-full">
                 <Shield className="h-3 w-3 text-emerald-400" />
                 <span className="text-xs">ISO 9001</span>
@@ -102,7 +102,7 @@ export default function Footer() {
                 <Award className="h-3 w-3 text-emerald-400" />
                 <span className="text-xs">13 yil</span>
               </div>
-            </div>
+            </div> */}
 
             <div className="flex items-center gap-2 pt-2">
               {socialLinks.map((social) => {
