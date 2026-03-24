@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 
@@ -10,11 +9,6 @@ const fade = {
 export default function About() {
   const { i18n, t } = useTranslation();
   const lang = i18n.language;
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
   const title = lang === "ru" ? "О компании" : "Kompaniya haqida";
   const subtitle =
@@ -79,7 +73,7 @@ export default function About() {
               </div>
             </motion.div>
 
-            {/* YouTube Video Section - Vercel'da ishlashi uchun tuzatilgan */}
+            {/* YouTube Video Section */}
             <motion.div
               initial="hidden"
               whileInView="visible"
@@ -91,19 +85,16 @@ export default function About() {
                 {lang === "ru" ? "Видео о нас" : "Biz haqimizda video"}
               </h3>
               
-              <div className="relative w-full pt-[56.25%] rounded-xl overflow-hidden bg-slate-100">
-                {isMounted && (
-                  <iframe
-                    className="absolute top-0 left-0 w-full h-full"
-                    src="https://www.youtube-nocookie.com/embed/SJ7EhMYrMW0?autoplay=0&rel=0&modestbranding=1"
-                    title="YouTube video player"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    allowFullScreen
-                    sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-presentation allow-popups-to-escape-sandbox"
-                  ></iframe>
-                )}
+              <div className="relative w-full pt-[56.25%] rounded-xl overflow-hidden">
+                <iframe
+                  className="absolute top-0 left-0 w-full h-full"
+                  src="https://www.youtube.com/embed/SJ7EhMYrMW0"
+                  title="YouTube video player"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                ></iframe>
               </div>
 
               <p className="text-sm text-slate-500 mt-4 text-center">
