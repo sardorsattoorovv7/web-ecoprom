@@ -399,7 +399,7 @@ export default function Contact() {
                 <div className="rounded-xl overflow-hidden h-64">
                   <iframe
                     title="Google Maps - Samarqand"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3124.9999999999995!2d66.959694!3d39.654201!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f4d1909c2e9b3a5%3A0x2b7c8a9f4e6d8c3!2sSamarqand%2C%20O%27zbekiston!5e0!3m2!1suz!2s!4v1700000000000!5m2!1suz!2s"
+                    src="https://maps.app.goo.gl/La43CVjS4HoD54yd6"
                     width="100%"
                     height="100%"
                     style={{ border: 0 }}
