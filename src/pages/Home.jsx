@@ -7,7 +7,6 @@ import {
   Sparkles,
   CheckCircle2,
   ArrowUp,
-  Loader2,
 } from "lucide-react";
 
 // Lazy loading komponentlar
@@ -116,8 +115,10 @@ const ScrollProgress = () => {
   }, []);
 
   return (
-    <div className="fixed top-0 left-0 z-50 h-1 bg-gradient-to-r from-emerald-500 to-emerald-600 transition-all duration-150"
-         style={{ width: `${progress}%` }} />
+    <div
+      className="fixed top-0 left-0 z-50 h-1 bg-gradient-to-r from-emerald-500 to-emerald-600 transition-all duration-150"
+      style={{ width: `${progress}%` }}
+    />
   );
 };
 
@@ -451,18 +452,34 @@ export default function EcoPromMain({ onOpenCall }) {
             </div>
           </div>
 
+          {/* Slider indikatorlari - NUQTALAR (SILLIQ HARAKATLANADIGAN) */}
           <div className="absolute bottom-6 left-0 w-full sm:bottom-8 md:bottom-10">
-            <div className="container-pad flex justify-center gap-2">
+            <div className="container-pad flex justify-center gap-2 sm:gap-3">
               {SLIDES.map((slide, i) => (
-                <button
+                <motion.button
                   key={slide.id}
                   onClick={() => handleHeroIndexChange(i)}
-                  className={`h-2 rounded-full transition-all sm:h-2.5 ${
-                    heroIndex === i
-                      ? "w-8 bg-emerald-400 sm:w-10"
-                      : "w-2 bg-white/50 hover:bg-white/80 sm:w-2.5"
-                  }`}
-                />
+                  className="relative focus:outline-none group"
+                  aria-label={`Slide ${i + 1}`}
+                  whileHover={{ scale: 1.2 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <motion.div
+                    className={`h-2 w-2 sm:h-2.5 sm:w-2.5 rounded-full transition-colors duration-300 ${
+                      heroIndex === i
+                        ? "bg-emerald-400 shadow-lg shadow-emerald-400/50"
+                        : "bg-white/50 group-hover:bg-white/80"
+                    }`}
+                    animate={{
+                      scale: heroIndex === i ? 1.3 : 1,
+                    }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 400,
+                      damping: 25,
+                    }}
+                  />
+                </motion.button>
               ))}
             </div>
           </div>

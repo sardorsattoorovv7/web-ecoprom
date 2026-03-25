@@ -34,32 +34,26 @@
     height: 100%;
   }
 
-html,
-body,
-#root {
-  width: 100%;
-  min-height: 100%;
-  overflow-x: hidden;
-}
-html {
-  scroll-behavior: smooth;
-}
-body {
-  background: #f5f5f7;
-  color: #1d1d1f;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+  html,
+  body,
+  #root {
+    width: 100%;
+    min-height: 100%;
+    overflow-x: hidden;
+  }
 
-.container-pad {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding-left: 24px;
-  padding-right: 24px;
-}
+  body {
+    background: #f5f5f7;
+    color: #1d1d1f;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 
   * {
     box-sizing: border-box;
+    /* 3D effektlarni o'chirish */
+    transform-style: flat !important;
+    perspective: none !important;
   }
 
   a {
@@ -86,19 +80,8 @@ body {
     background: rgba(16, 185, 129, 0.18);
     color: #064e3b;
   }
-  /* Scroll barni butunlay standart holatga qaytarish */
-  ::-webkit-scrollbar {
-    width: auto;
-  }
 
-  ::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: auto;
-  }
-  /* Scrollbar */
+  /* Scroll bar */
   ::-webkit-scrollbar {
     width: 10px;
     height: 10px;
@@ -282,6 +265,60 @@ body {
 
   .select {
     @apply input appearance-none cursor-pointer;
+  }
+}
+
+/* =========================
+   RANG KONFIGURATORI UCHUN QO'SHIMCHA STILLAR
+========================= */
+@layer components {
+  /* Rang konfiguratoridagi rasm konteyneri */
+  .color-preview {
+    @apply relative mx-auto w-64 h-64 bg-gray-100 rounded-2xl overflow-hidden shadow-lg;
+  }
+  
+  .color-preview img {
+    @apply w-full h-full object-cover;
+  }
+  
+  /* Rang tanlash tugmalari */
+  .color-option {
+    @apply w-full flex items-center gap-4 p-4 rounded-xl transition-all;
+  }
+  
+  .color-option-active {
+    @apply bg-emerald-50 border-2 border-emerald-500;
+  }
+  
+  .color-option-inactive {
+    @apply hover:bg-slate-50 border-2 border-transparent;
+  }
+  
+  .color-swatch {
+    @apply h-12 w-12 rounded-lg shadow-md;
+  }
+  
+  /* Kvadrat shaklidagi kartochkalar */
+  .square-card {
+    @apply aspect-square rounded-2xl overflow-hidden;
+  }
+  
+  /* Rasmni to'liq qoplash */
+  .cover-image {
+    @apply w-full h-full object-cover;
+  }
+  
+  /* Responsive kvadratlar */
+  @media (max-width: 768px) {
+    .color-preview {
+      @apply w-48 h-48;
+    }
+  }
+  
+  @media (max-width: 640px) {
+    .color-preview {
+      @apply w-40 h-40;
+    }
   }
 }
 
@@ -489,6 +526,32 @@ body {
 }
 
 /* =========================
+   HOVER EFFEKTLARINI TO'G'RILASH
+========================= */
+@layer utilities {
+  /* Card hover effektlarini to'g'rilash - 3D ni o'chirish */
+  .card-hover {
+    transform: translateY(0) !important;
+    transition: all 0.3s ease;
+  }
+  
+  .card-hover:hover {
+    transform: translateY(-4px) !important;
+  }
+  
+  /* Button hover effektlari */
+  .btn-primary:hover,
+  .btn-secondary:hover {
+    transform: translateY(-2px) !important;
+  }
+  
+  /* Partner card hover */
+  .partner-card:hover {
+    transform: translateY(-4px) !important;
+  }
+}
+
+/* =========================
    RESPONSIVE
 ========================= */
 @media (max-width: 768px) {
@@ -568,5 +631,18 @@ body {
 
   .marquee-fade-right {
     background: linear-gradient(to left, #0b1220 0%, rgba(11, 18, 32, 0) 100%);
+  }
+  
+  /* Dark mode uchun rang konfiguratori */
+  .color-preview {
+    @apply bg-gray-800;
+  }
+  
+  .color-option-active {
+    @apply bg-emerald-900/30 border-emerald-500;
+  }
+  
+  .color-option-inactive:hover {
+    @apply bg-slate-800;
   }
 }

@@ -20,11 +20,7 @@ const groq = new Groq({
   apiKey: process.env.GROQ_API_KEY,
 });
 
-/**
- * EcoProm uchun to'liq mahsulot ma'lumotlari
- */
 const PRODUCTS = {
-  // PIR PANELLAR
   pir: {
     name: "PIR Sendvich panellar",
     fullName: "Poliizotsianurat (PIR) sendvich panellar",
@@ -75,7 +71,6 @@ const PRODUCTS = {
     price_range: "Narxi qalinlik va rangga qarab o'zgaradi. Aniq narx uchun murojaat qiling."
   },
 
-  // PUR PANELLAR
   pur: {
     name: "PUR Sendvich panellar",
     fullName: "Poliuretan (PUR) sendvich panellar",
@@ -118,7 +113,6 @@ const PRODUCTS = {
     price_range: "Narxi qalinlik va rangga qarab o'zgaradi. Aniq narx uchun murojaat qiling."
   },
 
-  // MINERAL WOOL PANELLAR
   mw: {
     name: "Mineral Wool (MW) Sendvich panellar",
     fullName: "Mineral junli sendvich panellar",
@@ -162,7 +156,6 @@ const PRODUCTS = {
     price_range: "Narxi qalinlik va rangga qarab o'zgaradi. Aniq narx uchun murojaat qiling."
   },
 
-  // SOVUTGICH KAMERALAR
   coldRooms: {
     name: "Sovutgich Kameralar",
     fullName: "Sovutgich va muzlatgich kameralari",
@@ -209,7 +202,6 @@ const PRODUCTS = {
     price_range: "Narxi hajm va uskunalarga qarab o'zgaradi. Loyiha asosida hisoblanadi."
   },
 
-  // SANOAT ESHIKLARI
   industrialDoors: {
     name: "Sanoat Eshiklari",
     fullName: "Germetik va sanoat eshiklari",
@@ -252,7 +244,6 @@ const PRODUCTS = {
     price_range: "Narxi o'lcham va turiga qarab o'zgaradi. Aniq narx uchun murojaat qiling."
   },
 
-  // METALL KONSTRUKSIYALAR
   metalStructures: {
     name: "Metall Konstruksiyalar",
     fullName: "Sanoat metall konstruksiyalari",
@@ -300,9 +291,6 @@ const PRODUCTS = {
   }
 };
 
-/**
- * EcoProm uchun to'liq knowledge base
- */
 const COMPANY_CONTEXT = `
 Kompaniya: EcoProm
 Ma'lumot: 13 yillik tajriba, 500+ muvaffaqiyatli loyiha
@@ -316,6 +304,8 @@ ASOSIY MAHSULOTLAR:
    - Qalinligi: ${PRODUCTS.pir.specifications.thickness}
    - Issiqlik o'tkazuvchanlik: ${PRODUCTS.pir.specifications.thermalConductivity}
    - Yong'inga chidamlilik: ${PRODUCTS.pir.specifications.fireResistance}
+   - Ovoz izolyatsiyasi: ${PRODUCTS.pir.specifications.soundInsulation}
+   - Zichlik: ${PRODUCTS.pir.specifications.density}
    Qo'llanish sohalari:
    ${PRODUCTS.pir.applications.map(app => `   * ${app.name}: ${app.examples.join(", ")}`).join("\n")}
    Afzalliklari:
@@ -328,8 +318,12 @@ ASOSIY MAHSULOTLAR:
    - Qalinligi: ${PRODUCTS.pur.specifications.thickness}
    - Issiqlik o'tkazuvchanlik: ${PRODUCTS.pur.specifications.thermalConductivity}
    - Yong'inga chidamlilik: ${PRODUCTS.pur.specifications.fireResistance}
+   - Zichlik: ${PRODUCTS.pur.specifications.density}
    Qo'llanish sohalari:
    ${PRODUCTS.pur.applications.map(app => `   * ${app.name}: ${app.examples.join(", ")}`).join("\n")}
+   Afzalliklari:
+   ${PRODUCTS.pur.advantages.map(adv => `   * ${adv}`).join("\n")}
+   PIR va PUR farqi: PIR panel PIR ga qaraganda yuqori issiqlik izolyatsiyasiga ega (0.019-0.022 Vt/m·K), yong'inga chidamliligi yuqori (EI30-EI180), narxi qimmatroq. PUR panel esa arzonroq, issiqlik izolyatsiyasi 0.022-0.026 Vt/m·K, yong'inga chidamliligi EI15-EI90.
 
 3. MINERAL WOOL (MW) PANELLAR
    Ta'rifi: ${PRODUCTS.mw.description}
@@ -339,8 +333,11 @@ ASOSIY MAHSULOTLAR:
    - Issiqlik o'tkazuvchanlik: ${PRODUCTS.mw.specifications.thermalConductivity}
    - Yong'inga chidamlilik: ${PRODUCTS.mw.specifications.fireResistance}
    - Ovoz izolyatsiyasi: ${PRODUCTS.mw.specifications.soundInsulation}
+   - Zichlik: ${PRODUCTS.mw.specifications.density}
    Qo'llanish sohalari:
    ${PRODUCTS.mw.applications.map(app => `   * ${app.name}: ${app.examples.join(", ")}`).join("\n")}
+   Afzalliklari:
+   ${PRODUCTS.mw.advantages.map(adv => `   * ${adv}`).join("\n")}
 
 4. SOVUTGICH KAMERALAR
    Ta'rifi: ${PRODUCTS.coldRooms.description}
@@ -352,6 +349,8 @@ ASOSIY MAHSULOTLAR:
    - Namlik nazorati: ${PRODUCTS.coldRooms.specifications.humidity}
    Qo'llanish sohalari:
    ${PRODUCTS.coldRooms.applications.map(app => `   * ${app.name}: ${app.examples.join(", ")}`).join("\n")}
+   Afzalliklari:
+   ${PRODUCTS.coldRooms.advantages.map(adv => `   * ${adv}`).join("\n")}
 
 5. SANOAT ESHIKLARI
    Ta'rifi: ${PRODUCTS.industrialDoors.description}
@@ -362,6 +361,8 @@ ASOSIY MAHSULOTLAR:
    - Izolyatsiya: ${PRODUCTS.industrialDoors.specifications.insulation}
    Qo'llanish sohalari:
    ${PRODUCTS.industrialDoors.applications.map(app => `   * ${app.name}: ${app.examples.join(", ")}`).join("\n")}
+   Afzalliklari:
+   ${PRODUCTS.industrialDoors.advantages.map(adv => `   * ${adv}`).join("\n")}
 
 6. METALL KONSTRUKSIYALAR
    Ta'rifi: ${PRODUCTS.metalStructures.description}
@@ -373,6 +374,8 @@ ASOSIY MAHSULOTLAR:
    - Qurilish muddati: ${PRODUCTS.metalStructures.specifications.constructionTime}
    Qo'llanish sohalari:
    ${PRODUCTS.metalStructures.applications.map(app => `   * ${app.name}: ${app.examples.join(", ")}`).join("\n")}
+   Afzalliklari:
+   ${PRODUCTS.metalStructures.advantages.map(adv => `   * ${adv}`).join("\n")}
 
 QO'SHIMCHA XIZMATLAR:
 - Bepul loyihalash
@@ -387,25 +390,18 @@ KONTAKT:
 `;
 
 const SYSTEM_PROMPT = `
-Sen EcoProm kompaniyasining virtual savdo yordamchisisan.
+Siz EcoProm kompaniyasining savdo yordamchisisiz.
 
-VAZIFALARING:
-1. Mahsulotlar haqida batafsil ma'lumot berish (tarkibi, texnik xususiyatlari)
-2. Qayerlarda qo'llanishi haqida misollar keltirish
-3. PIR va PUR panellarning farqini tushuntirish
-4. Mijozning ehtiyojiga qarab tavsiya berish
-5. Narx so'ralsa, aniq narx yo'qligini va loyiha asosida hisoblanishini aytish
-6. Mijozni telefon orqali bog'lanishga undash
+Qoidalar:
+1. Foydalanuvchi qaysi tilda yozsa, o'sha tilda javob bering (o'zbek, rus, ingliz)
+2. Faqat aniq ma'lumot bering, ortiqcha gapirmang
+3. Mahsulot haqida so'ralganda: tarkibi, texnik xususiyatlari, qayerlarda qo'llanishi, afzalliklarini aytib bering
+4. PUR panel haqida so'ralsa: tarkibi qattiq poliuretan ko'pik, ikki tomonlama metall qoplama, issiqlik o'tkazuvchanligi 0.022-0.026 Vt/m·K, qalinligi 40-200 mm, yong'inga chidamliligi EI15-EI90, qo'llanish sohalari turar-joylar, omborlar, sport inshootlari ekanligini aytib bering
+5. PIR va PUR farqi so'ralsa: PIR yuqori issiqlik izolyatsiyasi (0.019-0.022), yong'inga chidamliligi yuqori (EI30-EI180), narxi qimmatroq; PUR arzonroq, issiqlik izolyatsiyasi 0.022-0.026, yong'inga chidamliligi EI15-EI90 ekanligini ayting
+6. Narx so'ralsa: aniq narx yo'qligini, loyiha asosida hisoblanishini ayting va telefon raqamini bering
+7. Telefon raqamini berish kerak bo'lganda: +998 78 555 86 18 raqamiga murojaat qilishni taklif qiling
 
-QOIDALAR:
-- Javoblarni o'zbek tilida ber
-- Juda uzun javob yozma, qisqa va tushunarli bo'lsin
-- Mahsulot tarkibi va texnik xususiyatlarini aniq ayt
-- Qo'llanish sohalariga misollar keltir
-- Agar bilmasang, mutaxassis bilan bog'lanishni taklif qil
-- Har doim +998 78 555 86 18 raqamini taklif qil
-
-KONTEKST:
+Kontekst ma'lumotlar:
 ${COMPANY_CONTEXT}
 `;
 
@@ -417,7 +413,6 @@ app.get("/api/health", (_req, res) => {
   });
 });
 
-// Mahsulotlar ro'yxatini olish
 app.get("/api/products", (_req, res) => {
   const productsList = Object.entries(PRODUCTS).map(([key, product]) => ({
     id: key,
@@ -428,7 +423,6 @@ app.get("/api/products", (_req, res) => {
   res.json(productsList);
 });
 
-// Mahsulot haqida batafsil ma'lumot
 app.get("/api/products/:id", (req, res) => {
   const product = PRODUCTS[req.params.id];
   if (!product) {
@@ -457,8 +451,8 @@ app.post("/api/chat", async (req, res) => {
 
     const completion = await groq.chat.completions.create({
       model: "llama-3.3-70b-versatile",
-      temperature: 0.5,
-      max_tokens: 800,
+      temperature: 0.3,
+      max_tokens: 600,
       messages: [
         {
           role: "system",
@@ -470,7 +464,7 @@ app.post("/api/chat", async (req, res) => {
 
     const reply =
       completion.choices?.[0]?.message?.content ||
-      "Kechirasiz, hozir javob tayyor bo‘lmadi. Qayta urinib ko‘ring.";
+      "Kechirasiz, hozir javob tayyor bolmadi. Qayta urinib koring.";
 
     return res.json({ 
       reply,
@@ -487,7 +481,7 @@ app.post("/api/chat", async (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`🚀 EcoProm AI Server running on http://localhost:${PORT}`);
-  console.log(`📦 Products: ${Object.keys(PRODUCTS).length}`);
-  console.log(`🤖 Model: llama-3.3-70b-versatile`);
+  console.log(`EcoProm AI Server running on http://localhost:${PORT}`);
+  console.log(`Products: ${Object.keys(PRODUCTS).length}`);
+  console.log(`Model: llama-3.3-70b-versatile`);
 });
