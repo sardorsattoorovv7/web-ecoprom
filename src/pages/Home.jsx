@@ -18,7 +18,7 @@ const OurProjects = lazy(() => import("../components/OurProjects"));
 const OurProduction = lazy(() => import("../components/OurProduction"));
 const AiAssistant = lazy(() => import("../components/AIAssistant"));
 const PartnerMarquee = lazy(() => import("../components/PartnerMarquee"));
-
+const CookieConsentBanner = lazy(() => import("../components/CookieConsentBanner"));
 /* ---------------- 1. HERO MA'LUMOTLARI ---------------- */
 const SLIDES = [
   {
@@ -579,7 +579,7 @@ export default function EcoPromMain({ onOpenCall }) {
         <Suspense fallback={<SkeletonLoader />}>
           <AiAssistant />
         </Suspense>
-
+         <CookieConsentBanner />
         <BackToTop />
       </div>
     </>
