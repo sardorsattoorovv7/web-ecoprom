@@ -48,7 +48,7 @@ export default function Footer() {
     { to: "/contact", label: "Bog'lanish" }
   ];
 
-  const products = ["PIR panellar", "Sovutgich kameralar", "Sanoat eshiklari", "Metall konstruksiyalar"];
+  const products = ["PIR va PUR panellar", "Sovutgich kameralar", "Sanoat eshiklari", "Metall konstruksiyalar"];
   const productIcons = [Package, Snowflake, Factory, Factory];
 
   return (
