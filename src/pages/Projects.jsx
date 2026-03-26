@@ -4,7 +4,7 @@ import LeadForm from "../components/LeadForm";
 const videoData = [
   { id: 1, title: "Zanglamas metall panel", src: "/assets/1.mp4" },
   { id: 2, title: "Eng Zamonaviy texnologiyalar", src: "/assets/2.mp4" },
-  { id: 3, title: "Aydar Ko' 2026 Biznes uchrashuv", src: "/assets/3.MP4" },
+  { id: 3, title: "Aydar Ko'l 2026 Biznes uchrashuv", src: "/assets/3.MP4" },
 ];
 
 export default function Projects() {
