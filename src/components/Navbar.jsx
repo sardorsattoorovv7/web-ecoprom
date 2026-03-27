@@ -45,7 +45,7 @@ export default function Navbar({ onOpenCall }) {
        <Link to="/" className="flex items-center gap-2">
         {/* Div o'rniga rasm qo'yamiz */}
         <img 
-          src="/assets/logo.png" 
+          src="/logo.png" 
           alt="EcoProm Logo" 
           className="h-11 w-11 object-contain rounded-lg" 
         />
