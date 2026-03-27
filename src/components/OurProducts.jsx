@@ -195,32 +195,45 @@ export default function OurProducts({ onProductClick }) {
           </motion.div>
 
           {/* 3 ta card - keng va to'liq */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
             {products.map((product, index) => (
               <motion.div
                 key={product.id}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 50, x: index % 2 === 0 ? -30 : 30 }}
+                whileInView={{ opacity: 1, y: 0, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.5 }}
-                whileHover={{ y: -10 }}
+                transition={{ delay: index * 0.15, duration: 0.6, type: "spring", stiffness: 100 }}
+                whileHover={{ y: -12, scale: 1.02 }}
                 className="group cursor-pointer w-full"
                 onClick={() => handleProductClick(product)}
               >
-                <div className="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 h-full flex flex-col">
+                <div className="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 h-full flex flex-col border border-slate-100/50">
                   {/* Image Container - balandligi oshirildi */}
                   <div className="relative h-96 bg-gradient-to-br from-slate-50 to-white p-8 flex items-center justify-center overflow-hidden">
+                    <motion.div 
+                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-t from-emerald-600/20 to-transparent"
+                    />
+                    
                     <motion.img 
                       src={product.image} 
                       alt={product.name} 
-                      className="w-full h-full object-contain transition-all duration-700 group-hover:scale-110"
+                      className="w-full h-full object-contain transition-all duration-700 group-hover:scale-110 relative z-10"
+                      whileHover={{ rotate: 2 }}
                     />
                     
                     {/* Quick view */}
                     <motion.div 
-                      className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-emerald-600 text-white px-6 py-3 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-500"
-                      initial={{ y: 20 }}
+                      className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-emerald-600 to-emerald-500 text-white px-6 py-3 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-500"
+                      initial={{ y: 20, opacity: 0 }}
                       whileHover={{ y: 0 }}
+                      animate={{ y: [0, -2, 0] }}
+                      transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
                     >
                       <span className="text-sm font-medium flex items-center gap-2">
                         <ZoomIn className="h-4 w-4" />
@@ -231,32 +244,68 @@ export default function OurProducts({ onProductClick }) {
                   
                   {/* Content - kengaytirildi */}
                   <div className="p-8 flex flex-col flex-grow">
-                    <span className="text-sm text-emerald-600 font-semibold mb-2 block uppercase tracking-wider">
+                    <motion.span 
+                      className="text-sm text-emerald-600 font-semibold mb-2 block uppercase tracking-wider"
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.15 + 0.1 }}
+                    >
                       {product.category}
-                    </span>
-                    <h3 className="text-2xl font-bold text-slate-800 mb-3">
+                    </motion.span>
+                    
+                    <motion.h3 
+                      className="text-2xl font-bold text-slate-800 mb-3"
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.15 + 0.2 }}
+                    >
                       {product.name}
-                    </h3>
-                    <p className="text-slate-600 mb-6 line-clamp-2 text-base">
+                    </motion.h3>
+                    
+                    <motion.p 
+                      className="text-slate-600 mb-6 line-clamp-2 text-base"
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.15 + 0.3 }}
+                    >
                       {product.description}
-                    </p>
+                    </motion.p>
                     
                     {/* Features */}
                     <div className="flex flex-wrap gap-2 mb-6">
                       {product.features.slice(0, 2).map((feature, i) => (
-                        <span key={i} className="text-xs bg-emerald-50 text-emerald-700 px-3 py-1.5 rounded-full font-medium">
+                        <motion.span 
+                          key={i} 
+                          className="text-xs bg-emerald-50 text-emerald-700 px-3 py-1.5 rounded-full font-medium"
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          whileInView={{ opacity: 1, scale: 1 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: index * 0.15 + 0.3 + i * 0.1 }}
+                          whileHover={{ scale: 1.1, backgroundColor: "#d1fae5" }}
+                        >
                           {feature}
-                        </span>
+                        </motion.span>
                       ))}
                     </div>
                     
                     {/* View details link */}
                     <div className="flex items-center justify-between pt-4 border-t border-slate-100 mt-auto">
-                      <span className="text-sm font-medium text-slate-400">Batafsil ma'lumot</span>
+                      <motion.span 
+                        className="text-sm font-medium text-slate-400"
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: index * 0.15 + 0.4 }}
+                      >
+                        Batafsil ma'lumot
+                      </motion.span>
                       <motion.div
                         animate={{ x: [0, 5, 0] }}
                         transition={{ duration: 1.5, repeat: Infinity }}
-                        className="bg-emerald-100 p-2 rounded-full"
+                        className="bg-gradient-to-r from-emerald-100 to-emerald-50 p-2 rounded-full group-hover:bg-gradient-to-r group-hover:from-emerald-200 group-hover:to-emerald-100 transition-all"
                       >
                         <ArrowRight className="h-5 w-5 text-emerald-600" />
                       </motion.div>
@@ -265,7 +314,7 @@ export default function OurProducts({ onProductClick }) {
                 </div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 

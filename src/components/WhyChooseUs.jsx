@@ -75,42 +75,111 @@ export default function WhyChooseUs() {
         </motion.div>
 
         {/* Cards Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <motion.div 
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
           {features.map((feature, index) => {
             const Icon = feature.icon;
             return (
               <motion.div
                 key={feature.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ y: -5 }}
-                className="group bg-white rounded-2xl border border-slate-100 p-6 hover:shadow-lg transition-all duration-300"
+                initial={{ 
+                  opacity: 0, 
+                  y: 40,
+                  x: index % 2 === 0 ? -20 : 20
+                }}
+                whileInView={{ 
+                  opacity: 1, 
+                  y: 0,
+                  x: 0
+                }}
+                viewport={{ once: true }}
+                transition={{ 
+                  duration: 0.6, 
+                  delay: index * 0.12,
+                  type: "spring",
+                  stiffness: 100,
+                  damping: 15
+                }}
+                whileHover={{ 
+                  y: -8,
+                  scale: 1.03,
+                  shadow: "0 20px 60px -24px rgba(16, 185, 129, 0.3)"
+                }}
+                className="group bg-white rounded-2xl border border-slate-100 p-6 hover:shadow-lg hover:border-emerald-100 transition-all duration-300 relative overflow-hidden"
               >
+                {/* Background gradient on hover */}
+                <motion.div 
+                  className="absolute inset-0 bg-gradient-to-br from-emerald-50/0 to-emerald-100/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"
+                />
+                
                 {/* Icon */}
-                <div className="w-14 h-14 bg-emerald-50 rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300">
-                  <Icon className="h-7 w-7 text-emerald-600" />
-                </div>
+                <motion.div 
+                  className="relative z-10 w-14 h-14 bg-emerald-50 rounded-xl flex items-center justify-center mb-5 group-hover:scale-125 group-hover:bg-emerald-100 transition-transform duration-300"
+                  animate={{ rotate: [0, 5, -5, 0] }}
+                  transition={{ duration: 3, repeat: Infinity, repeatType: "reverse", delay: index * 0.1 }}
+                  whileHover={{ rotate: 360, scale: 1.3 }}
+                  whileInView={{ scale: 1 }}
+                >
+                  <Icon className="h-7 w-7 text-emerald-600 transition-colors duration-300 group-hover:text-emerald-700" />
+                </motion.div>
 
                 {/* Content */}
-                <h3 className="text-xl font-bold text-slate-800 mb-2">
+                <motion.h3 
+                  className="relative z-10 text-xl font-bold text-slate-800 mb-2"
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.12 + 0.1 }}
+                >
                   {feature.title}
-                </h3>
-                <p className="text-slate-500 text-sm leading-relaxed mb-4">
+                </motion.h3>
+                
+                <motion.p 
+                  className="relative z-10 text-slate-500 text-sm leading-relaxed mb-4"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.12 + 0.2 }}
+                >
                   {feature.description}
-                </p>
+                </motion.p>
 
                 {/* Stats badge */}
-                <div className="inline-flex items-center gap-1.5 bg-slate-50 px-3 py-1.5 rounded-full">
-                  <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" />
-                  <span className="text-xs font-medium text-slate-600">
+                <motion.div 
+                  className="relative z-10 inline-flex items-center gap-1.5 bg-gradient-to-r from-slate-50 to-emerald-50 px-3 py-1.5 rounded-full border border-slate-100/50 group-hover:border-emerald-200 group-hover:from-emerald-50 group-hover:to-emerald-100 transition-all duration-300"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.12 + 0.3 }}
+                  whileHover={{ scale: 1.05 }}
+                >
+                  <motion.div
+                    animate={{ rotate: [0, 360] }}
+                    transition={{ duration: 3, repeat: Infinity }}
+                  >
+                    <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" />
+                  </motion.div>
+                  <span className="text-xs font-medium text-slate-600 group-hover:text-emerald-700 transition-colors">
                     {feature.stats}
                   </span>
-                </div>
+                </motion.div>
+
+                {/* Bottom border animation */}
+                <motion.div 
+                  className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-emerald-600 to-emerald-400"
+                  initial={{ width: "0%" }}
+                  whileHover={{ width: "100%" }}
+                  transition={{ duration: 0.4 }}
+                />
               </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

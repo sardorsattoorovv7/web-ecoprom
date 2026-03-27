@@ -102,17 +102,17 @@ export default function OurPartners() {
                     <img 
                       src={partner.logo}
                       alt={partner.name}
-                      className="h-45 md:h-65 w-auto object-contain grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
+                      className="h-45 md:h-65 w-auto object-contain grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-125 transition-all duration-500"
                       onError={(e) => {
                         e.target.onerror = null;
                         e.target.style.display = 'none';
                         e.target.nextSibling.style.display = 'block';
                       }}
                     />
-                    <span className="text-xs text-slate-400 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <span className="mt-4 text-sm font-bold text-emerald-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500 uppercase tracking-wider">
                       {partner.name}
                     </span>
-                    <div className="w-12 h-px bg-emerald-200/50 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div className="w-12 h-px bg-emerald-200/50 mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   </div>
                 ))}
               </div>
@@ -127,17 +127,17 @@ export default function OurPartners() {
                     <img 
                       src={partner.logo}
                       alt={partner.name}
-                      className="h-12 md:h-16 w-auto object-contain grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
+                      className="h-12 md:h-16 w-auto object-contain grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-125 transition-all duration-500"
                       onError={(e) => {
                         e.target.onerror = null;
                         e.target.style.display = 'none';
                         e.target.nextSibling.style.display = 'block';
                       }}
                     />
-                    <span className="text-xs text-slate-400 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <span className="mt-4 text-sm font-bold text-emerald-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500 uppercase tracking-wider">
                       {partner.name}
                     </span>
-                    <div className="w-12 h-px bg-emerald-200/50 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div className="w-12 h-px bg-emerald-200/50 mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   </div>
                 ))}
               </div>

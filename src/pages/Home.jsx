@@ -82,20 +82,21 @@ const useCounter = (end, duration = 2000) => {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.3 });
 
   useEffect(() => {
-    if (inView) {
-      let start = 0;
-      const increment = end / (duration / 16);
-      const timer = setInterval(() => {
-        start += increment;
-        if (start >= end) {
-          setCount(end);
-          clearInterval(timer);
-        } else {
-          setCount(Math.floor(start));
-        }
-      }, 16);
-      return () => clearInterval(timer);
-    }
+    if (!inView) return;
+
+    let start = 0;
+    const increment = end / (duration / 16);
+    const timer = setInterval(() => {
+      start += increment;
+      if (start >= end) {
+        setCount(end);
+        clearInterval(timer);
+      } else {
+        setCount(Math.floor(start));
+      }
+    }, 16);
+
+    return () => clearInterval(timer);
   }, [inView, end, duration]);
 
   return [count, ref];
@@ -190,13 +191,30 @@ const StatCard = ({ value, label, suffix = "+", delay = 0 }) => {
   const [count, ref] = useCounter(value, 2000);
   const [inViewRef, inView] = useInView({ triggerOnce: true, threshold: 0.3 });
 
+  // Alternating side animations - even: left, odd: right
+  const isFromLeft = !!(Math.floor(delay * 10) % 2);
+
   return (
     <motion.div
       ref={inViewRef}
-      initial={{ opacity: 0, y: 30 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay }}
-      className="text-center p-6 rounded-2xl bg-gradient-to-br from-slate-50 to-white shadow-lg hover:shadow-xl transition-all"
+      initial={{ 
+        opacity: 0, 
+        x: isFromLeft ? -100 : 100,
+        y: 20
+      }}
+      animate={inView ? { 
+        opacity: 1, 
+        x: 0,
+        y: 0
+      } : {}}
+      transition={{ 
+        duration: 0.7, 
+        delay,
+        type: "spring",
+        stiffness: 100,
+        damping: 12
+      }}
+      className="text-center p-6 rounded-2xl bg-gradient-to-br from-slate-50 to-white shadow-lg hover:shadow-xl transition-all hover:scale-105 hover:-translate-y-2"
     >
       <div ref={ref} className="text-4xl md:text-5xl font-bold text-emerald-600 mb-2">
         {inView ? count : 0}{suffix}
@@ -301,13 +319,26 @@ export default function EcoPromMain({ onOpenCall }) {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
-  // Auto-slide
-  useEffect(() => {
-    const timer = setInterval(() => {
+  // Auto-slide tugmasi
+  const heroTimerRef = useRef(null);
+
+  const resetAutoSlide = useCallback(() => {
+    if (heroTimerRef.current) {
+      clearInterval(heroTimerRef.current);
+    }
+    heroTimerRef.current = setInterval(() => {
       setHeroIndex((prev) => (prev + 1) % SLIDES.length);
     }, 5000);
-    return () => clearInterval(timer);
   }, []);
+
+  useEffect(() => {
+    resetAutoSlide();
+    return () => {
+      if (heroTimerRef.current) {
+        clearInterval(heroTimerRef.current);
+      }
+    };
+  }, [resetAutoSlide]);
 
   const handleColorSelect = useCallback((color) => {
     setSelectedColor(color);
@@ -315,7 +346,8 @@ export default function EcoPromMain({ onOpenCall }) {
 
   const handleHeroIndexChange = useCallback((index) => {
     setHeroIndex(index);
-  }, []);
+    resetAutoSlide();
+  }, [resetAutoSlide]);
 
   // Statistika ma'lumotlari
   const stats = [
@@ -579,7 +611,11 @@ export default function EcoPromMain({ onOpenCall }) {
         <Suspense fallback={<SkeletonLoader />}>
           <AiAssistant />
         </Suspense>
-         <CookieConsentBanner />
+
+        <Suspense fallback={<SkeletonLoader />}>
+          <CookieConsentBanner />
+        </Suspense>
+
         <BackToTop />
       </div>
     </>

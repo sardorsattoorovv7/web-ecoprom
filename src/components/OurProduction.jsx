@@ -5,7 +5,7 @@ import {
   ChevronLeft, ChevronRight as ChevronRightIcon,
   Download, FileText, Snowflake, DoorOpen 
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const productionImages = [
   {
@@ -98,16 +98,23 @@ export default function OurProduction() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showCatalogs, setShowCatalogs] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
 
-  const nextSlide = () => {
-    setDirection(1);
-    setCurrentIndex((prev) => (prev + 1) % productionImages.length);
-  };
+  // Auto-slide har 8 soniyada (hovering pauzasida to'xtaydi)
+  useEffect(() => {
+    if (isHovering) return; // Hovering pauzada, interval o'tkasman
+    
+    const autoSlideTimer = setInterval(() => {
+      setDirection(1);
+      setCurrentIndex((prev) => (prev + 1) % productionImages.length);
+    }, 8000);
 
-  const prevSlide = () => {
-    setDirection(-1);
-    setCurrentIndex((prev) => (prev - 1 + productionImages.length) % productionImages.length);
-  };
+    return () => clearInterval(autoSlideTimer);
+  }, [isHovering]);
+
+
+
+
 
   const openModal = (image) => {
     setSelectedImage(image);
@@ -188,23 +195,68 @@ export default function OurProduction() {
             return (
               <motion.div
                 key={stat.id}
-                whileHover={{ y: -5 }}
-                className="bg-white rounded-xl border border-slate-100 p-5 text-center hover:shadow-lg transition-all"
+                initial={{ opacity: 0, y: 30, x: index % 2 === 0 ? -20 : 20 }}
+                whileInView={{ opacity: 1, y: 0, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.12, duration: 0.6, type: "spring" }}
+                whileHover={{ y: -8, scale: 1.05 }}
+                className="bg-gradient-to-br from-white to-emerald-50/30 rounded-xl border border-slate-100 p-5 text-center hover:shadow-lg hover:border-emerald-200 transition-all"
               >
-                <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center mx-auto mb-3">
+                <motion.div 
+                  className="w-12 h-12 bg-gradient-to-br from-emerald-100 to-emerald-50 rounded-xl flex items-center justify-center mx-auto mb-3"
+                  whileHover={{ rotate: 360, scale: 1.15 }}
+                  transition={{ duration: 0.6 }}
+                >
                   <Icon className="h-6 w-6 text-emerald-600" />
-                </div>
-                <div className="text-xl font-bold text-slate-800 mb-1">{stat.value}</div>
-                <div className="text-xs text-slate-500">{stat.label}</div>
+                </motion.div>
+                <motion.div 
+                  className="text-xl font-bold text-slate-800 mb-1"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.12 + 0.2 }}
+                >
+                  {stat.value}
+                </motion.div>
+                <motion.div 
+                  className="text-xs text-slate-500"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.12 + 0.3 }}
+                >
+                  {stat.label}
+                </motion.div>
               </motion.div>
             );
           })}
         </motion.div>
 
         {/* Production Image Slider */}
-        <div className="relative max-w-4xl mx-auto mb-12">
+        <div className="relative w-full mb-12">
           {/* Main Slider */}
-          <div className="relative h-[500px] overflow-hidden rounded-2xl">
+          <motion.div 
+            className="relative h-screen max-h-[700px] overflow-hidden rounded-2xl shadow-2xl"
+            onMouseEnter={() => setIsHovering(true)}
+            onMouseLeave={() => setIsHovering(false)}
+            animate={{ scale: isHovering ? 1.02 : 1 }}
+            transition={{ duration: 0.3 }}
+          >
+            {/* Gradient overlay on sides */}
+            <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-black/20 to-transparent z-5 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-black/20 to-transparent z-5 pointer-events-none" />
+            
+            {/* Hover glow effect */}
+            <motion.div
+              className="absolute inset-0 rounded-2xl pointer-events-none"
+              animate={{
+                boxShadow: isHovering 
+                  ? "inset 0 0 40px rgba(16, 185, 129, 0.3), 0 0 40px rgba(16, 185, 129, 0.2)" 
+                  : "inset 0 0 0px rgba(16, 185, 129, 0), 0 0 0px rgba(16, 185, 129, 0)"
+              }}
+              transition={{ duration: 0.3 }}
+            />
+            
             <AnimatePresence initial={false} custom={direction}>
               <motion.div
                 key={currentIndex}
@@ -214,16 +266,18 @@ export default function OurProduction() {
                 animate="center"
                 exit="exit"
                 transition={{
-                  x: { type: "spring", stiffness: 300, damping: 30 },
-                  opacity: { duration: 0.2 }
+                  x: { type: "spring", stiffness: 300, damping: 25 },
+                  opacity: { duration: 0.5 }
                 }}
                 className="absolute w-full h-full cursor-pointer"
                 onClick={() => openModal(productionImages[currentIndex])}
               >
-                <img
+                <motion.img
                   src={productionImages[currentIndex].image}
                   alt={productionImages[currentIndex].title}
                   className="w-full h-full object-cover"
+                  animate={{ scale: isHovering ? 1.05 : 1 }}
+                  transition={{ duration: 0.3 }}
                 />
                 
                 {/* Overlay */}
@@ -242,40 +296,29 @@ export default function OurProduction() {
                 </div>
               </motion.div>
             </AnimatePresence>
-          </div>
-
-          {/* Navigation Buttons */}
-          <button
-            onClick={prevSlide}
-            className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center hover:bg-white transition-all z-10"
-          >
-            <ChevronLeft className="h-6 w-6 text-slate-700" />
-          </button>
-          
-          <button
-            onClick={nextSlide}
-            className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center hover:bg-white transition-all z-10"
-          >
-            <ChevronRightIcon className="h-6 w-6 text-slate-700" />
-          </button>
+          </motion.div>
 
           {/* Indicators */}
-          <div className="flex justify-center gap-2 mt-5">
+          <motion.div 
+            className="flex justify-center gap-2 mt-6"
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+          >
             {productionImages.map((_, index) => (
-              <button
+              <motion.div
                 key={index}
-                onClick={() => {
-                  setDirection(index > currentIndex ? 1 : -1);
-                  setCurrentIndex(index);
+                animate={{
+                  width: index === currentIndex ? 28 : 8,
+                  backgroundColor: index === currentIndex ? 'rgba(16, 185, 129, 1)' : 'rgba(148, 163, 184, 0.4)',
                 }}
-                className={`h-2 rounded-full transition-all ${
-                  index === currentIndex 
-                    ? 'w-8 bg-emerald-600' 
-                    : 'w-2 bg-slate-300 hover:bg-slate-400'
-                }`}
+                transition={{ duration: 0.3 }}
+                className="h-2 rounded-full cursor-pointer"
+                whileHover={{ scale: 1.2 }}
               />
             ))}
-          </div>
+          </motion.div>
         </div>
 
         {/* Catalog Section */}
