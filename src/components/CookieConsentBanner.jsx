@@ -7,6 +7,7 @@ export default function CookieConsent() {
   const [showBanner, setShowBanner] = useState(false);
 
   useEffect(() => {
+    // LocalStorage orqali foydalanuvchi roziligini tekshiramiz
     const hasConsent = localStorage.getItem("cookieConsent");
     if (!hasConsent) {
       setShowBanner(true);
@@ -14,11 +15,13 @@ export default function CookieConsent() {
   }, []);
 
   const acceptCookies = () => {
+    // Foydalanuvchi qabul qilganini localStorage-ga saqlaymiz
     localStorage.setItem("cookieConsent", "accepted");
     setShowBanner(false);
   };
 
   const declineCookies = () => {
+    // Foydalanuvchi rad etganini localStorage-ga saqlaymiz
     localStorage.setItem("cookieConsent", "declined");
     setShowBanner(false);
   };
@@ -34,7 +37,7 @@ export default function CookieConsent() {
           className="fixed bottom-4 left-4 right-4 z-50"
         >
           <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-lg border border-slate-200 p-4 max-w-3xl mx-auto">
-            <div className="flex items-center gap-4">
+            <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
               {/* Icon */}
               <div className="flex-shrink-0">
                 <Cookie className="h-6 w-6 text-emerald-500" />
@@ -43,13 +46,16 @@ export default function CookieConsent() {
               {/* Text */}
               <div className="flex-1">
                 <p className="text-sm text-slate-600">
-                  Sayt tajribangizni yaxshilash uchun cookie-lardan foydalanamiz. 
-                  
+                  Sayt tajribangizni yaxshilash va sizga qulaylik yaratish uchun cookies-fayllardan foydalanamiz. Davom etish orqali siz cookies-dan foydalanishga rozilik bildirasiz. 
+                  <br />
+                  <a href="/privacy" className="text-emerald-600 underline hover:text-emerald-700">
+                    Maxfiylik siyosatini o‘qing
+                  </a>
                 </p>
               </div>
 
               {/* Buttons */}
-              <div className="flex items-center gap-2 flex-shrink-0">
+              <div className="flex items-center gap-2 flex-shrink-0 mt-2 md:mt-0">
                 <button
                   onClick={declineCookies}
                   className="px-4 py-2 text-sm text-slate-500 hover:text-slate-700 transition-colors"

@@ -15,7 +15,7 @@ import OurProducts from "./pages/OurProducts";
 import News from "./pages/News";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
-
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 export default function App() {
   const [open, setOpen] = useState(false);
 
@@ -39,7 +39,7 @@ export default function App() {
             
             {/* BU YERDA: /OurProducts ni kichik harfga o'zgartirdik */}
             <Route path="/ourproducts" element={<OurProducts />} />
-            
+             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/news" element={<News />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
