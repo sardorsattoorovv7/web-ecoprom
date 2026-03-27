@@ -22,9 +22,9 @@ const CookieConsentBanner = lazy(() => import("../components/CookieConsentBanner
 /* ---------------- 1. HERO MA'LUMOTLARI ---------------- */
 const SLIDES = [
   {
-    id: "pir",
+    id: "pir-pur",
     category: "Poliuretan Tizimlari",
-    title: "PIR Sendvich panellar",
+    title: "PIR-PUR Sendvich panellar",
     desc: "Issiqlik izolyatsiyasi bo'yicha eng yuqori ko'rsatkich. Energiyani 40% gacha tejaydigan zamonaviy panel tizimlari.",
     badge: "Premium sifat",
   },
@@ -329,9 +329,9 @@ export default function EcoPromMain({ onOpenCall }) {
   const seoData = useMemo(
     () => ({
       title:
-        "EcoProm — PIR sendvich panellar, sovutgich kameralar va sanoat binolari",
+        "EcoProm — PIR-PUR sendvich panellar, sovutgich kameralar va sanoat binolari",
       description:
-        "EcoProm zamonaviy PIR sendvich panellar, sovutgich kameralar va sanoat binolari ishlab chiqaradi. Yuqori issiqlik izolyatsiyasi, tez montaj va ishonchli sifat.",
+        "EcoProm zamonaviy PIR-PUR sendvich panellar, sovutgich kameralar va sanoat binolari ishlab chiqaradi. Yuqori issiqlik izolyatsiyasi, tez montaj va ishonchli sifat.",
       keywords:
         "PIR sendvich panel, poliuretan panel, sovutgich kamera, sanoat binolari, sendvich panel Uzbekistan, EcoProm",
       canonicalUrl: "https://web-ecoprom.vercel.app/",
