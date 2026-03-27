@@ -39,7 +39,7 @@ export default function Projects() {
         }}
       />
 
-      <div className="relative z-10 container mx-auto px-6 py-20">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 py-20">
         
         {/* Sarlavha qismi */}
         <div className="max-w-3xl mb-16">
