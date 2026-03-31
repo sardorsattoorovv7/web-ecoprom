@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { 
   MapPin, Phone, Mail, Clock, Send, 
-  Facebook, Instagram, Youtube, Linkedin,
+  Facebook, Instagram, Youtube,
   User, MessageSquare, AlertCircle, CheckCircle,
   ArrowRight, Globe
 } from "lucide-react";
@@ -14,8 +14,7 @@ const fade = {
 };
 
 export default function Contact() {
-  const { i18n, t } = useTranslation();
-  const lang = i18n.language;
+  const { t, i18n } = useTranslation();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -30,11 +29,8 @@ export default function Contact() {
   const [loading, setLoading] = useState(false);
 
   // Telegram Bot Configuration
-  // 1. BotFather dan bot yarating va token oling
-  // 2. Botni kanalga admin qiling
-  // 3. Kanal ID ni oling (masalan: @your_channel yoki -1001234567890)
-  const BOT_TOKEN = "8559719741:AAGa5BnxXt2rxjC-gKFnzboBiJQgPUY2GzU"; // BotFather dan olingan token
-  const CHANNEL_ID = "@testttt1221"; // Kanal username yoki ID
+  const BOT_TOKEN = "8559719741:AAGa5BnxXt2rxjC-gKFnzboBiJQgPUY2GzU";
+  const CHANNEL_ID = "@testttt1221";
 
   const handleChange = (e) => {
     setFormData({
@@ -44,7 +40,6 @@ export default function Contact() {
   };
 
   const sendToTelegram = async (formData) => {
-    // Format message for Telegram
     const message = `
 🏢 *YANGI MUROJAAT* 🏢
 ━━━━━━━━━━━━━━━━━━━━━
@@ -91,20 +86,16 @@ export default function Contact() {
     e.preventDefault();
     setLoading(true);
     
-    // Send to Telegram
     const success = await sendToTelegram(formData);
     
     if (success) {
       setFormStatus({
         submitted: true,
         success: true,
-        message: lang === "ru" 
-          ? "Ваше сообщение успешно отправлено! Мы свяжемся с вами в ближайшее время." 
-          : "Xabaringiz muvaffaqiyatli yuborildi! Tez orada siz bilan bog'lanamiz."
+        message: t("contact.status.success")
       });
       setFormData({ name: "", email: "", phone: "", message: "" });
       
-      // Reset form status after 5 seconds
       setTimeout(() => {
         setFormStatus({ submitted: false, success: false, message: "" });
       }, 5000);
@@ -112,9 +103,7 @@ export default function Contact() {
       setFormStatus({
         submitted: true,
         success: false,
-        message: lang === "ru" 
-          ? "Произошла ошибка при отправке. Пожалуйста, попробуйте позже или свяжитесь с нами по телефону." 
-          : "Xatolik yuz berdi. Iltimos, keyinroq qayta urinib ko'ring yoki biz bilan telefon orqali bog'lang."
+        message: t("contact.status.error")
       });
       
       setTimeout(() => {
@@ -125,40 +114,38 @@ export default function Contact() {
     setLoading(false);
   };
 
-  // Contact Information with correct numbers
+  // Contact Information
   const contactInfo = [
     {
       icon: MapPin,
-      title: lang === "ru" ? "Адрес" : "Manzil",
-      details: [
-        "Samarqand viloyati, Samarqand tumani",
-        "Chumchuqli MFY, O'zbekiston"
-      ],
+      title: t("contact.info.address"),
+      details: t("contact.info.address_details", { returnObjects: true }) || ["Samarqand viloyati, Samarqand tumani", "Chumchuqli MFY, O'zbekiston"],
       link: "https://maps.google.com/?q=Samarqand+Chumchuqli",
-      color: "text-emerald-600"
+      color: "text-emerald-600",
+      bgColor: "bg-emerald-50"
     },
     {
       icon: Phone,
-      title: lang === "ru" ? "Телефон" : "Telefon",
+      title: t("contact.info.phone"),
       details: ["+998 (78) 555-86-16"],
       link: "tel:+998785558616",
-      color: "text-blue-600"
+      color: "text-blue-600",
+      bgColor: "bg-blue-50"
     },
     {
       icon: Mail,
       title: "Email",
       details: ["info@ecoprom.uz"],
       link: "mailto:info@ecoprom.uz",
-      color: "text-red-600"
+      color: "text-red-600",
+      bgColor: "bg-red-50"
     },
     {
       icon: Clock,
-      title: lang === "ru" ? "Режим работы" : "Ish vaqti",
-      details: [
-        lang === "ru" ? "Пн-Пт: 08:00 - 18:00" : "Du-Shan: 08:00 - 18:00",
-        lang === "ru" ? "Вс: Выходной" : "Yak: Dam olish"
-      ],
-      color: "text-purple-600"
+      title: t("contact.info.working_hours"),
+      details: t("contact.info.hours_details", { returnObjects: true }) || ["Du-Shan: 08:00 - 18:00", "Yak: Dam olish"],
+      color: "text-purple-600",
+      bgColor: "bg-purple-50"
     }
   ];
 
@@ -166,9 +153,7 @@ export default function Contact() {
     { icon: Facebook, href: "https://www.facebook.com/share/188Fga4yAs/", label: "Facebook", color: "hover:bg-[#1877f2]" },
     { icon: Instagram, href: "https://www.instagram.com/ecoprom_uz", label: "Instagram", color: "hover:bg-gradient-to-r from-[#f09433] to-[#bc1888]" },
     { icon: Youtube, href: "https://youtube.com", label: "YouTube", color: "hover:bg-[#ff0000]" },
-    { icon: Send, href: "https://t.me/ecopromgroup", label: "Telegram", color: "hover:text-sky-500" },
-    
-
+    { icon: Send, href: "https://t.me/ecopromgroup", label: "Telegram", color: "hover:text-sky-500" }
   ];
 
   return (
@@ -198,15 +183,13 @@ export default function Contact() {
           className="text-center mb-12 md:mb-16"
         >
           <div className="inline-flex px-4 py-1.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-100 text-sm font-medium mb-4">
-            {lang === "ru" ? "Свяжитесь с нами" : "Biz bilan bog'laning"}
+            {t("contact.badge")}
           </div>
           <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
-            {lang === "ru" ? "Контакты" : "Kontaktlar"}
+            {t("contact.title")}
           </h1>
           <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto">
-            {lang === "ru" 
-              ? "Оставьте заявку или свяжитесь с нами удобным для вас способом"
-              : "So'rov qoldiring yoki biz bilan qulay usulda bog'laning"}
+            {t("contact.subtitle")}
           </p>
         </motion.div>
 
@@ -221,7 +204,7 @@ export default function Contact() {
           >
             <div className="bg-white rounded-3xl shadow-xl border border-slate-100 p-6 md:p-8">
               <h2 className="text-2xl font-bold text-slate-900 mb-6">
-                {lang === "ru" ? "Отправить сообщение" : "Xabar yuborish"}
+                {t("contact.form_title")}
               </h2>
               
               {formStatus.submitted && (
@@ -247,7 +230,7 @@ export default function Contact() {
                 <div className="grid md:grid-cols-2 gap-5">
                   <div>
                     <label className="block text-sm font-medium text-slate-700 mb-2">
-                      {lang === "ru" ? "Ваше имя" : "Ismingiz"} *
+                      {t("contact.labels.name")} *
                     </label>
                     <div className="relative">
                       <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
@@ -258,14 +241,14 @@ export default function Contact() {
                         onChange={handleChange}
                         required
                         className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all"
-                        placeholder={lang === "ru" ? "Иван Иванов" : "Ismingizni kiriting"}
+                        placeholder={t("contact.placeholders.name")}
                       />
                     </div>
                   </div>
                   
                   <div>
                     <label className="block text-sm font-medium text-slate-700 mb-2">
-                      Email *
+                      {t("contact.labels.email")} *
                     </label>
                     <div className="relative">
                       <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
@@ -276,7 +259,7 @@ export default function Contact() {
                         onChange={handleChange}
                         required
                         className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all"
-                        placeholder="your@email.com"
+                        placeholder={t("contact.placeholders.email")}
                       />
                     </div>
                   </div>
@@ -284,7 +267,7 @@ export default function Contact() {
                 
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-2">
-                    {lang === "ru" ? "Телефон" : "Telefon"}
+                    {t("contact.labels.phone")}
                   </label>
                   <div className="relative">
                     <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
@@ -294,14 +277,14 @@ export default function Contact() {
                       value={formData.phone}
                       onChange={handleChange}
                       className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all"
-                      placeholder="+998 (78) 555-86-16"
+                      placeholder={t("contact.placeholders.phone")}
                     />
                   </div>
                 </div>
                 
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-2">
-                    {lang === "ru" ? "Сообщение" : "Xabar"} *
+                    {t("contact.labels.message")} *
                   </label>
                   <div className="relative">
                     <MessageSquare className="absolute left-3 top-3 h-5 w-5 text-slate-400" />
@@ -312,7 +295,7 @@ export default function Contact() {
                       required
                       rows={5}
                       className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all resize-none"
-                      placeholder={lang === "ru" ? "Ваше сообщение..." : "Xabaringiz..."}
+                      placeholder={t("contact.placeholders.message")}
                     />
                   </div>
                 </div>
@@ -325,11 +308,11 @@ export default function Contact() {
                   {loading ? (
                     <>
                       <div className="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent"></div>
-                      <span>{lang === "ru" ? "Отправка..." : "Yuborilmoqda..."}</span>
+                      <span>{t("contact.status.sending")}</span>
                     </>
                   ) : (
                     <>
-                      <span>{lang === "ru" ? "Отправить сообщение" : "Xabar yuborish"}</span>
+                      <span>{t("contact.form_title")}</span>
                       <Send className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
                     </>
                   )}
@@ -360,7 +343,7 @@ export default function Contact() {
                       className="bg-white rounded-2xl shadow-lg border border-slate-100 p-5 hover:shadow-xl transition-shadow"
                     >
                       <div className="flex items-start gap-3">
-                        <div className={`p-2 rounded-xl bg-${info.color.split('-')[1]}-50`}>
+                        <div className={`p-2 rounded-xl ${info.bgColor}`}>
                           <Icon className={`h-6 w-6 ${info.color}`} />
                         </div>
                         <div className="flex-1">
@@ -379,7 +362,7 @@ export default function Contact() {
                               rel="noopener noreferrer"
                               className="text-xs text-emerald-600 hover:text-emerald-700 mt-2 inline-flex items-center gap-1"
                             >
-                              {lang === "ru" ? "Подробнее" : "Batafsil"}
+                              {t("contact.info.more")}
                               <ArrowRight className="h-3 w-3" />
                             </a>
                           )}
@@ -394,7 +377,7 @@ export default function Contact() {
               <div className="bg-white rounded-2xl shadow-lg border border-slate-100 p-5">
                 <h3 className="font-semibold text-slate-900 mb-4 flex items-center gap-2">
                   <Globe className="h-5 w-5 text-emerald-600" />
-                  {lang === "ru" ? "Мы на карте" : "Biz xaritada"}
+                  {t("contact.info.map_title")}
                 </h3>
                 <div className="rounded-xl overflow-hidden h-64">
                   <iframe
@@ -413,7 +396,7 @@ export default function Contact() {
               {/* Social Links */}
               <div className="bg-white rounded-2xl shadow-lg border border-slate-100 p-5">
                 <h3 className="font-semibold text-slate-900 mb-4">
-                  {lang === "ru" ? "Социальные сети" : "Ijtimoiy tarmoqlar"}
+                  {t("contact.info.social_title")}
                 </h3>
                 <div className="flex gap-3">
                   {socialLinks.map((social, index) => {
@@ -448,12 +431,10 @@ export default function Contact() {
           <div className="bg-gradient-to-r from-emerald-50 to-emerald-100/50 rounded-3xl p-8 md:p-12">
             <div className="text-center mb-8">
               <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3">
-                {lang === "ru" ? "Часто задаваемые вопросы" : "Ko'p so'raladigan savollar"}
+                {t("contact.faq.title")}
               </h2>
               <p className="text-slate-600">
-                {lang === "ru" 
-                  ? "Не нашли ответ? Свяжитесь с нами напрямую" 
-                  : "Javob topolmadingizmi? To'g'ridan-to'g'ri biz bilan bog'laning"}
+                {t("contact.faq.desc")}
               </p>
             </div>
             <div className="flex justify-center gap-4 flex-wrap">
@@ -471,7 +452,7 @@ export default function Contact() {
                 className="inline-flex items-center gap-2 bg-sky-600 hover:bg-sky-700 text-white px-8 py-3 rounded-xl font-semibold transition-all duration-300"
               >
                 <Send className="h-5 w-5" />
-                <span>Telegram</span>
+                <span>{t("contact.faq.button")}</span>
               </a>
             </div>
           </div>

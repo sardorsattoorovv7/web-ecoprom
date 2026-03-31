@@ -6,7 +6,12 @@
     "ourproducts": "Our Products",
     "news": "News",
     "about": "About Company",
-    "contact": "Contact"
+    "contact": "Contact",
+    "menu": "Menu",
+    "openMenu": "Open menu"
+  },
+  "language": {
+    "select": "Select your language"
   },
   "topbar": {
     "phone": "Phone",
@@ -198,13 +203,44 @@
     ]
   },
   "form": {
-    "name": "Name",
-    "phone": "Phone Number",
-    "message": "Message",
-    "success": "Request sent successfully."
+    "name": "Your name",
+    "phone": "Phone number",
+    "message": "Additional information",
+    "product_placeholder": "Select product type",
+    "products": {
+      "pir": "PIR sandwich panels",
+      "cold": "Cold room",
+      "warehouse": "Freezer warehouse",
+      "doors": "Industrial doors"
+    },
+    "success": "Request sent successfully!",
+    "error_bot": "Error occurred. Check if the bot is an admin.",
+    "error_net": "Check your internet connection!",
+    "privacy": "Your data is kept confidential.",
+    "sending": "Sending..."
+  },
+  "common": {
+    "close": "Close"
+  },
+  "modal": {
+    "callRequest": "Request a call"
   },
   "footer": {
-    "rights": "All rights reserved."
+    "rights": "All rights reserved.",
+    "premium": "Premium quality",
+    "experience": "13 years of experience, 500+ successful projects",
+    "quickLinks": "Quick links",
+    "productsTitle": "Products",
+    "contactTitle": "Contact",
+    "products": [
+      "PIR and PUR panels",
+      "Cold storage rooms",
+      "Industrial doors",
+      "Metal structures"
+    ],
+    "addressShort": "Samarkand, Uzbekistan",
+    "workTime": "Mon - Sat 8:00-18:00",
+    "addressLong": "Samarkand District, Chumchuqli MFY"
   },
   "why_choose_us": {
     "badge": "Why us?",
@@ -306,6 +342,150 @@
           "description": "Section where finished sandwich panels are directed for packaging. Here panels undergo inspection according to specified dimensions."
         }
       ]
+    }
+  },
+  "partners": {
+    "badge": "Our trusted partners",
+    "title_1": "Our",
+    "title_2": "Partners",
+    "stats": {
+      "clients": "Partners",
+      "countries": "Countries"
+    }
+  },
+  "buttons": {
+    "get_info": "Get Consultation"
+},
+  "about": {
+    "title": "About Company",
+    "subtitle": "Sandwich panels and cold storage rooms: design, production, installation, and service.",
+    "who_we_are": "Who We Are",
+    "story": "EcoProm is a leading manufacturer of high-quality sandwich panels and professional cooling systems. Our goal is to provide energy-efficient and reliable solutions.",
+    "stats": {
+      "experience": "years experience",
+      "projects": "projects",
+      "service": "service"
+    },
+    "video_title": "Video About Us",
+    "video_desc": "Learn more about our work and approaches",
+    "features": {
+      "certificates": {
+        "title": "Certificates",
+        "desc": "ISO compliance, standards, and international quality documents."
+      },
+      "team": {
+        "title": "Team",
+        "desc": "Engineers, installers, and service specialists."
+      },
+      "equipment": {
+        "title": "Equipment",
+        "desc": "Modern production lines and full quality control."
+      }
+    },
+    "cta": {
+      "question": "Want to know more?",
+      "title": "Get a consultation for your project",
+      "desc": "Leave a request — we will contact you with a solution.",
+      "button": "Leave Request"
+    }
+  },
+  "projects": {
+    "badge": "Eco Technology",
+    "title_1": "Process",
+    "title_2": "Highlights",
+    "subtitle": "Brief video overviews of our technological processes and completed projects.",
+    "videos": {
+      "video_1": "Stainless metal panel",
+      "video_2": "State-of-the-art technologies",
+      "video_3": "Aydar Kul 2026 Business Meeting"
+    }
+},
+  "products_section": {
+    "title_main": "Our",
+    "title_accent": "products",
+    "subtitle": "Quality and trust guarantee - 13 years warranty",
+    "details": "Details",
+    "about_product": "About product",
+    "warranty_text": "13 years",
+    "get_info": "Get information",
+    "tabs": {
+      "specs": "Technical",
+      "features": "Features",
+      "advantages": "Advantages",
+      "applications": "Applications"
+    },
+    "items": [
+      {
+        "name": "Sandwich panels",
+        "category": "For walls and roofs",
+        "fullName": "Sandwich panels",
+        "description": "High-quality insulation, fire-resistant, long service life.",
+        "longDescription": "PIR sandwich panels are a modern building material characterized by high thermal insulation, fire safety, and durability.",
+        "specs_labels": ["Thickness", "Length", "Width", "Thermal conductivity"],
+        "features": ["Fire resistance - 30 min", "Energy saving - 40%", "RAL colors", "Hermetic connection"],
+        "advantages": ["No cold bridges", "CE certificate", "EN-14509 standard", "20 mm profile connection"],
+        "applications": ["Industrial buildings", "Cold rooms", "Warehouses", "Shopping malls"]
+      },
+      {
+        "name": "Cold Storage Rooms",
+        "category": "Meat, fruit, dairy",
+        "fullName": "Cold Storage Rooms",
+        "description": "Special temperature mode, fast installation, hermetic seal.",
+        "longDescription": "Cold storage rooms are professional cooling systems designed for storing various types of products.",
+        "specs_labels": ["Temperature", "Volume", "Wall thickness", "Humidity"],
+        "features": ["Automatic control", "Humidity sensors", "Quick freezing", "Defrost system"],
+        "advantages": ["Energy efficient", "24/7 monitoring", "Backup power", "GSM alarm"],
+        "applications": ["Meat products", "Fruit and vegetables", "Dairy products", "Fish products"]
+      },
+      {
+        "name": "Warehouse Systems",
+        "category": "Metal constructions",
+        "fullName": "Warehouse Systems",
+        "description": "Pre-engineered warehouses, logistics centers, workshops.",
+        "longDescription": "Warehouse systems are fast-built and cost-effective industrial buildings.",
+        "specs_labels": ["Area", "Height", "Load capacity", "Installation"],
+        "features": ["Fast assembly", "Durable", "Economical", "Energy efficient"],
+        "advantages": ["13 years warranty", "Any climate", "Modular system", "Expandable"],
+        "applications": ["Logistics centers", "Production workshops", "Agro-industrial complexes", "Trade warehouses"]
+      }
+    ]
+  },
+  "contact": {
+    "badge": "Contact us",
+    "title": "Contacts",
+    "subtitle": "Leave a request or contact us in a convenient way",
+    "form_title": "Send message",
+    "labels": {
+      "name": "Your name",
+      "email": "Email",
+      "phone": "Phone",
+      "message": "Message"
+    },
+    "placeholders": {
+      "name": "Enter your name",
+      "email": "your@email.com",
+      "phone": "+998 (78) 555-86-16",
+      "message": "Your message..."
+    },
+    "info": {
+      "address": "Address",
+      "phone": "Phone",
+      "working_hours": "Working hours",
+      "address_details": ["Samarkand region, Samarkand district", "Chumchuqli MFY, Uzbekistan"],
+      "hours_details": ["Mon-Fri: 08:00 - 18:00", "Sun: Closed"],
+      "more": "More details",
+      "map_title": "We are on the map",
+      "social_title": "Social networks"
+    },
+    "faq": {
+      "title": "Frequently asked questions",
+      "desc": "Didn't find the answer? Contact us directly",
+      "button": "Telegram"
+    },
+    "status": {
+      "success": "Your message has been sent successfully! We will contact you shortly.",
+      "error": "An error occurred. Please try again later or contact us by phone.",
+      "sending": "Sending..."
     }
   }
 }

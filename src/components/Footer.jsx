@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { 
   Phone, Mail, MapPin, Instagram, Facebook, 
   Send, Shield, Award, Clock, ChevronRight,
@@ -30,6 +31,7 @@ const YouTubeIcon = () => (
 );
 
 export default function Footer() {
+  const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
@@ -42,13 +44,13 @@ export default function Footer() {
   ];
 
   const quickLinks = [
-    { to: "/", label: "Bosh sahifa" },
-    { to: "/services", label: "Xizmatlar" },
-    { to: "/projects", label: "Loyihalar" },
-    { to: "/contact", label: "Bog'lanish" }
+    { to: "/", label: t("nav.home") },
+    { to: "/services", label: t("nav.services") },
+    { to: "/projects", label: t("nav.projects") },
+    { to: "/contact", label: t("nav.contact") },
   ];
 
-  const products = ["PIR va PUR panellar", "Sovutgich kameralar", "Sanoat eshiklari", "Metall konstruksiyalar"];
+  const products = t("footer.products", { returnObjects: true });
   const productIcons = [Package, Snowflake, Factory, Factory];
 
   return (
@@ -85,12 +87,12 @@ export default function Footer() {
               />
               <div>
                 <span className="text-xl font-bold text-white">EcoProm</span>
-                <span className="block text-xs text-emerald-400">Premium sifat</span>
+                <span className="block text-xs text-emerald-400">{t("footer.premium")}</span>
               </div>
             </div>
             
             <p className="text-sm text-slate-300 leading-relaxed">
-              13 yillik tajriba, 500+ muvaffaqiyatli loyiha
+              {t("footer.experience")}
             </p>
 
             {/* <div className="flex items-center gap-3">
@@ -124,7 +126,7 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-sm font-semibold text-white mb-4">Tezkor havolalar</h3>
+            <h3 className="text-sm font-semibold text-white mb-4">{t("footer.quickLinks")}</h3>
             <ul className="space-y-2">
               {quickLinks.map((link) => (
                 <li key={link.to}>
@@ -139,7 +141,7 @@ export default function Footer() {
 
           {/* Products */}
           <div>
-            <h3 className="text-sm font-semibold text-white mb-4">Mahsulotlar</h3>
+            <h3 className="text-sm font-semibold text-white mb-4">{t("footer.productsTitle")}</h3>
             <ul className="space-y-2">
               {products.map((product, idx) => {
                 const Icon = productIcons[idx];
@@ -155,7 +157,7 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h3 className="text-sm font-semibold text-white mb-4">Bog'lanish</h3>
+            <h3 className="text-sm font-semibold text-white mb-4">{t("footer.contactTitle")}</h3>
             <ul className="space-y-3">
               <li className="flex items-center gap-2 text-sm text-slate-300">
                 <Phone className="h-4 w-4 text-emerald-400" />
@@ -167,11 +169,11 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-2 text-sm text-slate-300">
                 <MapPin className="h-4 w-4 text-emerald-400" />
-                <span>Samarqand, O'zbekiston</span>
+                <span>{t("footer.addressShort")}</span>
               </li>
               <li className="flex items-center gap-2 text-sm text-slate-300">
                 <Clock className="h-4 w-4 text-emerald-400" />
-                <span>Dush - Shan 8:00-18:00</span>
+                <span>{t("footer.workTime")}</span>
               </li>
             </ul>
           </div>
@@ -179,8 +181,8 @@ export default function Footer() {
 
         {/* Bottom */}
         <div className="border-t border-white/10 mt-10 pt-6 text-center text-xs text-slate-400">
-          <p>© {currentYear} EcoProm. Barcha huquqlar himoyalangan</p>
-          <p className="mt-1">Samarqand Tuman, Chumchuqli MFY</p>
+          <p>© {currentYear} EcoProm. {t("footer.rights")}</p>
+          <p className="mt-1">{t("footer.addressLong")}</p>
         </div>
       </div>
     </footer>

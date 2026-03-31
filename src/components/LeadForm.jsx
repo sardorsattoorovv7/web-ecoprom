@@ -11,7 +11,6 @@ export default function LeadForm({ compact = false, onClose }) {
     e.preventDefault();
     setLoading(true);
 
-    // Formadagi ma'lumotlarni yig'ish
     const formData = new FormData(e.target);
     const name = formData.get("name");
     const phone = formData.get("phone");
@@ -19,7 +18,7 @@ export default function LeadForm({ compact = false, onClose }) {
     const message = formData.get("message");
 
     const botToken = "8559719741:AAGa5BnxXt2rxjC-gKFnzboBiJQgPUY2GzU";
-    const chatId = "@testttt1221"; // FAQAT BITTA @ BELGISI
+    const chatId = "@testttt1221";
 
     const text = `🚀 <b>Yangi buyurtma!</b>\n\n` +
                  `👤 <b>Ism:</b> ${name}\n` +
@@ -40,16 +39,16 @@ export default function LeadForm({ compact = false, onClose }) {
 
       if (response.ok) {
         setSent(true);
-        // 3 soniyadan keyin xabarni o'chirish va modalni yopish
         setTimeout(() => {
           setSent(false);
           if (onClose) onClose(); 
         }, 2500);
+        e.target.reset(); // Formani tozalash
       } else {
-        alert("Xatolik yuz berdi. Bot kanalda admin ekanligini tekshiring.");
+        alert(t("form.error_bot"));
       }
     } catch (error) {
-      alert("Internet aloqasini tekshiring!");
+      alert(t("form.error_net"));
     } finally {
       setLoading(false);
     }
@@ -62,55 +61,55 @@ export default function LeadForm({ compact = false, onClose }) {
     >
       <div className="grid md:grid-cols-2 gap-3">
         <input
-          name="name" // NAME ATRIBUTI SHART
+          name="name"
           type="text"
-          className="input border p-2 rounded-lg"
-          placeholder={t("form.name") || "Ismingiz"}
+          className="input border p-2 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+          placeholder={t("form.name")}
           required
         />
 
         <input
-          name="phone" // NAME ATRIBUTI SHART
+          name="phone"
           type="tel"
-          className="input border p-2 rounded-lg"
-          placeholder={t("form.phone") || "Telefon raqam"}
+          className="input border p-2 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+          placeholder={t("form.phone")}
           required
         />
       </div>
 
-      <select name="product" className="select border p-2 rounded-lg">
-        <option value="Tanlanmagan">Mahsulot turini tanlang</option>
-        <option value="PIR sendvich panel">PIR sendvich panel</option>
-        <option value="Sovutgich kamera">Sovutgich kamera</option>
-        <option value="Muzlatgich ombor">Muzlatgich ombor</option>
-        <option value="Sanoat eshiklari">Sanoat eshiklari</option>
+      <select name="product" className="select border p-2 rounded-lg outline-none cursor-pointer">
+        <option value="Tanlanmagan">{t("form.product_placeholder")}</option>
+        <option value={t("form.products.pir")}>{t("form.products.pir")}</option>
+        <option value={t("form.products.cold")}>{t("form.products.cold")}</option>
+        <option value={t("form.products.warehouse")}>{t("form.products.warehouse")}</option>
+        <option value={t("form.products.doors")}>{t("form.products.doors")}</option>
       </select>
 
       <textarea
-        name="message" // NAME ATRIBUTI SHART
-        className="textarea border p-2 rounded-lg"
-        placeholder={t("form.message") || "Qo‘shimcha ma'lumot"}
+        name="message"
+        className="textarea border p-2 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+        placeholder={t("form.message")}
         rows={compact ? 3 : 4}
       />
 
       <div className="flex items-center gap-3">
         <button
-          className="bg-blue-600 text-white px-6 py-2 rounded-xl hover:bg-blue-700 disabled:bg-gray-400 transition-all"
+          className="bg-blue-600 text-white px-6 py-2 rounded-xl hover:bg-blue-700 disabled:bg-gray-400 transition-all font-semibold"
           type="submit"
           disabled={loading}
         >
-          {loading ? "Yuborilmoqda..." : t("cta.send") || "Yuborish"}
+          {loading ? t("form.sending") : t("cta.send")}
         </button>
 
         {sent && (
           <span className="text-sm font-medium text-emerald-600 animate-bounce">
-             {t("form.success") || "Muvaffaqiyatli yuborildi!"}
+             {t("form.success")}
           </span>
         )}
       </div>
 
       <p className="text-[10px] text-slate-400">
-        Sizning ma'lumotlaringiz maxfiy saqlanadi.
+        {t("form.privacy")}
       </p>
     </form>
   );

@@ -2,6 +2,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { HelmetProvider } from "react-helmet-async";
 import ReactGA from "react-ga4";
+import { useTranslation } from "react-i18next";
 
 import TopBar from "./components/TopBar";
 import Navbar from "./components/Navbar";
@@ -24,6 +25,7 @@ ReactGA.initialize("G-8F1XE9QTXM");
 export default function App() {
   const [open, setOpen] = useState(false);
   const location = useLocation();
+  const { t } = useTranslation();
 
   // 2. Sahifa o'zgarganda (Route o'zgarganda) Analytics-ga ma'lumot yuborish
   useEffect(() => {
@@ -66,7 +68,8 @@ export default function App() {
         <Modal 
           open={open} 
           onClose={() => setOpen(false)} 
-          title="Qo‘ng‘iroq buyurtma qilish"
+          title={t("modal.callRequest")}
+          closeLabel={t("common.close")}
         >
           <div className="p-2">
             <LeadForm />

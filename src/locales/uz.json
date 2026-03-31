@@ -6,7 +6,12 @@
     "ourproducts": "Bizning Mahsulotlar",
     "news": "Yangiliklar",
     "about": "Kompaniya haqida",
-    "contact": "Kontakt"
+    "contact": "Kontakt",
+    "menu": "Menyu",
+    "openMenu": "Menyuni ochish"
+  },
+  "language": {
+    "select": "Tilingizni tanlang"
   },
   "topbar": {
     "phone": "Telefon",
@@ -193,14 +198,45 @@
       }
     ]
   },
-  "form": {
-    "name": "Ism",
+ "form": {
+    "name": "Ismingiz",
     "phone": "Telefon raqam",
-    "message": "Xabar",
-    "success": "So‘rov yuborildi."
+    "message": "Qo‘shimcha ma'lumot",
+    "product_placeholder": "Mahsulot turini tanlang",
+    "products": {
+      "pir": "PIR sendvich panel",
+      "cold": "Sovutgich kamera",
+      "warehouse": "Muzlatgich ombor",
+      "doors": "Sanoat eshiklari"
+    },
+    "success": "Muvaffaqiyatli yuborildi!",
+    "error_bot": "Xatolik yuz berdi. Bot kanalda admin ekanligini tekshiring.",
+    "error_net": "Internet aloqasini tekshiring!",
+    "privacy": "Sizning ma'lumotlaringiz maxfiy saqlanadi.",
+    "sending": "Yuborilmoqda..."
+  },
+  "common": {
+    "close": "Yopish"
+  },
+  "modal": {
+    "callRequest": "Qo‘ng‘iroq buyurtma qilish"
   },
   "footer": {
-    "rights": "Barcha huquqlar himoyalangan."
+    "rights": "Barcha huquqlar himoyalangan.",
+    "premium": "Premium sifat",
+    "experience": "13 yillik tajriba, 500+ muvaffaqiyatli loyiha",
+    "quickLinks": "Tezkor havolalar",
+    "productsTitle": "Mahsulotlar",
+    "contactTitle": "Bog'lanish",
+    "products": [
+      "PIR va PUR panellar",
+      "Sovutgich kameralar",
+      "Sanoat eshiklari",
+      "Metall konstruksiyalar"
+    ],
+    "addressShort": "Samarqand, O'zbekiston",
+    "workTime": "Dush - Shan 8:00-18:00",
+    "addressLong": "Samarqand Tuman, Chumchuqli MFY"
   },
   "why_choose_us": {
     "badge": "Nega biz?",
@@ -303,6 +339,151 @@
           "description": "Tayyor bo'lgan sendvich panellarning qadoqlashga yo'naltiriladigan qismi. Bu yerda panellar belgilangan o'lchamlar bo'yicha nazoratdan o'tadi."
         }
       ]
+    }
+  },
+  "partners": {
+    "badge": "Ishonchli hamkorlarimiz",
+    "title_1": "Bizning",
+    "title_2": "Hamkorlarimiz",
+    "stats": {
+      "clients": "Hamkorlarimiz",
+      "countries": "Davlatlar"
+    }
+  },
+  "buttons": {
+    "get_info": "Ma'lumot olish"
+  },
+  "about": {
+    "title": "Kompaniya haqida",
+    "subtitle": "Sendvich panel va sovutkich kameralar: loyiha, ishlab chiqarish, montaj va servis.",
+    "who_we_are": "Biz kimmiz",
+    "story": "EcoProm — bu sifatli sendvich panellar va professional sovutish tizimlarini ishlab chiqaruvchi yetakchi kompaniya. Bizning maqsadimiz — mijozlarimizga energiya tejamkor va ishonchli yechimlarni taqdim etish.",
+    "stats": {
+      "experience": "yil tajriba",
+      "projects": "loyiha",
+      "service": "servis"
+    },
+    "video_title": "Biz haqimizda video",
+    "video_desc": "Ishimiz va yondashuvlarimiz haqida ko'proq bilib oling",
+    "features": {
+      "certificates": {
+        "title": "Sertifikatlar",
+        "desc": "ISO, standartlarga moslik va xalqaro sifat hujjatlari."
+      },
+      "team": {
+        "title": "Jamoa",
+        "desc": "Muhandislar, montaj va servis mutaxassislari."
+      },
+      "equipment": {
+        "title": "Uskuna",
+        "desc": "Zamonaviy liniyalar va to'liq sifat nazorati."
+      }
+    },
+    "cta": {
+      "question": "Batafsil bilmoqchimisiz?",
+      "title": "Loyihangiz bo‘yicha konsultatsiya oling",
+      "desc": "So‘rov qoldiring — bog‘lanib yechim taklif qilamiz.",
+      "button": "So‘rov qoldirish"
+    }
+},
+
+  "projects": {
+    "badge": "Eco Technology",
+    "title_1": "Ish jarayonidan",
+    "title_2": "lavhalar",
+    "subtitle": "Bizning texnologik jarayonlarimiz va amalga oshirilgan loyihalarimizning qisqacha video sharhlari.",
+    "videos": {
+      "video_1": "Zanglamas metall panel",
+      "video_2": "Eng zamonaviy texnologiyalar",
+      "video_3": "Aydar Ko'l 2026 Biznes uchrashuv"
+    }
+},
+  "products_section": {
+    "title_main": "Bizning",
+    "title_accent": "mahsulotlar",
+    "subtitle": "Sifat va ishonch garovi - 13 yil kafolat",
+    "details": "Batafsil",
+    "about_product": "Mahsulot haqida",
+    "warranty_text": "13 yil",
+    "get_info": "Ma'lumot olish",
+    "tabs": {
+      "specs": "Texnik",
+      "features": "Xususiyat",
+      "advantages": "Afzallik",
+      "applications": "Qo'llash"
+    },
+    "items": [
+      {
+        "name": "Sendvich panellar",
+        "category": "Devor va tom uchun",
+        "fullName": "Sendvich panellar",
+        "description": "Yuqori sifatli izolyatsiya, yong'inga chidamli, uzoq xizmat muddati.",
+        "longDescription": "PIR sendvich panellar - bu zamonaviy qurilish materiali bo'lib, yuqori issiqlik izolyatsiyasi, yong'in xavfsizligi va uzoq xizmat muddati bilan ajralib turadi.",
+        "specs_labels": ["Qalinlik", "Uzunlik", "Kenglik", "Issiqlik o'tkazuvchanlik"],
+        "features": ["Yong'inga chidamlilik - 30 min", "Energiya tejash - 40%", "RAL ranglari", "Germetik ulanish"],
+        "advantages": ["Sovuq ko'priklari yo'q", "CE sertifikati", "EN-14509 standarti", "20 mm profilli ulanish"],
+        "applications": ["Sanoat binolari", "Sovutgich kameralari", "Omborxonalar", "Savdo markazlari"]
+      },
+      {
+        "name": "Sovutgich Kameralar",
+        "category": "Go'sht, meva, sut",
+        "fullName": "Sovutgich Kameralar",
+        "description": "Maxsus harorat rejimi, tez montaj, germetik muhr.",
+        "longDescription": "Sovutgich kameralari - bu har xil turdagi mahsulotlarni saqlash uchun mo'ljallangan professional sovutish tizimlari.",
+        "specs_labels": ["Harorat", "Hajm", "Devor qalinligi", "Namlik"],
+        "features": ["Avtomatik boshqaruv", "Namlik sensorlari", "Tez muzlatish", "Defrost tizimi"],
+        "advantages": ["Energiya tejamkor", "24/7 monitoring", "Zaxira quvvat", "GSM signalizatsiya"],
+        "applications": ["Go'sht mahsulotlari", "Meva-sabzavot", "Sut mahsulotlari", "Baliq mahsulotlari"]
+      },
+      {
+        "name": "Ombor Tizimlari",
+        "category": "Metall konstruksiyalar",
+        "fullName": "Ombor Tizimlari",
+        "description": "Tez quriladigan omborlar, logistika markazlari, sexlar.",
+        "longDescription": "Ombor tizimlari - bu tez quriladigan va iqtisodiy jihatdan samarali bo'lgan sanoat binolari.",
+        "specs_labels": ["Maydon", "Balandlik", "Yuk ko'tarish", "Montaj"],
+        "features": ["Tez montaj", "Mustahkam", "Iqtisodiy", "Energiya tejamkor"],
+        "advantages": ["13 yil kafolat", "Har qanday iqlim", "Modul tizim", "Kengaytirish mumkin"],
+        "applications": ["Logistika markazlari", "Ishlab chiqarish sexlari", "Agrosanoat majmualari", "Savdo omborlari"]
+      }
+    ]
+  },
+  "contact": {
+    "badge": "Biz bilan bog'laning",
+    "title": "Kontaktlar",
+    "subtitle": "So'rov qoldiring yoki biz bilan qulay usulda bog'laning",
+    "form_title": "Xabar yuborish",
+    "labels": {
+      "name": "Ismingiz",
+      "email": "Email",
+      "phone": "Telefon",
+      "message": "Xabar"
+    },
+    "placeholders": {
+      "name": "Ismingizni kiriting",
+      "email": "your@email.com",
+      "phone": "+998 (78) 555-86-16",
+      "message": "Xabaringiz..."
+    },
+    "info": {
+      "address": "Manzil",
+      "phone": "Telefon",
+      "working_hours": "Ish vaqti",
+      "address_details": ["Samarqand viloyati, Samarqand tumani", "Chumchuqli MFY, O'zbekiston"],
+      "hours_details": ["Du-Shan: 08:00 - 18:00", "Yak: Dam olish"],
+      "more": "Batafsil",
+      "map_title": "Biz xaritada",
+      "social_title": "Ijtimoiy tarmoqlar"
+    },
+    "faq": {
+      "title": "Ko'p so'raladigan savollar",
+      "desc": "Javob topolmadingizmi? To'g'ridan-to'g'ri biz bilan bog'laning",
+      "button": "Telegram"
+    },
+    "status": {
+      "success": "Xabaringiz muvaffaqiyatli yuborildi! Tez orada siz bilan bog'lanamiz.",
+      "error": "Xatolik yuz berdi. Iltimos, keyinroq qayta urinib ko'ring yoki biz bilan telefon orqali bog'lang.",
+      "sending": "Yuborilmoqda..."
     }
   }
 }

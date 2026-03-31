@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Award, Briefcase, Globe2 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const partners = [
   { 
@@ -35,6 +36,8 @@ const partners = [
 ];
 
 export default function OurPartners() {
+  const { t } = useTranslation();
+
   return (
     <section className="py-24 bg-white/0 relative overflow-hidden">
       {/* Elegant background */}
@@ -66,12 +69,12 @@ export default function OurPartners() {
           <div className="inline-flex items-center gap-3 px-6 py-2 rounded-full border border-emerald-200/50 bg-white/50 backdrop-blur-sm mb-6">
             <Award className="h-4 w-4 text-emerald-600" />
             <span className="text-xs font-medium text-emerald-700 uppercase tracking-wider">
-              Ishonchli hamkorlarimiz
+              {t("partners.badge")}
             </span>
           </div>
           
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-light text-slate-800 mb-6 tracking-tight">
-            Bizning <span className="font-semibold text-emerald-600">Hamkorlarimiz</span>
+            {t("partners.title_1")} <span className="font-semibold text-emerald-600">{t("partners.title_2")}</span>
           </h2>
         </motion.div>
 
@@ -156,7 +159,7 @@ export default function OurPartners() {
             <div className="text-4xl md:text-5xl font-light text-emerald-600 mb-2">50+</div>
             <div className="flex items-center gap-2 text-slate-400 text-sm uppercase tracking-wider">
               <Briefcase className="h-4 w-4" />
-              <span>Hamkorlarimiz</span>
+              <span>{t("partners.stats.clients")}</span>
             </div>
           </div>
           
@@ -166,7 +169,7 @@ export default function OurPartners() {
             <div className="text-4xl md:text-5xl font-light text-emerald-600 mb-2">10+</div>
             <div className="flex items-center gap-2 text-slate-400 text-sm uppercase tracking-wider">
               <Globe2 className="h-4 w-4" />
-              <span>Davlatlar</span>
+              <span>{t("partners.stats.countries")}</span>
             </div>
           </div>
         </motion.div>

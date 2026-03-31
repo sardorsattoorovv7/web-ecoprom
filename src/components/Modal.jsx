@@ -1,4 +1,4 @@
-export default function Modal({ open, onClose, title, children }) {
+export default function Modal({ open, onClose, title, children, closeLabel = "Close" }) {
   if (!open) return null;
 
   return (
@@ -9,7 +9,7 @@ export default function Modal({ open, onClose, title, children }) {
           <button
             onClick={onClose}
             className="absolute right-4 top-4 h-9 w-9 rounded-xl hover:bg-slate-50"
-            aria-label="Close"
+            aria-label={closeLabel}
           >
             ✕
           </button>

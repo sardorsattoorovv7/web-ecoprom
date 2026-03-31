@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { ChevronDown, Globe } from "lucide-react";
 
 export default function Navbar({ onOpenCall }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -24,12 +25,9 @@ export default function Navbar({ onOpenCall }) {
     };
   }, [open]);
 
-  const linkBase =
-    "text-sm font-medium transition px-3 py-2 rounded-xl";
-  const linkIdle =
-    "text-slate-700 hover:bg-slate-100/70 hover:text-slate-900";
-  const linkActive =
-    "text-emerald-700 bg-emerald-50 border border-emerald-100";
+  const linkBase = "text-sm font-medium transition px-3 py-2 rounded-xl";
+  const linkIdle = "text-slate-700 hover:bg-slate-100/70 hover:text-slate-900";
+  const linkActive = "text-emerald-700 bg-emerald-50 border border-emerald-100";
 
   return (
     <header
@@ -42,87 +40,42 @@ export default function Navbar({ onOpenCall }) {
     >
       <div className="container-pad h-16 flex items-center justify-between">
         {/* Logo */}
-       <Link to="/" className="flex items-center gap-2">
-        {/* Div o'rniga rasm qo'yamiz */}
-        <img 
-          src="/logo.png" 
-          alt="EcoProm Logo" 
-          className="h-11 w-11 object-contain rounded-lg" 
-        />
-        
-        <div className="leading-tight">
-          <div className="font-semibold text-slate-900">EcoProm</div>
-        </div>
-      </Link>
+        <Link to="/" className="flex items-center gap-2">
+          <img 
+            src="/logo.png" 
+            alt="EcoProm Logo" 
+            className="h-11 w-11 object-contain rounded-lg" 
+          />
+          <div className="leading-tight">
+            <div className="font-semibold text-slate-900 text-lg">EcoProm</div>
+          </div>
+        </Link>
+
         {/* Desktop nav */}
         <nav className="hidden nav:flex items-center gap-1">
-          <NavLink
-            to="/"
-            className={({ isActive }) =>
-              [linkBase, isActive ? linkActive : linkIdle].join(" ")
-            }
-            end
-          >
+          <NavLink to="/" className={({ isActive }) => [linkBase, isActive ? linkActive : linkIdle].join(" ")} end>
             {t("nav.home")}
           </NavLink>
-
-          {/* <NavLink
-            to="/services"
-            className={({ isActive }) =>
-              [linkBase, isActive ? linkActive : linkIdle].join(" ")
-            }
-          >
-            {t("nav.services")}
-          </NavLink> */}
-
-          <NavLink
-            to="/projects"
-            className={({ isActive }) =>
-              [linkBase, isActive ? linkActive : linkIdle].join(" ")
-            }
-          >
+          <NavLink to="/projects" className={({ isActive }) => [linkBase, isActive ? linkActive : linkIdle].join(" ")}>
             {t("nav.projects")}
           </NavLink>
-
-         <NavLink
-          to="/ourproducts"
-          className={({ isActive }) =>
-            `${linkBase} ${isActive ? linkActive : linkIdle}`
-          }
-        >
-          {t("nav.ourproducts")}
-        </NavLink>
-          
-          {/* <NavLink
-            to="/news"
-            className={({ isActive }) =>
-              [linkBase, isActive ? linkActive : linkIdle].join(" ")
-            }
-          >
-            {t("nav.news")}
-          </NavLink> */}
-
-          <NavLink
-            to="/about"
-            className={({ isActive }) =>
-              [linkBase, isActive ? linkActive : linkIdle].join(" ")
-            }
-          >
+          <NavLink to="/ourproducts" className={({ isActive }) => [linkBase, isActive ? linkActive : linkIdle].join(" ")}>
+            {t("nav.ourproducts")}
+          </NavLink>
+          <NavLink to="/about" className={({ isActive }) => [linkBase, isActive ? linkActive : linkIdle].join(" ")}>
             {t("nav.about")}
           </NavLink>
-
-          <NavLink
-            to="/contact"
-            className={({ isActive }) =>
-              [linkBase, isActive ? linkActive : linkIdle].join(" ")
-            }
-          >
+          <NavLink to="/contact" className={({ isActive }) => [linkBase, isActive ? linkActive : linkIdle].join(" ")}>
             {t("nav.contact")}
           </NavLink>
         </nav>
 
-        {/* Actions */}
-        <div className="flex items-center gap-2">
+        {/* Actions (Desktop til tanlagich va Tugma) */}
+        <div className="flex items-center gap-3">
+          <div className="hidden nav:block">
+            <LanguageDropdown />
+          </div>
+
           <button className="btn-outline hidden sm:inline-flex" onClick={onOpenCall}>
             {t("hero.primary")}
           </button>
@@ -131,7 +84,7 @@ export default function Navbar({ onOpenCall }) {
           <button
             className="nav:hidden inline-flex items-center justify-center h-10 w-10 rounded-xl border border-slate-200 bg-white/70"
             onClick={() => setOpen(true)}
-            aria-label="Open menu"
+            aria-label={t("nav.openMenu")}
           >
             <span className="text-xl">≡</span>
           </button>
@@ -141,29 +94,24 @@ export default function Navbar({ onOpenCall }) {
       {/* Mobile menu overlay */}
       {open && (
         <div className="nav:hidden fixed inset-0 z-50">
-          <div
-            className="absolute inset-0 bg-slate-900/40"
-            onClick={() => setOpen(false)}
-          />
-          <div className="absolute right-0 top-0 h-full w-[86%] max-w-sm bg-white shadow-xl p-4">
-            <div className="flex items-center justify-between">
-              <div className="font-semibold text-slate-900">Menu</div>
+          <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" onClick={() => setOpen(false)} />
+          <div className="absolute right-0 top-0 h-full w-[86%] max-w-sm bg-white shadow-xl p-5 flex flex-col">
+            <div className="flex items-center justify-between mb-6">
+              <div className="font-bold text-slate-900 text-lg">{t("nav.menu")}</div>
               <button
-                className="h-10 w-10 rounded-xl border border-slate-200"
+                className="h-10 w-10 flex items-center justify-center rounded-xl border border-slate-200 text-slate-500"
                 onClick={() => setOpen(false)}
-                aria-label="Close menu"
               >
                 ✕
               </button>
             </div>
 
-            <div className="mt-4 grid gap-2">
+            {/* Mobile Nav Links */}
+            <div className="grid gap-2 overflow-y-auto flex-1">
               {[
                 { to: "/", label: t("nav.home"), end: true },
-                // { to: "/services", label: t("nav.services") },
                 { to: "/projects", label: t("nav.projects") },
                 { to: "/ourproducts", label: t("nav.ourproducts") },
-                // { to: "/news", label: t("nav.news") },
                 { to: "/about", label: t("nav.about") },
                 { to: "/contact", label: t("nav.contact") },
               ].map((x) => (
@@ -174,10 +122,10 @@ export default function Navbar({ onOpenCall }) {
                   onClick={() => setOpen(false)}
                   className={({ isActive }) =>
                     [
-                      "px-4 py-3 rounded-2xl border text-sm font-medium transition",
+                      "px-4 py-3 rounded-2xl border text-[15px] font-medium transition",
                       isActive
                         ? "bg-emerald-50 border-emerald-100 text-emerald-800"
-                        : "bg-white border-slate-200 text-slate-800 hover:bg-slate-50",
+                        : "bg-white border-slate-100 text-slate-700 hover:bg-slate-50",
                     ].join(" ")
                   }
                 >
@@ -186,9 +134,30 @@ export default function Navbar({ onOpenCall }) {
               ))}
             </div>
 
-            <div className="mt-4">
+            {/* Mobile Language & CTA Section */}
+            <div className="mt-auto pt-6 border-t border-slate-100">
+              <p className="text-[12px] font-bold text-slate-400 uppercase tracking-widest mb-3 px-1">{t("language.select")}</p>
+              <div className="flex items-center gap-2 mb-6">
+                {["uz", "ru", "en"].map((lang) => (
+                  <button
+                    key={lang}
+                    onClick={() => {
+                      i18n.changeLanguage(lang);
+                      setOpen(false);
+                    }}
+                    className={`flex-1 py-2.5 rounded-xl border font-bold text-sm transition-all ${
+                      i18n.language === lang
+                        ? "bg-emerald-600 border-emerald-600 text-white shadow-md shadow-emerald-100"
+                        : "bg-slate-50 border-slate-100 text-slate-600"
+                    }`}
+                  >
+                    {lang.toUpperCase()}
+                  </button>
+                ))}
+              </div>
+
               <button
-                className="btn-primary w-full"
+                className="btn-primary w-full py-4 rounded-2xl"
                 onClick={() => {
                   setOpen(false);
                   onOpenCall?.();
@@ -196,13 +165,77 @@ export default function Navbar({ onOpenCall }) {
               >
                 {t("hero.primary")}
               </button>
-              <p className="text-xs text-slate-500 mt-2">
-                {t("hero.subtitle")}
-              </p>
             </div>
           </div>
         </div>
       )}
     </header>
+  );
+}
+
+// Navbar uchun Dropdown Komponenti
+function LanguageDropdown() {
+  const { t, i18n } = useTranslation();
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  const languages = [
+    { code: "uz", label: "O'zbekcha" },
+    { code: "ru", label: "Русский" },
+    { code: "en", label: "English" },
+  ];
+
+  const currentLang = languages.find((l) => l.code === i18n.language) || languages[0];
+
+  useEffect(() => {
+    const handleClick = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) setIsOpen(false);
+    };
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, []);
+
+  return (
+    <div className="relative" ref={dropdownRef}>
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="flex items-center gap-2 px-3 py-2 hover:bg-slate-100/80 rounded-xl transition-all"
+        aria-label={t("language.select")}
+      >
+        <Globe size={16} className="text-emerald-600" />
+        <span className="text-sm font-bold text-slate-700 uppercase tracking-tight">
+          {currentLang.code}
+        </span>
+        <ChevronDown 
+          size={14} 
+          className={`text-slate-400 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`} 
+        />
+      </button>
+
+      {isOpen && (
+        <div className="absolute right-0 mt-2 w-40 bg-white border border-slate-100 shadow-2xl rounded-2xl py-1.5 z-[100] animate-in fade-in zoom-in duration-150">
+          {languages.map((lang) => (
+            <button
+              key={lang.code}
+              onClick={() => {
+                i18n.changeLanguage(lang.code);
+                setIsOpen(false);
+              }}
+              className={`
+                w-full flex items-center justify-between px-4 py-2.5 text-[13px] font-medium transition-colors
+                ${i18n.language === lang.code 
+                  ? "bg-emerald-50 text-emerald-700" 
+                  : "text-slate-600 hover:bg-slate-50"}
+              `}
+            >
+              {lang.label}
+              {i18n.language === lang.code && (
+                <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full" />
+              )}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
   );
 }
