@@ -423,7 +423,7 @@ export default function EcoPromMain({ onOpenCall }) {
           className="relative flex min-h-[500px] items-center overflow-hidden pt-6 sm:min-h-[600px] md:min-h-[70vh]"
           aria-label="Asosiy mahsulotlar"
           style={{
-            backgroundImage: `url(/assets/main-bg.png)`,
+            backgroundImage: `url(/assets/main-bg.jpg)`,
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
