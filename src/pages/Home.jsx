@@ -7,8 +7,8 @@ import {
   Sparkles,
   CheckCircle2,
   ArrowUp,
-  Loader2,
 } from "lucide-react";
+import { useTranslation } from "react-i18next"; // ✅ useTranslation import qilindi
 
 // Lazy loading komponentlar
 const OurProducts = lazy(() => import("../components/OurProducts"));
@@ -19,64 +19,8 @@ const OurProduction = lazy(() => import("../components/OurProduction"));
 const AiAssistant = lazy(() => import("../components/AIAssistant"));
 const PartnerMarquee = lazy(() => import("../components/PartnerMarquee"));
 const CookieConsentBanner = lazy(() => import("../components/CookieConsentBanner"));
-/* ---------------- 1. HERO MA'LUMOTLARI ---------------- */
-const SLIDES = [
-  {
-    id: "pir-pur",
-    category: "Poliuretan Tizimlari",
-    title: "PIR-PUR Sendvich panellar",
-    desc: "Issiqlik izolyatsiyasi bo'yicha eng yuqori ko'rsatkich. Energiyani 40% gacha tejaydigan zamonaviy panel tizimlari.",
-    badge: "Premium sifat",
-  },
-  {
-    id: "cold",
-    category: "Sovutish Texnologiyasi",
-    title: "Sovutgich Kameralar",
-    desc: "Meva-sabzavot va go'sht mahsulotlari uchun maxsus harorat nazorati ostidagi professional omborxonalar.",
-    badge: "Energiya tejamkor",
-  },
-  {
-    id: "doors",
-    category: "Sanoat qurilishi",
-    title: "Sanoat binolari",
-    desc: "Tezkor montaj qilinadigan va yillar davomida xizmat qiladigan mustahkam va ishonchli qurilmalar.",
-    badge: "Tez montaj",
-  },
-];
 
-/* ---------------- 2. RANG KONFIGURATORI MA'LUMOTLARI ---------------- */
-const PANEL_COLORS = [
-  {
-    id: "yellow",
-    name: "Sariq",
-    hex: "#ffff08",
-    image: "/assets/sariq-panel.png",
-    desc: "Klassik sanoat uslubi",
-  },
-  {
-    id: "blue",
-    name: "Ko'k",
-    hex: "#2563EB",
-    image: "/assets/kok-panel.png",
-    desc: "Sovutish omborlari uchun ideal",
-  },
-  {
-    id: "red",
-    name: "Qizil",
-    hex: "#DC2626",
-    image: "https://i.ibb.co/Xx5vNwF3/qizil.jpg",
-    desc: "Brending uchun maxsus rang",
-  },
-  {
-    id: "green",
-    name: "Yashil",
-    hex: "#16A34A",
-    image: "https://i.ibb.co/DHnkBPs8/yashil.jpg",
-    desc: "Ekologik loyihalar uchun",
-  },
-];
-
-/* ---------------- 3. COUNTER HOOK ---------------- */
+/* ---------------- 1. COUNTER HOOK ---------------- */
 const useCounter = (end, duration = 2000) => {
   const [count, setCount] = useState(0);
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.3 });
@@ -102,7 +46,7 @@ const useCounter = (end, duration = 2000) => {
   return [count, ref];
 };
 
-/* ---------------- 4. SCROLL PROGRESS BAR ---------------- */
+/* ---------------- 2. SCROLL PROGRESS BAR ---------------- */
 const ScrollProgress = () => {
   const [progress, setProgress] = useState(0);
 
@@ -122,7 +66,7 @@ const ScrollProgress = () => {
   );
 };
 
-/* ---------------- 5. BACK TO TOP BUTTON ---------------- */
+/* ---------------- 3. BACK TO TOP BUTTON ---------------- */
 const BackToTop = () => {
   const [visible, setVisible] = useState(false);
 
@@ -144,7 +88,7 @@ const BackToTop = () => {
   );
 };
 
-/* ---------------- 6. LOADING SKELETON ---------------- */
+/* ---------------- 4. LOADING SKELETON ---------------- */
 const SkeletonLoader = () => (
   <div className="w-full py-20">
     <div className="container-pad">
@@ -160,7 +104,7 @@ const SkeletonLoader = () => (
   </div>
 );
 
-/* ---------------- 7. 3D CARD COMPONENT ---------------- */
+/* ---------------- 5. 3D CARD COMPONENT ---------------- */
 const Card3D = ({ children, className = "" }) => {
   const [rotate, setRotate] = useState({ x: 0, y: 0 });
 
@@ -186,12 +130,11 @@ const Card3D = ({ children, className = "" }) => {
   );
 };
 
-/* ---------------- 8. STAT CARD WITH COUNTER ---------------- */
+/* ---------------- 6. STAT CARD WITH COUNTER ---------------- */
 const StatCard = ({ value, label, suffix = "+", delay = 0 }) => {
   const [count, ref] = useCounter(value, 2000);
   const [inViewRef, inView] = useInView({ triggerOnce: true, threshold: 0.3 });
 
-  // Alternating side animations - even: left, odd: right
   const isFromLeft = !!(Math.floor(delay * 10) % 2);
 
   return (
@@ -224,7 +167,7 @@ const StatCard = ({ value, label, suffix = "+", delay = 0 }) => {
   );
 };
 
-/* ---------------- 9. INTERACTIVE BACKGROUND ---------------- */
+/* ---------------- 7. INTERACTIVE BACKGROUND ---------------- */
 const InteractiveBackground = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const bgRef = useRef(null);
@@ -285,7 +228,7 @@ const InteractiveBackground = () => {
   );
 };
 
-/* ---------------- 10. SECTION WITH SCROLL ANIMATION ---------------- */
+/* ---------------- 8. SECTION WITH SCROLL ANIMATION ---------------- */
 const SectionWrapper = ({ children, className = "", delay = 0 }) => {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
@@ -302,11 +245,79 @@ const SectionWrapper = ({ children, className = "", delay = 0 }) => {
   );
 };
 
+/* ---------------- 9. RANG KONFIGURATORI MA'LUMOTLARI (tarjima bilan) ---------------- */
+const getPanelColors = (t) => [
+  {
+    id: "yellow",
+    name: t("colors_config.yellow", "Sariq"),
+    hex: "#ffff08",
+    image: "/assets/sariq-panel.png",
+    desc: t("colors_config.desc_classic", "Klassik sanoat uslubi"),
+  },
+  {
+    id: "blue",
+    name: t("colors_config.blue", "Ko'k"),
+    hex: "#2563EB",
+    image: "/assets/kok-panel.png",
+    desc: t("colors_config.desc_cold", "Sovutish omborlari uchun ideal"),
+  },
+  {
+    id: "red",
+    name: t("colors_config.red", "Qizil"),
+    hex: "#DC2626",
+    image: "https://i.ibb.co/Xx5vNwF3/qizil.jpg",
+    desc: t("colors_config.desc_brand", "Brending uchun maxsus rang"),
+  },
+  {
+    id: "green",
+    name: t("colors_config.green", "Yashil"),
+    hex: "#16A34A",
+    image: "https://i.ibb.co/DHnkBPs8/yashil.jpg",
+    desc: t("colors_config.desc_eco", "Ekologik loyihalar uchun"),
+  },
+];
+
+/* ---------------- 10. HERO SLIDES (tarjima bilan) ---------------- */
+const getHeroSlides = (t) => [
+  {
+    id: "pir-pur",
+    category: t("hero_slides.0.category", "Poliuretan Tizimlari"),
+    title: t("hero_slides.0.title", "PIR-PUR Sendvich panellar"),
+    desc: t("hero_slides.0.desc", "Issiqlik izolyatsiyasi bo'yicha eng yuqori ko'rsatkich. Energiyani 40% gacha tejaydigan zamonaviy panel tizimlari."),
+    badge: t("hero_slides.0.badge", "Premium sifat"),
+  },
+  {
+    id: "cold",
+    category: t("hero_slides.1.category", "Sovutish Texnologiyasi"),
+    title: t("hero_slides.1.title", "Sovutgich Kameralar"),
+    desc: t("hero_slides.1.desc", "Meva-sabzavot va go'sht mahsulotlari uchun maxsus harorat nazorati ostidagi professional omborxonalar."),
+    badge: t("hero_slides.1.badge", "Energiya tejamkor"),
+  },
+  {
+    id: "doors",
+    category: t("hero_slides.2.category", "Sanoat qurilishi"),
+    title: t("hero_slides.2.title", "Sanoat binolari"),
+    desc: t("hero_slides.2.desc", "Tezkor montaj qilinadigan va yillar davomida xizmat qiladigan mustahkam va ishonchli qurilmalar."),
+    badge: t("hero_slides.2.badge", "Tez montaj"),
+  },
+];
+
 /* ---------------- 11. MAIN COMPONENT ---------------- */
 export default function EcoPromMain({ onOpenCall }) {
+  const { t, i18n } = useTranslation();
+  
+  // Tarjimaga qarab dinamik ma'lumotlar
+  const heroSlides = useMemo(() => getHeroSlides(t), [t]);
+  const panelColors = useMemo(() => getPanelColors(t), [t]);
+  
   const [heroIndex, setHeroIndex] = useState(0);
-  const [selectedColor, setSelectedColor] = useState(PANEL_COLORS[0]);
+  const [selectedColor, setSelectedColor] = useState(panelColors[0]);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  // selectedColor panelColors o'zgarganda yangilanadi
+  useEffect(() => {
+    setSelectedColor(panelColors[0]);
+  }, [panelColors]);
 
   // Parallax effekt uchun
   useEffect(() => {
@@ -327,9 +338,9 @@ export default function EcoPromMain({ onOpenCall }) {
       clearInterval(heroTimerRef.current);
     }
     heroTimerRef.current = setInterval(() => {
-      setHeroIndex((prev) => (prev + 1) % SLIDES.length);
+      setHeroIndex((prev) => (prev + 1) % heroSlides.length);
     }, 5000);
-  }, []);
+  }, [heroSlides.length]);
 
   useEffect(() => {
     resetAutoSlide();
@@ -349,27 +360,24 @@ export default function EcoPromMain({ onOpenCall }) {
     resetAutoSlide();
   }, [resetAutoSlide]);
 
-  // Statistika ma'lumotlari
+  // Statistika ma'lumotlari (tarjima bilan)
   const stats = [
-    { value: 13, label: "Yillik tajriba", suffix: "+" },
-    { value: 500, label: "Muvaffaqiyatli loyiha", suffix: "+" },
-    { value: 100, label: "Malakali xodimlar", suffix: "+" },
-    { value: 5, label: "Ishlab chiqarish liniyasi", suffix: "" },
+    { value: 13, label: t("stats_items.exp", "Yillik tajriba"), suffix: "+" },
+    { value: 500, label: t("stats_items.projects", "Muvaffaqiyatli loyiha"), suffix: "+" },
+    { value: 100, label: t("stats_items.staff", "Malakali xodimlar"), suffix: "+" },
+    { value: 5, label: t("stats_items.lines", "Ishlab chiqarish liniyasi"), suffix: "" },
   ];
 
   // SEO data
   const seoData = useMemo(
     () => ({
-      title:
-        "EcoProm — PIR-PUR sendvich panellar, sovutgich kameralar va sanoat binolari",
-      description:
-        "EcoProm zamonaviy PIR-PUR sendvich panellar, sovutgich kameralar va sanoat binolari ishlab chiqaradi. Yuqori issiqlik izolyatsiyasi, tez montaj va ishonchli sifat.",
-      keywords:
-        "PIR sendvich panel, poliuretan panel, sovutgich kamera, sanoat binolari, sendvich panel Uzbekistan, EcoProm",
+      title: t("seo.title", "EcoProm — PIR-PUR sendvich panellar, sovutgich kameralar va sanoat binolari"),
+      description: t("seo.description", "EcoProm zamonaviy PIR-PUR sendvich panellar, sovutgich kameralar va sanoat binolari ishlab chiqaradi. Yuqori issiqlik izolyatsiyasi, tez montaj va ishonchli sifat."),
+      keywords: t("seo.keywords", "PIR sendvich panel, poliuretan panel, sovutgich kamera, sanoat binolari, sendvich panel Uzbekistan, EcoProm"),
       canonicalUrl: "https://web-ecoprom.vercel.app/",
       ogImage: "https://i.ibb.co/LzsjFKLv/24.png",
     }),
-    []
+    [t]
   );
 
   const structuredData = useMemo(
@@ -402,7 +410,7 @@ export default function EcoPromMain({ onOpenCall }) {
   return (
     <>
       <Helmet>
-        <html lang="uz" />
+        <html lang={i18n.language} />
         <title>{seoData.title}</title>
         <meta name="description" content={seoData.description} />
         <meta name="keywords" content={seoData.keywords} />
@@ -421,7 +429,7 @@ export default function EcoPromMain({ onOpenCall }) {
         {/* Hero Section */}
         <section
           className="relative flex min-h-[500px] items-center overflow-hidden pt-6 sm:min-h-[600px] md:min-h-[70vh]"
-          aria-label="Asosiy mahsulotlar"
+          aria-label={t("hero.aria_label", "Asosiy mahsulotlar")}
           style={{
             backgroundImage: `url(/assets/main-bg.jpg)`,
             backgroundSize: "cover",
@@ -446,7 +454,7 @@ export default function EcoPromMain({ onOpenCall }) {
             <div className="max-w-3xl">
               <AnimatePresence mode="wait">
                 <motion.div
-                  key={SLIDES[heroIndex].id}
+                  key={heroSlides[heroIndex]?.id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
@@ -454,15 +462,15 @@ export default function EcoPromMain({ onOpenCall }) {
                 >
                   <div className="mb-4 inline-flex w-fit items-center gap-2 rounded-full bg-emerald-500/20 px-3 py-1.5 text-xs font-semibold text-emerald-100 backdrop-blur-sm sm:px-4 sm:py-2 sm:text-sm">
                     <Sparkles className="h-4 w-4" aria-hidden="true" />
-                    {SLIDES[heroIndex].category}
+                    {heroSlides[heroIndex]?.category}
                   </div>
 
                   <h1 className="mb-4 text-3xl font-bold leading-tight text-white drop-shadow-lg sm:text-4xl md:text-5xl lg:text-6xl">
-                    {SLIDES[heroIndex].title}
+                    {heroSlides[heroIndex]?.title}
                   </h1>
 
                   <p className="mb-6 max-w-2xl text-base leading-7 text-white/90 drop-shadow md:text-lg md:leading-8">
-                    {SLIDES[heroIndex].desc}
+                    {heroSlides[heroIndex]?.desc}
                   </p>
 
                   <div className="flex flex-wrap items-center gap-3 sm:gap-4">
@@ -470,12 +478,12 @@ export default function EcoPromMain({ onOpenCall }) {
                       onClick={onOpenCall}
                       className="flex items-center gap-2 rounded-xl bg-emerald-600 px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-emerald-700 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 sm:px-8 sm:py-4 sm:text-base"
                     >
-                      Ma'lumot olish
+                      {t("buttons.get_info", "Ma'lumot olish")}
                       <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5" />
                     </button>
 
                     <span className="rounded-full bg-white/20 px-4 py-2 text-xs font-medium text-white backdrop-blur-sm sm:px-5 sm:py-2.5 sm:text-sm">
-                      {SLIDES[heroIndex].badge}
+                      {heroSlides[heroIndex]?.badge}
                     </span>
                   </div>
                 </motion.div>
@@ -485,7 +493,7 @@ export default function EcoPromMain({ onOpenCall }) {
 
           <div className="absolute bottom-6 left-0 w-full sm:bottom-8 md:bottom-10">
             <div className="container-pad flex justify-center gap-2">
-              {SLIDES.map((slide, i) => (
+              {heroSlides.map((slide, i) => (
                 <button
                   key={slide.id}
                   onClick={() => handleHeroIndexChange(i)}
@@ -494,6 +502,7 @@ export default function EcoPromMain({ onOpenCall }) {
                       ? "w-8 bg-emerald-400 sm:w-10"
                       : "w-2 bg-white/50 hover:bg-white/80 sm:w-2.5"
                   }`}
+                  aria-label={`Go to slide ${i + 1}`}
                 />
               ))}
             </div>
@@ -521,9 +530,11 @@ export default function EcoPromMain({ onOpenCall }) {
         <SectionWrapper className="py-16 bg-white">
           <div className="container-pad">
             <div className="text-center mb-12">
-              <span className="text-emerald-600 font-medium">Ranglar</span>
+              <span className="text-emerald-600 font-medium">
+                {t("colors_config.title", "Ranglar")}
+              </span>
               <h2 className="text-4xl font-bold text-slate-900 mt-2">
-                Loyihangiz rangini tanlang
+                {t("colors_config.subtitle", "Loyihangiz rangini tanlang")}
               </h2>
             </div>
 
@@ -545,7 +556,7 @@ export default function EcoPromMain({ onOpenCall }) {
 
               <div className="flex-1">
                 <div className="space-y-3">
-                  {PANEL_COLORS.map((color) => (
+                  {panelColors.map((color) => (
                     <button
                       key={color.id}
                       onClick={() => handleColorSelect(color)}
@@ -576,7 +587,7 @@ export default function EcoPromMain({ onOpenCall }) {
                   onClick={onOpenCall}
                   className="w-full mt-8 bg-gradient-to-r from-emerald-600 to-emerald-500 text-white py-4 rounded-xl font-semibold hover:from-emerald-700 hover:to-emerald-600 transition-all hover:scale-[1.02] shadow-lg"
                 >
-                  Loyihani boshlash
+                  {t("colors_config.button", "Loyihani boshlash")}
                 </button>
               </div>
             </div>
@@ -591,7 +602,7 @@ export default function EcoPromMain({ onOpenCall }) {
         <Suspense fallback={<SkeletonLoader />}>
           <OurProducts
             onProductClick={(product) => {
-              console.log("Tanlandi:", product);
+              console.log(t("product.selected", "Tanlandi:"), product);
             }}
           />
         </Suspense>

@@ -55,7 +55,7 @@ export default function Navbar({ onOpenCall }) {
         </div>
       </Link>
         {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-1">
+        <nav className="hidden nav:flex items-center gap-1">
           <NavLink
             to="/"
             className={({ isActive }) =>
@@ -129,7 +129,7 @@ export default function Navbar({ onOpenCall }) {
 
           {/* Mobile burger */}
           <button
-            className="md:hidden inline-flex items-center justify-center h-10 w-10 rounded-xl border border-slate-200 bg-white/70"
+            className="nav:hidden inline-flex items-center justify-center h-10 w-10 rounded-xl border border-slate-200 bg-white/70"
             onClick={() => setOpen(true)}
             aria-label="Open menu"
           >
@@ -140,7 +140,7 @@ export default function Navbar({ onOpenCall }) {
 
       {/* Mobile menu overlay */}
       {open && (
-        <div className="md:hidden fixed inset-0 z-50">
+        <div className="nav:hidden fixed inset-0 z-50">
           <div
             className="absolute inset-0 bg-slate-900/40"
             onClick={() => setOpen(false)}

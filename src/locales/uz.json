@@ -3,7 +3,7 @@
     "home": "Bosh sahifa",
     "services": "Xizmatlar",
     "projects": "Loyihalar",
-    "ourproducts":"Bizning Maxsulotlar",
+    "ourproducts": "Bizning Mahsulotlar",
     "news": "Yangiliklar",
     "about": "Kompaniya haqida",
     "contact": "Kontakt"
@@ -23,12 +23,175 @@
     "primary": "Konsultatsiya olish",
     "secondary": "Loyihalarni ko‘rish"
   },
+  "hero_slides": [
+    {
+      "category": "Poliuretan Tizimlari",
+      "title": "PIR-PUR Sendvich panellar",
+      "desc": "Issiqlik izolyatsiyasi bo'yicha eng yuqori ko'rsatkich. Energiyani 40% gacha tejaydigan zamonaviy panel tizimlari.",
+      "badge": "Premium sifat"
+    },
+    {
+      "category": "Sovutish Texnologiyasi",
+      "title": "Sovutgich Kameralar",
+      "desc": "Meva-sabzavot va go'sht mahsulotlari uchun maxsus harorat nazorati ostidagi professional omborxonalar.",
+      "badge": "Energiya tejamkor"
+    },
+    {
+      "category": "Sanoat qurilishi",
+      "title": "Sanoat binolari",
+      "desc": "Tezkor montaj qilinadigan va yillar davomida xizmat qiladigan mustahkam va ishonchli qurilmalar.",
+      "badge": "Tez montaj"
+    }
+  ],
   "sections": {
     "services": "Xizmatlar",
     "projects": "Loyihalar",
     "stats": "Natijalar",
     "catalog": "Katalog",
     "faq": "Savol-javob"
+  },
+  "stats_items": {
+    "exp": "Yillik tajriba",
+    "projects": "Muvaffaqiyatli loyiha",
+    "staff": "Malakali xodimlar",
+    "lines": "Ishlab chiqarish liniyasi"
+  },
+  "colors_config": {
+    "title": "Ranglar",
+    "subtitle": "Loyihangiz rangini tanlang",
+    "button": "Loyihani boshlash",
+    "yellow": "Sariq",
+    "blue": "Ko'k",
+    "red": "Qizil",
+    "green": "Yashil",
+    "desc_classic": "Klassik sanoat uslubi",
+    "desc_cold": "Sovutish omborlari uchun ideal",
+    "desc_brand": "Brending uchun maxsus rang",
+    "desc_eco": "Ekologik loyihalar uchun"
+  },
+  "free_samples": {
+    "badge": "Bepul namunalar",
+    "title_1": "Mahsulotlarimizni",
+    "title_2": "sinab ko'ring",
+    "desc_1": "Sifatga o'zingiz baho bering. Bepul namunalar va kataloglarni",
+    "desc_2": "bugun",
+    "desc_3": "buyurtma qiling",
+    "items": ["Panel namunalari", "Izolyatsiya materiallari", "Katalog"]
+  },
+  "our_products": {
+    "title": "Bizning mahsulotlar",
+    "subtitle": "Sifat va ishonch garovi - 13 yil kafolat",
+    "view_details": "Batafsil",
+    "more_info": "Batafsil ma'lumot",
+    "quick_view": "Batafsil",
+    "gallery_title": "Mahsulot galereyasi",
+    "about_product": "Mahsulot haqida",
+    "tabs": {
+      "specs": "Texnik",
+      "features": "Xususiyatlar",
+      "advantages": "Afzalliklar",
+      "applications": "Qo'llanish"
+    },
+    "warranty": "yil kafolat",
+    "get_info": "Ma'lumot olish",
+    "products": [
+      {
+        "id": 1,
+        "name": "Sendvich panellar",
+        "category": "Devor va tom uchun",
+        "fullName": "Sendvich panellar",
+        "description": "Yuqori sifatli izolyatsiya, yong'inga chidamli, uzoq xizmat muddati.",
+        "longDescription": "PIR sendvich panellar - bu zamonaviy qurilish materiali bo'lib, yuqori issiqlik izolyatsiyasi, yong'in xavfsizligi va uzoq xizmat muddati bilan ajralib turadi.",
+        "specs": [
+          { "label": "Qalinlik", "value": "40-200 mm" },
+          { "label": "Uzunlik", "value": "2000-16000 mm" },
+          { "label": "Kenglik", "value": "1000/1190 mm" },
+          { "label": "Issiqlik o'tkazuvchanlik", "value": "0.0194 Vt/(m·K)" }
+        ],
+        "features": [
+          "Yong'inga chidamlilik - 30 min",
+          "Energiya tejash - 40%",
+          "RAL ranglari",
+          "Germetik ulanish"
+        ],
+        "advantages": [
+          "Sovuq ko'priklari yo'q",
+          "CE sertifikati",
+          "EN-14509 standarti",
+          "20 mm profilli ulanish"
+        ],
+        "applications": [
+          "Sanoat binolari",
+          "Sovutgich kameralari",
+          "Omborxonalar",
+          "Savdo markazlari"
+        ]
+      },
+      {
+        "id": 2,
+        "name": "Sovutgich Kameralar",
+        "category": "Go'sht, meva, sut",
+        "fullName": "Sovutgich Kameralar",
+        "description": "Maxsus harorat rejimi, tez montaj, germetik muhr.",
+        "longDescription": "Sovutgich kameralari - bu har xil turdagi mahsulotlarni saqlash uchun mo'ljallangan professional sovutish tizimlari.",
+        "specs": [
+          { "label": "Harorat", "value": "-25°C dan +8°C" },
+          { "label": "Hajm", "value": "5-1000 m³" },
+          { "label": "Devor qalinligi", "value": "80-200 mm" },
+          { "label": "Namlik", "value": "40-85%" }
+        ],
+        "features": [
+          "Avtomatik boshqaruv",
+          "Namlik sensorlari",
+          "Tez muzlatish",
+          "Defrost tizimi"
+        ],
+        "advantages": [
+          "Energiya tejamkor",
+          "24/7 monitoring",
+          "Zaxira quvvat",
+          "GSM signalizatsiya"
+        ],
+        "applications": [
+          "Go'sht mahsulotlari",
+          "Meva-sabzavot",
+          "Sut mahsulotlari",
+          "Baliq mahsulotlari"
+        ]
+      },
+      {
+        "id": 3,
+        "name": "Ombor Tizimlari",
+        "category": "Metall konstruksiyalar",
+        "fullName": "Ombor Tizimlari",
+        "description": "Tez quriladigan omborlar, logistika markazlari, sexlar.",
+        "longDescription": "Ombor tizimlari - bu tez quriladigan va iqtisodiy jihatdan samarali bo'lgan sanoat binolari.",
+        "specs": [
+          { "label": "Maydon", "value": "100-10000 m²" },
+          { "label": "Balandlik", "value": "6-15 m" },
+          { "label": "Yuk ko'tarish", "value": "5 t/m²" },
+          { "label": "Montaj", "value": "30-90 kun" }
+        ],
+        "features": [
+          "Tez montaj",
+          "Mustahkam",
+          "Iqtisodiy",
+          "Energiya tejamkor"
+        ],
+        "advantages": [
+          "13 yil kafolat",
+          "Har qanday iqlim",
+          "Modul tizim",
+          "Kengaytirish mumkin"
+        ],
+        "applications": [
+          "Logistika markazlari",
+          "Ishlab chiqarish sexlari",
+          "Agrosanoat majmualari",
+          "Savdo omborlari"
+        ]
+      }
+    ]
   },
   "form": {
     "name": "Ism",
@@ -38,5 +201,108 @@
   },
   "footer": {
     "rights": "Barcha huquqlar himoyalangan."
+  },
+  "why_choose_us": {
+    "badge": "Nega biz?",
+    "title_main": "Bizni tanlashning",
+    "title_accent": "6 ta sababi",
+    "subtitle": "13 yillik tajriba va 500+ muvaffaqiyatli loyihalar",
+    "features": [
+      {
+        "title": "Yuqori sifat",
+        "desc": "Barcha 5 bosqichda sifat va texnologiya nazorati: komponentlar tanlashdan tortib ishlab chiqarishgacha",
+        "stats": "5 bosqichli nazorat"
+      },
+      {
+        "title": "Tezkor yetkazib berish",
+        "desc": "5 ta uzluksiz ishlab chiqarish liniyasi mahsulot yetkazib berish muddatini aniq rejalashtirish imkonini beradi",
+        "stats": "5 ta liniya"
+      },
+      {
+        "title": "Qulay narxlar",
+        "desc": "Buyurtma hajmiga qarab chegirmalar, doimiy mijozlar uchun hamkorlik dasturlari",
+        "stats": "Moslashuvchan narx"
+      },
+      {
+        "title": "Ekologik toza",
+        "desc": "Zamonaviy ekologik standartlarga javob beradigan materiallar va ishlab chiqarish texnologiyalari",
+        "stats": "100% qayta ishlanadi"
+      },
+      {
+        "title": "24/7 Qo'llab-quvvatlash",
+        "desc": "Texnik maslahat va servis xizmati tunu-kun, har doim yoningizda",
+        "stats": "24/7 texnik yordam"
+      },
+      {
+        "title": "Kafolat va sertifikat",
+        "desc": "13 yil kafolat va xalqaro sifat sertifikatlari.",
+        "stats": "13 yil kafolat"
+      }
+    ]
+  },
+
+  "production": {
+    "title": "Bizning ishlab chiqarish",
+    "subtitle": "Zamonaviy uskunalar va malakali mutaxassislar",
+    "badge": "Ishlab chiqarish",
+    "stats": {
+      "area": "Ishlab chiqarish maydoni",
+      "employees": "Malakali xodimlar",
+      "lines": "Ishlab chiqarish liniyasi"
+    },
+    "catalogs": {
+      "title": "Mahsulot kataloglari",
+      "subtitle": "Batafsil ma'lumotlar va texnik hujjatlar",
+      "view_all": "Barcha kataloglar",
+      "download": "Yuklab olish",
+      "pages": "sahifa",
+      "catalogs_list": [
+        {
+          "name": "PIR Sendvich panellar katalogi",
+          "description": "Texnik xususiyatlar, o'lchamlar, ranglar"
+        },
+        {
+          "name": "Sovutgich kameralar katalogi",
+          "description": "Sovutish tizimlari, o'rnatish bo'yicha qo'llanma"
+        },
+        {
+          "name": "Sanoat eshiklari katalogi",
+          "description": "Germetik eshiklar, avtomatika, o'lchamlar"
+        },
+        {
+          "name": "Umumiy katalog",
+          "description": "Barcha mahsulotlar to'plami"
+        }
+      ]
+    },
+    "slider": {
+      "images": [
+        {
+          "title": "Xomashyo uzatish tizimi",
+          "category": "Ishlab chiqarish",
+          "description": "Liniyaning yuqori qismida joylashgan maxsus rezervuarlar va xomashyo aralashtirish tizimi. Bu yerda panelning ichki qismi uchun komponentlar tayyorlanadi."
+        },
+        {
+          "title": "Sovutgich kameralar yig'ish sexi",
+          "category": "Yig'ish",
+          "description": "Butun liniyani boshqaruvchi markaziy blok. Ishlab chiqarish jarayoni to'liq raqamlashtirilgan bo'lib, inson omilini minimallashtiradi."
+        },
+        {
+          "title": "Konveyer va shakllantirish bo'limi",
+          "category": "Ishlab chiqarish",
+          "description": "Tayyor panellarning shakllanishi va harakatlanishi uchun mo'ljallangan uzun konveyer liniyasi. Xavfsizlik qoidalariga muvofiq maxsus belgilar bilan jihozlangan."
+        },
+        {
+          "title": "Gidravlik presslash tizimi",
+          "category": "Sifat nazorati",
+          "description": "Panellarni yuqori bosim ostida presslash va zichligini ta'minlash uchun mo'ljallangan gidravlik porshenlar tizimi."
+        },
+        {
+          "title": "Tayyor mahsulot chiqish qismi",
+          "category": "Yakuniy bosqich",
+          "description": "Tayyor bo'lgan sendvich panellarning qadoqlashga yo'naltiriladigan qismi. Bu yerda panellar belgilangan o'lchamlar bo'yicha nazoratdan o'tadi."
+        }
+      ]
+    }
   }
 }

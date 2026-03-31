@@ -1,132 +1,130 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   Package, ArrowRight, X,
-  Ruler, Thermometer, Shield, Zap, Droplets, Clock,
+  Ruler, Thermometer, Shield, Droplets, Clock,
   Maximize2, Minimize2, ZoomIn, ChevronLeft, ChevronRight,
-  Info, Award, CheckCircle, Star, ThumbsUp,
+  Info, Award, CheckCircle, ThumbsUp,
   Layers, Grid3X3, Box
 } from "lucide-react";
 
-const products = [
+const productsData = [
   {
     id: 1,
-    name: "Sendvich panellar",
-    category: "Devor va tom uchun",
-    fullName: "Sendvich panellar",
+    key: "sandwich_panels",
+    categoryKey: "sandwich_panels",
+    nameKey: "sandwich_panels",
     image: "/assets/devor.jpg",
-    gallery: [
-      "/assets/devor.jpg",
-    ],
-    description: "Yuqori sifatli izolyatsiya, yong'inga chidamli, uzoq xizmat muddati.",
-    longDescription: "PIR sendvich panellar - bu zamonaviy qurilish materiali bo'lib, yuqori issiqlik izolyatsiyasi, yong'in xavfsizligi va uzoq xizmat muddati bilan ajralib turadi.",
+    gallery: ["/assets/devor.jpg"],
+    descriptionKey: "sandwich_panels",
+    longDescriptionKey: "sandwich_panels",
     specs: [
-      { label: "Qalinlik", value: "40-200 mm", icon: Ruler },
-      { label: "Uzunlik", value: "2000-16000 mm", icon: Ruler },
-      { label: "Kenglik", value: "1000/1190 mm", icon: Ruler },
-      { label: "Issiqlik o'tkazuvchanlik", value: "0.0194 Vt/(m·K)", icon: Thermometer },
+      { labelKey: "thickness", value: "40-200 mm", icon: Ruler },
+      { labelKey: "length", value: "2000-16000 mm", icon: Ruler },
+      { labelKey: "width", value: "1000/1190 mm", icon: Ruler },
+      { labelKey: "thermal_conductivity", value: "0.0194 W/(m·K)", icon: Thermometer },
     ],
     features: [
-      "Yong'inga chidamlilik - 30 min",
-      "Energiya tejash - 40%",
-      "RAL ranglari",
-      "Germetik ulanish"
+      "fire_resistance",
+      "energy_saving",
+      "ral_colors",
+      "sealed_connection"
     ],
     advantages: [
-      "Sovuq ko'priklari yo'q",
-      "CE sertifikati",
-      "EN-14509 standarti",
-      "20 mm profilli ulanish"
+      "no_cold_bridges",
+      "ce_certificate",
+      "en_standard",
+      "profile_connection"
     ],
-    applications: [
-      "Sanoat binolari",
-      "Sovutgich kameralari",
-      "Omborxonalar",
-      "Savdo markazlari"
-    ]
+    applicationsKey: "panels"
   },
   {
     id: 2,
-    name: "Sovutgich Kameralar",
-    category: "Go'sht, meva, sut",
-    fullName: "Sovutgich Kameralar",
+    key: "cold_rooms",
+    categoryKey: "cold_rooms",
+    nameKey: "cold_rooms",
     image: "/assets/sovutgich.jpg",
-    gallery: [
-      "/assets/sovutgich.jpg",
-      
-    ],
-    description: "Maxsus harorat rejimi, tez montaj, germetik muhr.",
-    longDescription: "Sovutgich kameralari - bu har xil turdagi mahsulotlarni saqlash uchun mo'ljallangan professional sovutish tizimlari.",
+    gallery: ["/assets/sovutgich.jpg"],
+    descriptionKey: "cold_rooms",
+    longDescriptionKey: "cold_rooms",
     specs: [
-      { label: "Harorat", value: "-25°C dan +8°C", icon: Thermometer },
-      { label: "Hajm", value: "5-1000 m³", icon: Package },
-      { label: "Devor qalinligi", value: "80-200 mm", icon: Ruler },
-      { label: "Namlik", value: "40-85%", icon: Droplets },
+      { labelKey: "temperature", value: "-25°C to +8°C", icon: Thermometer },
+      { labelKey: "volume", value: "5-1000 m³", icon: Package },
+      { labelKey: "wall_thickness", value: "80-200 mm", icon: Ruler },
+      { labelKey: "humidity", value: "40-85%", icon: Droplets },
     ],
     features: [
-      "Avtomatik boshqaruv",
-      "Namlik sensorlari",
-      "Tez muzlatish",
-      "Defrost tizimi"
+      "automatic_control",
+      "humidity_sensors",
+      "quick_freezing",
+      "defrost_system"
     ],
     advantages: [
-      "Energiya tejamkor",
-      "24/7 monitoring",
-      "Zaxira quvvat",
-      "GSM signalizatsiya"
+      "energy_efficient",
+      "247_monitoring",
+      "backup_power",
+      "gsm_alarm"
     ],
-    applications: [
-      "Go'sht mahsulotlari",
-      "Meva-sabzavot",
-      "Sut mahsulotlari",
-      "Baliq mahsulotlari"
-    ]
+    applicationsKey: "cold"
   },
   {
     id: 3,
-    name: "Ombor Tizimlari",
-    category: "Metall konstruksiyalar",
-    fullName: "Ombor Tizimlari",
+    key: "warehouse_systems",
+    categoryKey: "warehouse_systems",
+    nameKey: "warehouse_systems",
     image: "/assets/omborr.jpg",
-    gallery: [
-      "/assets/ombor.jpg",
-    ],
-    description: "Tez quriladigan omborlar, logistika markazlari, sexlar.",
-    longDescription: "Ombor tizimlari - bu tez quriladigan va iqtisodiy jihatdan samarali bo'lgan sanoat binolari.",
+    gallery: ["/assets/ombor.jpg"],
+    descriptionKey: "warehouse_systems",
+    longDescriptionKey: "warehouse_systems",
     specs: [
-      { label: "Maydon", value: "100-10000 m²", icon: Ruler },
-      { label: "Balandlik", value: "6-15 m", icon: Ruler },
-      { label: "Yuk ko'tarish", value: "5 t/m²", icon: Package },
-      { label: "Montaj", value: "30-90 kun", icon: Clock },
+      { labelKey: "area", value: "100-10000 m²", icon: Ruler },
+      { labelKey: "height", value: "6-15 m", icon: Ruler },
+      { labelKey: "load_capacity", value: "5 t/m²", icon: Package },
+      { labelKey: "installation", value: "30-90 kun", icon: Clock },
     ],
     features: [
-      "Tez montaj",
-      "Mustahkam",
-      "Iqtisodiy",
-      "Energiya tejamkor"
+      "fast_assembly",
+      "durable",
+      "economical",
+      "energy_efficient"
     ],
     advantages: [
-      "13 yil kafolat",
-      "Har qanday iqlim",
-      "Modul tizim",
-      "Kengaytirish mumkin"
+      "13_year_warranty",
+      "any_climate",
+      "modular_system",
+      "expandable"
     ],
-    applications: [
-      "Logistika markazlari",
-      "Ishlab chiqarish sexlari",
-      "Agrosanoat majmualari",
-      "Savdo omborlari"
-    ]
+    applicationsKey: "warehouse"
   }
 ];
 
 export default function OurProducts({ onProductClick }) {
+  const { t } = useTranslation();
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isZoomed, setIsZoomed] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showGallery, setShowGallery] = useState(false);
   const [activeTab, setActiveTab] = useState('specs');
+
+  // Tarjima qilingan mahsulotlar - useMemo bilan optimallashtirildi
+  const products = useMemo(() => {
+    return productsData.map(product => ({
+      ...product,
+      name: t(`product_names.${product.nameKey}`, product.nameKey),
+      category: t(`product_categories.${product.categoryKey}`, product.categoryKey),
+      description: t(`product_descriptions.${product.descriptionKey}`, product.descriptionKey),
+      longDescription: t(`product_long_descriptions.${product.longDescriptionKey}`, product.longDescriptionKey),
+      features: product.features.map(f => t(`products.${f}`, f)),
+      advantages: product.advantages.map(a => t(`products.${a}`, a)),
+      applications: t(`product_applications.${product.applicationsKey}`, { returnObjects: true }) || [],
+      specs: product.specs.map(spec => ({
+        ...spec,
+        label: t(`products.${spec.labelKey}`, spec.labelKey)
+      }))
+    }));
+  }, [t]);
 
   useEffect(() => {
     if (isModalOpen) {
@@ -175,6 +173,14 @@ export default function OurProducts({ onProductClick }) {
     }
   };
 
+  // Tarjimalarni olish
+  const productsTitle = t("products.title", "Bizning mahsulotlar");
+  const productsSubtitle = t("products.subtitle", "Sifat va ishonch garovi - 13 yil kafolat");
+  const buttonsDetails = t("buttons.details", "Batafsil");
+  const buttonsMoreInfo = t("buttons.more_info", "Batafsil ma'lumot");
+  const buttonsGetInfo = t("buttons.get_info", "Ma'lumot olish");
+  const productsWarranty = t("products.warranty", "yil kafolat");
+
   return (
     <>
       <section className="py-24 bg-white/0 relative overflow-hidden">
@@ -187,14 +193,13 @@ export default function OurProducts({ onProductClick }) {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-5xl font-bold text-slate-800 mb-4">
-              Bizning <span className="text-emerald-600">mahsulotlar</span>
+              {productsTitle}
             </h2>
             <p className="text-xl text-slate-500 max-w-2xl mx-auto">
-              Sifat va ishonch garovi - 13 yil kafolat
+              {productsSubtitle}
             </p>
           </motion.div>
 
-          {/* 3 ta card - keng va to'liq */}
           <motion.div 
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto"
             initial={{ opacity: 0 }}
@@ -214,20 +219,16 @@ export default function OurProducts({ onProductClick }) {
                 onClick={() => handleProductClick(product)}
               >
                 <div className="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 h-full flex flex-col border border-slate-100/50">
-                  {/* Image Container - balandligi oshirildi */}
                   <div className="relative h-96 bg-gradient-to-br from-slate-50 to-white p-8 flex items-center justify-center overflow-hidden">
                     <motion.div 
                       className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-t from-emerald-600/20 to-transparent"
                     />
-                    
                     <motion.img 
                       src={product.image} 
                       alt={product.name} 
                       className="w-full h-full object-contain transition-all duration-700 group-hover:scale-110 relative z-10"
                       whileHover={{ rotate: 2 }}
                     />
-                    
-                    {/* Quick view */}
                     <motion.div 
                       className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-emerald-600 to-emerald-500 text-white px-6 py-3 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-500"
                       initial={{ y: 20, opacity: 0 }}
@@ -237,12 +238,11 @@ export default function OurProducts({ onProductClick }) {
                     >
                       <span className="text-sm font-medium flex items-center gap-2">
                         <ZoomIn className="h-4 w-4" />
-                        Batafsil
+                        {buttonsDetails}
                       </span>
                     </motion.div>
                   </div>
                   
-                  {/* Content - kengaytirildi */}
                   <div className="p-8 flex flex-col flex-grow">
                     <motion.span 
                       className="text-sm text-emerald-600 font-semibold mb-2 block uppercase tracking-wider"
@@ -274,7 +274,6 @@ export default function OurProducts({ onProductClick }) {
                       {product.description}
                     </motion.p>
                     
-                    {/* Features */}
                     <div className="flex flex-wrap gap-2 mb-6">
                       {product.features.slice(0, 2).map((feature, i) => (
                         <motion.span 
@@ -291,7 +290,6 @@ export default function OurProducts({ onProductClick }) {
                       ))}
                     </div>
                     
-                    {/* View details link */}
                     <div className="flex items-center justify-between pt-4 border-t border-slate-100 mt-auto">
                       <motion.span 
                         className="text-sm font-medium text-slate-400"
@@ -300,7 +298,7 @@ export default function OurProducts({ onProductClick }) {
                         viewport={{ once: true }}
                         transition={{ delay: index * 0.15 + 0.4 }}
                       >
-                        Batafsil ma'lumot
+                        {buttonsMoreInfo}
                       </motion.span>
                       <motion.div
                         animate={{ x: [0, 5, 0] }}
@@ -334,6 +332,9 @@ export default function OurProducts({ onProductClick }) {
             setActiveTab={setActiveTab}
             nextImage={nextImage}
             prevImage={prevImage}
+            t={t}
+            buttonsGetInfo={buttonsGetInfo}
+            productsWarranty={productsWarranty}
           />
         )}
       </AnimatePresence>
@@ -354,8 +355,21 @@ function ProductDetailModal({
   activeTab,
   setActiveTab,
   nextImage,
-  prevImage 
+  prevImage,
+  t,
+  buttonsGetInfo,
+  productsWarranty
 }) {
+  const tabs = [
+    { id: 'specs', label: t("products.specifications", "Texnik xususiyatlar"), icon: Ruler },
+    { id: 'features', label: t("products.features", "Xususiyatlar"), icon: Layers },
+    { id: 'advantages', label: t("products.advantages", "Afzalliklar"), icon: Award },
+    { id: 'applications', label: t("products.applications", "Qo'llanish sohalari"), icon: Box }
+  ];
+
+  const productInfo = t("products.product_info", "Mahsulot haqida");
+  const galleryTitle = t("products.gallery", "Mahsulot galereyasi");
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -380,7 +394,7 @@ function ProductDetailModal({
             </div>
             <div>
               <span className="text-sm text-emerald-600 font-medium">{product.category}</span>
-              <h2 className="text-2xl font-bold text-slate-800">{product.fullName}</h2>
+              <h2 className="text-2xl font-bold text-slate-800">{product.name}</h2>
             </div>
           </div>
           <div className="flex items-center gap-2">
@@ -407,7 +421,7 @@ function ProductDetailModal({
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             >
-              <h3 className="text-lg font-semibold text-slate-800">Mahsulot galereyasi</h3>
+              <h3 className="text-lg font-semibold text-slate-800">{galleryTitle}</h3>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {product.gallery?.map((img, index) => (
                   <motion.div
@@ -430,7 +444,7 @@ function ProductDetailModal({
             </motion.div>
           ) : (
             <div className="grid lg:grid-cols-2 gap-8">
-              {/* Left - Image Gallery - TO'G'IRLANGAN */}
+              {/* Left - Image Gallery */}
               <div className="space-y-4">
                 <motion.div 
                   className={`relative bg-slate-50 rounded-2xl overflow-hidden border border-slate-100 transition-all duration-500 ${
@@ -442,7 +456,7 @@ function ProductDetailModal({
                     <motion.img 
                       key={currentImageIndex}
                       src={product.gallery?.[currentImageIndex] || product.image}
-                      alt={product.fullName}
+                      alt={product.name}
                       className={`w-full h-full transition-all duration-500 ${
                         isZoomed ? 'object-contain' : 'object-contain'
                       }`}
@@ -511,7 +525,7 @@ function ProductDetailModal({
                 <div>
                   <h3 className="text-base md:text-lg font-semibold text-slate-800 mb-2 md:mb-3 flex items-center gap-2">
                     <Info className="h-4 w-4 md:h-5 md:w-5 text-emerald-500" />
-                    Mahsulot haqida
+                    {productInfo}
                   </h3>
                   <p className="text-sm md:text-base text-slate-600 leading-relaxed">
                     {product.longDescription}
@@ -519,12 +533,7 @@ function ProductDetailModal({
                 </div>
 
                 <div className="flex flex-wrap gap-1 md:gap-2 border-b border-slate-100">
-                  {[
-                    { id: 'specs', label: 'Texnik', icon: Ruler },
-                    { id: 'features', label: 'Xususiyatlar', icon: Layers },
-                    { id: 'advantages', label: 'Afzalliklar', icon: Award },
-                    { id: 'applications', label: 'Qo\'llanish', icon: Box }
-                  ].map((tab) => {
+                  {tabs.map((tab) => {
                     const Icon = tab.icon;
                     return (
                       <button
@@ -640,16 +649,12 @@ function ProductDetailModal({
             <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 md:gap-4">
               <div className="flex items-center gap-1 md:gap-2">
                 <Shield className="h-4 w-4 md:h-5 md:w-5 text-emerald-500" />
-                <span className="text-xs md:text-sm text-slate-600 font-medium">13 yil kafolat</span>
-              </div>
-              <div className="flex items-center gap-1 md:gap-2">
-                <Award className="h-4 w-4 md:h-5 md:w-5 text-emerald-500" />
-                {/* <span className="text-xs md:text-sm text-slate-600 font-medium">ISO 9001</span> */}
+                <span className="text-xs md:text-sm text-slate-600 font-medium">13 {productsWarranty}</span>
               </div>
             </div>
             
             <button className="w-full sm:w-auto bg-emerald-600 text-white px-6 md:px-8 py-2.5 md:py-3 rounded-xl text-sm md:text-base font-semibold hover:bg-emerald-700 transition-colors flex items-center justify-center gap-2 md:gap-3">
-              Ma'lumot olish
+              {buttonsGetInfo}
               <ArrowRight className="h-3 w-3 md:h-4 md:w-4" />
             </button>
           </div>

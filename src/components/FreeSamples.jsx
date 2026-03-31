@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Package, Sparkles, CheckCircle, Award } from "lucide-react";
+import { useTranslation } from "react-i18next"; // i18n import qilindi
 import LeadForm from "../components/LeadForm";
 
 const fadeUp = {
@@ -16,6 +17,8 @@ const fadeUp = {
 };
 
 export default function FreeSamples() {
+  const { t } = useTranslation(); // t funksiyasi chaqirildi
+
   return (
     <section className="py-20 bg-gradient-to-br from-white via-emerald-50/20 to-white relative overflow-hidden">
       
@@ -42,7 +45,7 @@ export default function FreeSamples() {
               className="inline-flex items-center gap-2 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white px-5 py-2.5 rounded-full text-sm font-semibold mb-6 shadow-lg"
             >
               <Package className="h-4 w-4" />
-              Bepul namunalar
+              {t("free_samples.badge")}
               <Sparkles className="h-3 w-3 ml-1" />
             </motion.div>
 
@@ -52,9 +55,9 @@ export default function FreeSamples() {
               custom={2}
               className="text-4xl md:text-5xl font-bold text-slate-800 mb-4"
             >
-              Mahsulotlarimizni 
+              {t("free_samples.title_1")}{" "}
               <span className="text-emerald-600 block mt-2">
-                sinab ko'ring
+                {t("free_samples.title_2")}
               </span>
             </motion.h2>
 
@@ -64,9 +67,9 @@ export default function FreeSamples() {
               custom={3}
               className="text-lg text-slate-600 mb-8"
             >
-              Sifatga o'zingiz baho bering. Bepul namunalar va kataloglarni 
-              <span className="text-emerald-600 font-semibold"> bugun </span> 
-              buyurtma qiling
+              {t("free_samples.desc_1")}{" "}
+              <span className="text-emerald-600 font-semibold"> {t("free_samples.desc_2")} </span> 
+              {t("free_samples.desc_3")}
             </motion.p>
 
             {/* Features */}
@@ -75,11 +78,7 @@ export default function FreeSamples() {
               custom={4}
               className="flex flex-wrap gap-4 mb-10 justify-center lg:justify-start"
             >
-              {[
-                "Panel namunalari",
-                "Izolyatsiya materiallari",
-                "Katalog"
-              ].map((item, i) => (
+              {t("free_samples.items", { returnObjects: true }).map((item, i) => (
                 <motion.div
                   key={i}
                   whileHover={{ scale: 1.05 }}
@@ -96,11 +95,9 @@ export default function FreeSamples() {
               variants={fadeUp}
               custom={5}
             >
-              {/* Glow */}
               <div className="bg-emerald-50 border border-emerald-100 rounded-[40px] p-8 md:p-10 shadow-lg">
-              <LeadForm compact={true} />
-            </div>
-
+                <LeadForm compact={true} />
+              </div>
             </motion.div>
 
           </motion.div>
@@ -114,17 +111,13 @@ export default function FreeSamples() {
             className="flex justify-center lg:justify-end relative"
           >
             <div className="relative group">
-              
-              {/* Glow circles */}
               <div className="absolute -top-10 -right-10 w-40 h-40 bg-emerald-200 rounded-full blur-2xl opacity-60 group-hover:opacity-80 transition" />
               <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-emerald-300 rounded-full blur-2xl opacity-40 group-hover:opacity-60 transition" />
 
-              {/* Image */}
               <div className="relative rounded-2xl bg-gradient-to-br from-white to-emerald-50 p-4 shadow-2xl">
-                
                 <img 
                   src="/assets/sampples.png"
-                  alt="Bepul namunalar"
+                  alt={t("free_samples.badge")}
                   className="w-auto h-[350px] md:h-[400px] object-contain rounded-xl relative z-10 drop-shadow-2xl group-hover:scale-105 transition duration-500"
                 />
 
@@ -144,7 +137,6 @@ export default function FreeSamples() {
                 >
                   <Package className="h-6 w-6" />
                 </motion.div>
-
               </div>
             </div>
           </motion.div>

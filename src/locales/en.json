@@ -1,0 +1,311 @@
+{
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "projects": "Projects",
+    "ourproducts": "Our Products",
+    "news": "News",
+    "about": "About Company",
+    "contact": "Contact"
+  },
+  "topbar": {
+    "phone": "Phone",
+    "email": "Email",
+    "hours": "Working Hours"
+  },
+  "cta": {
+    "orderCall": "Request a Call",
+    "send": "Send"
+  },
+  "hero": {
+    "title": "Sandwich Panels and Cold Storages — “Turnkey”",
+    "subtitle": "Design, production, installation, and service — all in one team.",
+    "primary": "Get Consultation",
+    "secondary": "View Projects"
+  },
+  "hero_slides": [
+    {
+      "category": "Polyurethane Systems",
+      "title": "PIR-PUR Sandwich Panels",
+      "desc": "The highest thermal insulation performance. Modern panel systems that save up to 40% energy.",
+      "badge": "Premium Quality"
+    },
+    {
+      "category": "Cooling Technology",
+      "title": "Cold Storage Rooms",
+      "desc": "Professional temperature-controlled warehouses for fruits, vegetables, and meat products.",
+      "badge": "Energy Efficient"
+    },
+    {
+      "category": "Industrial Construction",
+      "title": "Industrial Buildings",
+      "desc": "Durable and reliable structures that are quickly assembled and serve for many years.",
+      "badge": "Fast Assembly"
+    }
+  ],
+  "sections": {
+    "services": "Services",
+    "projects": "Projects",
+    "stats": "Results",
+    "catalog": "Catalog",
+    "faq": "FAQ"
+  },
+  "stats_items": {
+    "exp": "Years of Experience",
+    "projects": "Successful Projects",
+    "staff": "Qualified Staff",
+    "lines": "Production Lines"
+  },
+  "colors_config": {
+    "title": "Colors",
+    "subtitle": "Choose the Color for Your Project",
+    "button": "Start Project",
+    "yellow": "Yellow",
+    "blue": "Blue",
+    "red": "Red",
+    "green": "Green",
+    "desc_classic": "Classic industrial style",
+    "desc_cold": "Ideal for cold storages",
+    "desc_brand": "Special color for branding",
+    "desc_eco": "For ecological projects"
+  },
+  "free_samples": {
+    "badge": "Free Samples",
+    "title_1": "Try our",
+    "title_2": "products",
+    "desc_1": "Evaluate the quality yourself. Order free samples and catalogs",
+    "desc_2": "today",
+    "desc_3": "",
+    "items": [
+      "Panel samples",
+      "Insulation materials",
+      "Catalog"
+    ]
+  },
+  "our_products": {
+    "title": "Our Products",
+    "subtitle": "Quality and reliability guarantee - 13 years warranty",
+    "view_details": "View details",
+    "more_info": "More information",
+    "quick_view": "Quick view",
+    "gallery_title": "Product Gallery",
+    "about_product": "About product",
+    "tabs": {
+      "specs": "Specifications",
+      "features": "Features",
+      "advantages": "Advantages",
+      "applications": "Applications"
+    },
+    "warranty": "years warranty",
+    "get_info": "Get information",
+    "products": [
+      {
+        "id": 1,
+        "name": "Sandwich Panels",
+        "category": "For walls and roofs",
+        "fullName": "Sandwich Panels",
+        "description": "High-quality insulation, fire-resistant, long service life.",
+        "longDescription": "PIR sandwich panels are a modern building material characterized by high thermal insulation, fire safety, and long service life.",
+        "specs": [
+          { "label": "Thickness", "value": "40-200 mm" },
+          { "label": "Length", "value": "2000-16000 mm" },
+          { "label": "Width", "value": "1000/1190 mm" },
+          { "label": "Thermal conductivity", "value": "0.0194 W/(m·K)" }
+        ],
+        "features": [
+          "Fire resistance - 30 min",
+          "Energy saving - 40%",
+          "RAL colors",
+          "Hermetic connection"
+        ],
+        "advantages": [
+          "No cold bridges",
+          "CE certificate",
+          "EN-14509 standard",
+          "20 mm profile connection"
+        ],
+        "applications": [
+          "Industrial buildings",
+          "Refrigeration chambers",
+          "Warehouses",
+          "Shopping centers"
+        ]
+      },
+      {
+        "id": 2,
+        "name": "Refrigeration Chambers",
+        "category": "Meat, fruits, dairy",
+        "fullName": "Refrigeration Chambers",
+        "description": "Special temperature regime, quick installation, hermetic seal.",
+        "longDescription": "Refrigeration chambers are professional cooling systems designed for storing various types of products.",
+        "specs": [
+          { "label": "Temperature", "value": "-25°C to +8°C" },
+          { "label": "Volume", "value": "5-1000 m³" },
+          { "label": "Wall thickness", "value": "80-200 mm" },
+          { "label": "Humidity", "value": "40-85%" }
+        ],
+        "features": [
+          "Automatic control",
+          "Humidity sensors",
+          "Quick freezing",
+          "Defrost system"
+        ],
+        "advantages": [
+          "Energy efficient",
+          "24/7 monitoring",
+          "Backup power",
+          "GSM alarm"
+        ],
+        "applications": [
+          "Meat products",
+          "Fruits and vegetables",
+          "Dairy products",
+          "Fish products"
+        ]
+      },
+      {
+        "id": 3,
+        "name": "Warehouse Systems",
+        "category": "Metal structures",
+        "fullName": "Warehouse Systems",
+        "description": "Quickly erected warehouses, logistics centers, workshops.",
+        "longDescription": "Warehouse systems are quickly erected and cost-effective industrial buildings.",
+        "specs": [
+          { "label": "Area", "value": "100-10000 m²" },
+          { "label": "Height", "value": "6-15 m" },
+          { "label": "Load capacity", "value": "5 t/m²" },
+          { "label": "Installation", "value": "30-90 days" }
+        ],
+        "features": [
+          "Quick installation",
+          "Durable",
+          "Cost-effective",
+          "Energy efficient"
+        ],
+        "advantages": [
+          "13 years warranty",
+          "Any climate",
+          "Modular system",
+          "Expandable"
+        ],
+        "applications": [
+          "Logistics centers",
+          "Production workshops",
+          "Agro-industrial complexes",
+          "Trade warehouses"
+        ]
+      }
+    ]
+  },
+  "form": {
+    "name": "Name",
+    "phone": "Phone Number",
+    "message": "Message",
+    "success": "Request sent successfully."
+  },
+  "footer": {
+    "rights": "All rights reserved."
+  },
+  "why_choose_us": {
+    "badge": "Why us?",
+    "title_main": "6 reasons to",
+    "title_accent": "choose us",
+    "subtitle": "13 years of experience and 500+ successful projects",
+    "features": [
+      {
+        "title": "High Quality",
+        "desc": "Quality control at all 5 stages: from component selection to production",
+        "stats": "5-stage control"
+      },
+      {
+        "title": "Fast Delivery",
+        "desc": "5 continuous production lines allow for precise delivery scheduling",
+        "stats": "5 lines"
+      },
+      {
+        "title": "Affordable Prices",
+        "desc": "Volume-based discounts and partnership programs for regular clients",
+        "stats": "Flexible pricing"
+      },
+      {
+        "title": "Eco Friendly",
+        "desc": "Materials and production technologies that meet modern environmental standards",
+        "stats": "100% recyclable"
+      },
+      {
+        "title": "24/7 Support",
+        "desc": "Technical advice and service maintenance available around the clock",
+        "stats": "24/7 tech support"
+      },
+      {
+        "title": "Warranty & Certificates",
+        "desc": "13 years warranty and international quality certificates.",
+        "stats": "13 years warranty"
+      }
+    ]
+  },
+  "production": {
+    "title": "Our Production",
+    "subtitle": "Modern equipment and qualified specialists",
+    "badge": "Production",
+    "stats": {
+      "area": "Production area",
+      "employees": "Qualified employees",
+      "lines": "Production lines"
+    },
+    "catalogs": {
+      "title": "Product Catalogs",
+      "subtitle": "Detailed information and technical documentation",
+      "view_all": "All catalogs",
+      "download": "Download",
+      "pages": "pages",
+      "catalogs_list": [
+        {
+          "name": "PIR Sandwich Panels Catalog",
+          "description": "Technical specifications, dimensions, colors"
+        },
+        {
+          "name": "Cold Rooms Catalog",
+          "description": "Cooling systems, installation guide"
+        },
+        {
+          "name": "Industrial Doors Catalog",
+          "description": "Hermetic doors, automation, dimensions"
+        },
+        {
+          "name": "General Catalog",
+          "description": "All products in one catalog"
+        }
+      ]
+    },
+    "slider": {
+      "images": [
+        {
+          "title": "Raw Material Supply System",
+          "category": "Production",
+          "description": "Special tanks and raw material mixing system located at the top of the line. Here, components for the inner part of the panel are prepared."
+        },
+        {
+          "title": "Cold Room Assembly Workshop",
+          "category": "Assembly",
+          "description": "Central control unit for the entire line. The production process is fully digitized, minimizing human factor."
+        },
+        {
+          "title": "Conveyor and Forming Section",
+          "category": "Production",
+          "description": "Long conveyor line for forming and moving finished panels. Equipped with special safety markings."
+        },
+        {
+          "title": "Hydraulic Pressing System",
+          "category": "Quality Control",
+          "description": "Hydraulic piston system for pressing panels under high pressure and ensuring density."
+        },
+        {
+          "title": "Finished Product Output Section",
+          "category": "Final Stage",
+          "description": "Section where finished sandwich panels are directed for packaging. Here panels undergo inspection according to specified dimensions."
+        }
+      ]
+    }
+  }
+}
