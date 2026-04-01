@@ -7,9 +7,13 @@ export default function Navbar({ onOpenCall }) {
   const { t, i18n } = useTranslation();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [sticky, setSticky] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 10);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 10);
+      setSticky(window.scrollY > 600);
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -35,11 +39,14 @@ export default function Navbar({ onOpenCall }) {
   return (
     <header
       className={[
-        "fixed top-0 left-0 right-0 z-50 border-b backdrop-blur-md transition",
-        scrolled
-          ? "bg-white/50 border-slate-200 shadow-md"
-          : "bg-white/20 border-slate-200",
+        sticky
+          ? "fixed top-4 left-0 right-0 mx-auto z-50 border-b backdrop-blur-md transition max-w-6xl w-[98%] rounded-xl shadow-lg border"
+          : "static border-b backdrop-blur-md transition",
+        sticky
+          ? (scrolled ? "bg-white/50 border-slate-200" : "bg-white/20 border-slate-200")
+          : "bg-transparent border-slate-200",
       ].join(" ")}
+      style={sticky ? { borderRadius: '0.75rem' } : {}}
     >
       <div className="container-pad h-16 flex items-center justify-between">
         {/* Logo */}
