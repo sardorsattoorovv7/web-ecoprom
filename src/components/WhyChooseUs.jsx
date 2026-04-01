@@ -21,9 +21,11 @@ export default function WhyChooseUs() {
     })) : [];
   }, [t]);
 
-  return (
-    <section className="py-24 bg-white">
-      <div className="container-pad">
+  return ( 
+    <section className="py-24 bg-slate-100 rounded-2xl shadow-md max-w-6xl w-full px-4 mx-auto mb-10">
+      <div className="w-full flex justify-center">
+        <div className="w-full max-w-6xl px-4">
+          <div className="container-pad">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -108,6 +110,8 @@ export default function WhyChooseUs() {
             );
           })}
         </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   );

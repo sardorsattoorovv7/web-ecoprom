@@ -19,7 +19,7 @@ const OurProduction = lazy(() => import("../components/OurProduction"));
 const AiAssistant = lazy(() => import("../components/AIAssistant"));
 const PartnerMarquee = lazy(() => import("../components/PartnerMarquee"));
 const CookieConsentBanner = lazy(() => import("../components/CookieConsentBanner"));
-
+import SideDecor from "../components/SideDecor";
 /* ---------------- 1. COUNTER HOOK ---------------- */
 const useCounter = (end, duration = 2000) => {
   const [count, setCount] = useState(0);
@@ -423,12 +423,13 @@ export default function EcoPromMain({ onOpenCall }) {
       </Helmet>
 
       <div className="relative bg-white">
+        {/* <SideDecor />    */}
         <ScrollProgress />
-        <InteractiveBackground />
+
 
         {/* Hero Section */}
         <section
-          className="relative flex min-h-[500px] items-center overflow-hidden pt-6 sm:min-h-[600px] md:min-h-[70vh]"
+          className="relative flex min-h-[500px] items-center overflow-hidden pt-6 mb-20 sm:min-h-[600px] md:min-h-[70vh]"
           aria-label={t("hero.aria_label", "Asosiy mahsulotlar")}
           style={{
             backgroundImage: `url(/assets/main-bg.jpg)`,
@@ -510,7 +511,9 @@ export default function EcoPromMain({ onOpenCall }) {
         </section>
 
         {/* Stats Section with Counters */}
-        <SectionWrapper className="py-16 bg-gradient-to-br from-slate-50 to-white">
+        <div className="w-full flex justify-center bg-white">
+          <div className="w-full max-w-6xl px-4 mb-10">
+            <SectionWrapper className="py-16 bg-slate-100 rounded-2xl shadow-md">
           <div className="container-pad">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {stats.map((stat, idx) => (
@@ -524,10 +527,14 @@ export default function EcoPromMain({ onOpenCall }) {
               ))}
             </div>
           </div>
-        </SectionWrapper>
+            </SectionWrapper>
+          </div>
+        </div>
 
         {/* Color Configurator */}
-        <SectionWrapper className="py-16 bg-white">
+        {/* <div className="w-full flex justify-center bg-white">
+          <div className="w-full max-w-6xl px-4 mb-10">
+            <SectionWrapper className="py-16 bg-slate-100 rounded-2xl shadow-md">
           <div className="container-pad">
             <div className="text-center mb-12">
               <span className="text-emerald-600 font-medium">
@@ -592,7 +599,9 @@ export default function EcoPromMain({ onOpenCall }) {
               </div>
             </div>
           </div>
-        </SectionWrapper>
+            </SectionWrapper>
+          </div>
+        </div> */}
 
         {/* Lazy loaded komponentlar */}
         <Suspense fallback={<SkeletonLoader />}>

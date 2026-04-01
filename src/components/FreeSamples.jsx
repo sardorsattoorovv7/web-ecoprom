@@ -17,19 +17,11 @@ const fadeUp = {
 };
 
 export default function FreeSamples() {
-  const { t } = useTranslation(); // t funksiyasi chaqirildi
+  const { t } = useTranslation();
 
   return (
-    <section className="py-20 bg-gradient-to-br from-white via-emerald-50/20 to-white relative overflow-hidden">
-      
-      {/* Background */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-20 right-20 w-64 h-64 bg-emerald-200 rounded-full blur-3xl opacity-20" />
-        <div className="absolute bottom-20 left-20 w-80 h-80 bg-emerald-100 rounded-full blur-3xl opacity-30" />
-      </div>
-
-      <div className="container-pad relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+    <section className="py-20 mb-20 bg-slate-100 rounded-2xl shadow-md max-w-6xl w-full px-4 mx-auto">
+      <div className="grid lg:grid-cols-2 gap-12 items-center">
           
           {/* LEFT */}
           <motion.div
@@ -141,7 +133,6 @@ export default function FreeSamples() {
             </div>
           </motion.div>
 
-        </div>
       </div>
     </section>
   );
