@@ -55,7 +55,7 @@ export default function Navbar({ onOpenCall }) {
         </Link>
 
         {/* Desktop nav - 1004px va undan katta ekranlarda ko'rinadi */}
-        <nav className="hidden min-[1004px]:flex items-center gap-1">
+        <nav className="hidden min-[1006px]:flex items-center gap-1">
           <NavLink
             to="/"
             className={({ isActive }) =>
@@ -114,7 +114,7 @@ export default function Navbar({ onOpenCall }) {
 
           {/* Mobile burger - 1003px va undan kichik ekranlarda ko'rinadi */}
           <button
-            className="min-[1004px]:hidden inline-flex items-center justify-center h-10 w-10 rounded-xl border border-slate-200 bg-white/70"
+            className="min-[1006px]:hidden inline-flex items-center justify-center h-10 w-10 rounded-xl border border-slate-200 bg-white/70"
             onClick={() => setOpen(true)}
             aria-label="Open menu"
           >
