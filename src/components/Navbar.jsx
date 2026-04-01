@@ -115,7 +115,10 @@ export default function Navbar({ onOpenCall }) {
           {/* Language Dropdown - Har doim ko'rinadi (hamburger yonida) */}
           <LanguageDropdown />
 
-          <button className="btn-outline hidden sm:inline-flex" onClick={onOpenCall}>
+          <button 
+            className="hidden sm:inline-flex items-center justify-center px-8 py-3 bg-[#009A73] text-white font-semibold rounded-lg hover:bg-[#008563] transition-all duration-200 shadow-md active:scale-95" 
+            onClick={onOpenCall}
+          >
             {t("hero.primary")}
           </button>
 
