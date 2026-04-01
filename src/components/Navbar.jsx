@@ -25,9 +25,12 @@ export default function Navbar({ onOpenCall }) {
     };
   }, [open]);
 
-  const linkBase = "text-sm font-medium transition px-3 py-2 rounded-xl";
-  const linkIdle = "text-slate-700 hover:bg-slate-100/70 hover:text-slate-900";
-  const linkActive = "text-emerald-700 bg-emerald-50 border border-emerald-100";
+  const linkBase =
+    "text-sm font-medium transition px-3 py-2 rounded-xl";
+  const linkIdle =
+    "text-slate-700 hover:bg-slate-100/70 hover:text-slate-900";
+  const linkActive =
+    "text-emerald-700 bg-emerald-50 border border-emerald-100";
 
   return (
     <header
@@ -47,67 +50,102 @@ export default function Navbar({ onOpenCall }) {
             className="h-11 w-11 object-contain rounded-lg" 
           />
           <div className="leading-tight">
-            <div className="font-semibold text-slate-900 text-lg">EcoProm</div>
+            <div className="font-semibold text-slate-900">EcoProm</div>
           </div>
         </Link>
 
-        {/* Desktop nav */}
-        <nav className="hidden nav:flex items-center gap-1">
-          <NavLink to="/" className={({ isActive }) => [linkBase, isActive ? linkActive : linkIdle].join(" ")} end>
+        {/* Desktop nav - 1004px va undan katta ekranlarda ko'rinadi */}
+        <nav className="hidden min-[1004px]:flex items-center gap-1">
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              [linkBase, isActive ? linkActive : linkIdle].join(" ")
+            }
+            end
+          >
             {t("nav.home")}
           </NavLink>
-          <NavLink to="/projects" className={({ isActive }) => [linkBase, isActive ? linkActive : linkIdle].join(" ")}>
+
+          <NavLink
+            to="/projects"
+            className={({ isActive }) =>
+              [linkBase, isActive ? linkActive : linkIdle].join(" ")
+            }
+          >
             {t("nav.projects")}
           </NavLink>
-          <NavLink to="/ourproducts" className={({ isActive }) => [linkBase, isActive ? linkActive : linkIdle].join(" ")}>
+
+          <NavLink
+            to="/ourproducts"
+            className={({ isActive }) =>
+              `${linkBase} ${isActive ? linkActive : linkIdle}`
+            }
+          >
             {t("nav.ourproducts")}
           </NavLink>
-          <NavLink to="/about" className={({ isActive }) => [linkBase, isActive ? linkActive : linkIdle].join(" ")}>
+
+          <NavLink
+            to="/about"
+            className={({ isActive }) =>
+              [linkBase, isActive ? linkActive : linkIdle].join(" ")
+            }
+          >
             {t("nav.about")}
           </NavLink>
-          <NavLink to="/contact" className={({ isActive }) => [linkBase, isActive ? linkActive : linkIdle].join(" ")}>
+
+          <NavLink
+            to="/contact"
+            className={({ isActive }) =>
+              [linkBase, isActive ? linkActive : linkIdle].join(" ")
+            }
+          >
             {t("nav.contact")}
           </NavLink>
         </nav>
 
-        {/* Actions (Desktop til tanlagich va Tugma) */}
-        <div className="flex items-center gap-3">
-          <div className="hidden nav:block">
-            <LanguageDropdown />
-          </div>
+        {/* Actions */}
+        <div className="flex items-center gap-2">
+          {/* Language Dropdown - Har doim ko'rinadi (hamburger yonida) */}
+          <LanguageDropdown />
 
           <button className="btn-outline hidden sm:inline-flex" onClick={onOpenCall}>
             {t("hero.primary")}
           </button>
 
-          {/* Mobile burger */}
+          {/* Mobile burger - 1003px va undan kichik ekranlarda ko'rinadi */}
           <button
-            className="nav:hidden inline-flex items-center justify-center h-10 w-10 rounded-xl border border-slate-200 bg-white/70"
+            className="min-[1004px]:hidden inline-flex items-center justify-center h-10 w-10 rounded-xl border border-slate-200 bg-white/70"
             onClick={() => setOpen(true)}
-            aria-label={t("nav.openMenu")}
+            aria-label="Open menu"
           >
             <span className="text-xl">≡</span>
           </button>
         </div>
       </div>
 
-      {/* Mobile menu overlay */}
+      {/* Mobile menu overlay - faqat menyular, tillar YO'Q (chunki tillar tashqarida) */}
       {open && (
-        <div className="nav:hidden fixed inset-0 z-50">
-          <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" onClick={() => setOpen(false)} />
+        <div className="min-[1004px]:hidden fixed inset-0 z-50">
+          <div
+            className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm"
+            onClick={() => setOpen(false)}
+          />
           <div className="absolute right-0 top-0 h-full w-[86%] max-w-sm bg-white shadow-xl p-5 flex flex-col">
             <div className="flex items-center justify-between mb-6">
-              <div className="font-bold text-slate-900 text-lg">{t("nav.menu")}</div>
+              <div className="font-bold text-slate-900 text-lg">
+                {t("nav.menu") || "Menu"}
+              </div>
               <button
-                className="h-10 w-10 flex items-center justify-center rounded-xl border border-slate-200 text-slate-500"
+                className="h-10 w-10 flex items-center justify-center rounded-xl border border-slate-200 text-slate-500 hover:bg-slate-50"
                 onClick={() => setOpen(false)}
+                aria-label="Close menu"
               >
                 ✕
               </button>
             </div>
 
-            {/* Mobile Nav Links */}
-            <div className="grid gap-2 overflow-y-auto flex-1">
+            {/* Faqat menyular ro'yxati (tillar YO'Q) */}
+            <div className="grid gap-2">
               {[
                 { to: "/", label: t("nav.home"), end: true },
                 { to: "/projects", label: t("nav.projects") },
@@ -133,39 +171,6 @@ export default function Navbar({ onOpenCall }) {
                 </NavLink>
               ))}
             </div>
-
-            {/* Mobile Language & CTA Section */}
-            <div className="mt-auto pt-6 border-t border-slate-100">
-              <p className="text-[12px] font-bold text-slate-400 uppercase tracking-widest mb-3 px-1">{t("language.select")}</p>
-              <div className="flex items-center gap-2 mb-6">
-                {["uz", "ru", "en"].map((lang) => (
-                  <button
-                    key={lang}
-                    onClick={() => {
-                      i18n.changeLanguage(lang);
-                      setOpen(false);
-                    }}
-                    className={`flex-1 py-2.5 rounded-xl border font-bold text-sm transition-all ${
-                      i18n.language === lang
-                        ? "bg-emerald-600 border-emerald-600 text-white shadow-md shadow-emerald-100"
-                        : "bg-slate-50 border-slate-100 text-slate-600"
-                    }`}
-                  >
-                    {lang.toUpperCase()}
-                  </button>
-                ))}
-              </div>
-
-              <button
-                className="btn-primary w-full py-4 rounded-2xl"
-                onClick={() => {
-                  setOpen(false);
-                  onOpenCall?.();
-                }}
-              >
-                {t("hero.primary")}
-              </button>
-            </div>
           </div>
         </div>
       )}
@@ -173,7 +178,7 @@ export default function Navbar({ onOpenCall }) {
   );
 }
 
-// Navbar uchun Dropdown Komponenti
+// Language Dropdown Komponenti
 function LanguageDropdown() {
   const { t, i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
@@ -189,7 +194,9 @@ function LanguageDropdown() {
 
   useEffect(() => {
     const handleClick = (e) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) setIsOpen(false);
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setIsOpen(false);
+      }
     };
     document.addEventListener("mousedown", handleClick);
     return () => document.removeEventListener("mousedown", handleClick);
@@ -200,7 +207,7 @@ function LanguageDropdown() {
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center gap-2 px-3 py-2 hover:bg-slate-100/80 rounded-xl transition-all"
-        aria-label={t("language.select")}
+        aria-label={t("language.select") || "Tilni tanlang"}
       >
         <Globe size={16} className="text-emerald-600" />
         <span className="text-sm font-bold text-slate-700 uppercase tracking-tight">
@@ -213,7 +220,7 @@ function LanguageDropdown() {
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-40 bg-white border border-slate-100 shadow-2xl rounded-2xl py-1.5 z-[100] animate-in fade-in zoom-in duration-150">
+        <div className="absolute right-0 mt-2 w-40 bg-white border border-slate-100 shadow-2xl rounded-2xl py-1.5 z-[100]">
           {languages.map((lang) => (
             <button
               key={lang.code}
