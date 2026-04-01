@@ -39,7 +39,7 @@ export default function OurPartners() {
   const { t } = useTranslation();
 
   return (
-    <section className="py-24 bg-white/0 relative overflow-hidden">
+    <section className="py-24 bg-white relative overflow-hidden">
       {/* Elegant background */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-emerald-50/20 rounded-full blur-3xl" />

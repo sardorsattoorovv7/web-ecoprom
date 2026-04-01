@@ -27,19 +27,8 @@ export default function Projects() {
   };
 
   return (
-    <div className="relative min-h-screen bg-white">
-      
-      {/* Grid background */}
-      <div 
-        className="absolute inset-0 pointer-events-none opacity-[0.08]"
-        style={{
-          backgroundImage: `
-            linear-gradient(to right, #10b981 1px, transparent 1px),
-            linear-gradient(to bottom, #10b981 1px, transparent 1px)
-          `,
-          backgroundSize: "40px 40px",
-        }}
-      />
+    <div className="relative min-h-screen bg-slate-100">
+    
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-20">
         

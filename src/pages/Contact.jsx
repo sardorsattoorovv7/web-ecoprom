@@ -159,19 +159,10 @@ export default function Contact() {
   return (
     <div className="relative min-h-screen overflow-hidden">
       {/* Background Grid */}
-      <div 
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage: `
-            linear-gradient(to right, #e2e8f0 1px, transparent 1px),
-            linear-gradient(to bottom, #e2e8f0 1px, transparent 1px)
-          `,
-          backgroundSize: "32px 32px",
-        }}
-      />
+      
       
       {/* Background Overlay */}
-      <div className="absolute inset-0 bg-white/80 pointer-events-none" />
+      <div className="absolute inset-0 bg-slate-100 pointer-events-none" />
 
       <div className="relative z-10 container-pad py-10 md:py-16">
         {/* Header */}

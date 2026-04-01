@@ -141,22 +141,21 @@ const StatCard = ({ value, label, suffix = "+", delay = 0 }) => {
     <motion.div
       ref={inViewRef}
       initial={{ 
-        opacity: 0, 
-        x: isFromLeft ? -100 : 100,
-        y: 20
-      }}
-      animate={inView ? { 
-        opacity: 1, 
-        x: 0,
-        y: 0
-      } : {}}
-      transition={{ 
-        duration: 0.7, 
-        delay,
+      opacity: 0, 
+      y: -50,
+      scale: 0.7
+    }}
+    animate={inView ? { 
+      opacity: 1, 
+      y: 0,
+      scale: 1,
+      transition: {
         type: "spring",
-        stiffness: 100,
-        damping: 12
-      }}
+        stiffness: 200,
+        damping: 15,
+        delay: delay * 0.05
+      }
+    } : {}}
       className="text-center p-6 rounded-2xl bg-gradient-to-br from-slate-50 to-white shadow-lg hover:shadow-xl transition-all hover:scale-105 hover:-translate-y-2"
     >
       <div ref={ref} className="text-4xl md:text-5xl font-bold text-emerald-600 mb-2">
