@@ -35,10 +35,10 @@ export default function Navbar({ onOpenCall }) {
   return (
     <header
       className={[
-        "sticky top-0 z-50 border-b backdrop-blur-md transition",
+        "fixed top-0 left-0 right-0 z-50 border-b backdrop-blur-md transition",
         scrolled
-          ? "bg-white/85 border-slate-200 shadow-sm"
-          : "bg-white/55 border-slate-200/60",
+          ? "bg-white/50 border-slate-200 shadow-md"
+          : "bg-white/20 border-slate-200",
       ].join(" ")}
     >
       <div className="container-pad h-16 flex items-center justify-between">
