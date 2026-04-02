@@ -61,8 +61,8 @@ export default function Navbar({ onOpenCall }) {
           </div>
         </Link>
 
-        {/* Desktop nav - 1004px va undan katta ekranlarda ko'rinadi */}
-        <nav className="hidden min-[1009px]:flex items-center gap-1">
+        {/* Desktop nav - 1060px va undan katta ekranlarda ko'rinadi */}
+        <nav className="hidden min-[1060px]:flex items-center gap-1">
           <NavLink
             to="/"
             className={({ isActive }) =>
@@ -122,9 +122,9 @@ export default function Navbar({ onOpenCall }) {
             {t("hero.primary")}
           </button>
 
-          {/* Mobile burger - 1003px va undan kichik ekranlarda ko'rinadi */}
+          {/* Mobile burger - 1059px va undan kichik ekranlarda ko'rinadi */}
           <button
-            className="min-[1009px]:hidden inline-flex items-center justify-center h-10 w-10 rounded-xl border border-slate-200 bg-white/70"
+            className="min-[1060px]:hidden inline-flex items-center justify-center h-10 w-10 rounded-xl border border-slate-200 bg-white/70"
             onClick={() => setOpen(true)}
             aria-label="Open menu"
           >
@@ -135,7 +135,7 @@ export default function Navbar({ onOpenCall }) {
 
       {/* Mobile menu overlay - faqat menyular, tillar YO'Q (chunki tillar tashqarida) */}
       {open && (
-        <div className="min-[1004px]:hidden fixed inset-0 z-50">
+        <div className="min-[1060px]:hidden fixed inset-0 z-50">
           <div
             className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm"
             onClick={() => setOpen(false)}
