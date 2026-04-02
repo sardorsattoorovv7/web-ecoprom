@@ -19,7 +19,7 @@ const OurProduction = lazy(() => import("../components/OurProduction"));
 const AiAssistant = lazy(() => import("../components/AIAssistant"));
 const PartnerMarquee = lazy(() => import("../components/PartnerMarquee"));
 const CookieConsentBanner = lazy(() => import("../components/CookieConsentBanner"));
-import SideDecor from "../components/SideDecor";
+import ProductShowcase from "../components/ProductShowcase";
 /* ---------------- 1. COUNTER HOOK ---------------- */
 const useCounter = (end, duration = 2000) => {
   const [count, setCount] = useState(0);
@@ -508,7 +508,7 @@ export default function EcoPromMain({ onOpenCall }) {
             </div>
           </div>
         </section>
-
+              
         {/* Stats Section with Counters */}
         <div className="w-full flex justify-center bg-white">
           <div className="w-full max-w-6xl px-4 mb-10">
@@ -529,7 +529,7 @@ export default function EcoPromMain({ onOpenCall }) {
             </SectionWrapper>
           </div>
         </div>
-
+        <ProductShowcase />
         {/* Color Configurator */}
         {/* <div className="w-full flex justify-center bg-white">
           <div className="w-full max-w-6xl px-4 mb-10">
