@@ -56,7 +56,7 @@ export default function Footer() {
   return (
     <footer className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white overflow-hidden">
       {/* Kvadratcha grid background */}
-      <div 
+      {/* <div 
         className="absolute inset-0 pointer-events-none"
         style={{
           backgroundImage: `
@@ -65,7 +65,7 @@ export default function Footer() {
           `,
           backgroundSize: "32px 32px",
         }}
-      />
+      /> */}
 
       {/* Background decoration - yumshoqroq qilindi */}
       <div className="absolute inset-0 pointer-events-none opacity-20">
