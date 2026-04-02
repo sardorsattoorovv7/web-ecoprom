@@ -529,7 +529,7 @@ export default function EcoPromMain({ onOpenCall }) {
             </SectionWrapper>
           </div>
         </div>
-        <ProductShowcase />
+        {/* <ProductShowcase /> */}
         {/* Color Configurator */}
         {/* <div className="w-full flex justify-center bg-white">
           <div className="w-full max-w-6xl px-4 mb-10">
