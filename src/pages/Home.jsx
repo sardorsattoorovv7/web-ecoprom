@@ -510,8 +510,8 @@ export default function EcoPromMain({ onOpenCall }) {
         </section>
               
         {/* Stats Section with Counters */}
-        <div className="w-full flex justify-center bg-white">
-          <div className="w-full max-w-6xl px-4 mb-10">
+        <div className="w-[full] flex justify-center bg-white">
+          <div className="w-full max-w-7xl px-4 mb-10">
             <SectionWrapper className="py-16 bg-slate-100 rounded-2xl shadow-md">
           <div className="container-pad">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">

@@ -20,7 +20,7 @@ export default function FreeSamples() {
   const { t } = useTranslation();
 
   return (
-    <section className="py-20 mb-20 bg-slate-100 rounded-2xl shadow-md max-w-6xl w-full px-4 mx-auto">
+    <section className="py-20 mb-20 bg-slate-100 rounded-2xl shadow-md max-w-7xl w-full px-4 mx-auto">
       <div className="grid lg:grid-cols-2 gap-12 items-center">
           
           {/* LEFT */}

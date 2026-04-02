@@ -40,7 +40,7 @@ export default function Navbar({ onOpenCall }) {
     <header
       className={[
         sticky
-          ? "fixed top-4 left-0 right-0 mx-auto z-50 border-b backdrop-blur-md transition max-w-6xl w-[98%] rounded-xl shadow-lg border"
+          ? "fixed top-4 left-0 right-0 mx-auto z-50 border-b backdrop-blur-md transition max-w-7xl w-[98%] rounded-xl shadow-lg border"
           : "static border-b backdrop-blur-md transition",
         sticky
           ? (scrolled ? "bg-white/50 border-slate-200" : "bg-white/20 border-slate-200")

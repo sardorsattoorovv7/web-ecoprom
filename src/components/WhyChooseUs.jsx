@@ -22,9 +22,9 @@ export default function WhyChooseUs() {
   }, [t]);
 
   return ( 
-    <section className="py-24 bg-slate-100 rounded-2xl shadow-md max-w-6xl w-full px-4 mx-auto mb-10">
+    <section className="py-24 bg-slate-100 rounded-2xl shadow-md max-w-7xl w-full px-4 mx-auto mb-10">
       <div className="w-full flex justify-center">
-        <div className="w-full max-w-6xl px-4">
+        <div className="w-full max-w-7xl px-4">
           <div className="container-pad">
         {/* Header */}
         <motion.div

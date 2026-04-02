@@ -114,7 +114,7 @@ export default function OurProducts({ onProductClick }) {
 
   return (
     <>
-      <section className="py-24 bg-slate-100 rounded-2xl shadow-md max-w-6xl w-full px-4 mx-auto mb-10">
+      <section className="py-24 bg-slate-100 rounded-2xl shadow-md max-w-7xl w-full px-4 mx-auto mb-10">
         <div className="container-pad relative z-10">
           <motion.div 
             className="text-center mb-16"
