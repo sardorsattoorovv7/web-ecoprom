@@ -54,7 +54,7 @@ export default function Footer() {
   const productIcons = [Package, Snowflake, Factory, Factory];
 
   return (
-    <footer className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white overflow-hidden">
+    <footer className="relative bg-gradient-to-br from-slate-900 via-slate-900 to-slate-900 text-white overflow-hidden">
       {/* Kvadratcha grid background */}
       {/* <div 
         className="absolute inset-0 pointer-events-none"
