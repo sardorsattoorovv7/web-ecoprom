@@ -313,6 +313,7 @@ export default function EcoPromMain({ onOpenCall }) {
   const [selectedColor, setSelectedColor] = useState(panelColors[0]);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
+
   // selectedColor panelColors o'zgarganda yangilanadi
   useEffect(() => {
     setSelectedColor(panelColors[0]);
@@ -529,6 +530,8 @@ export default function EcoPromMain({ onOpenCall }) {
             </SectionWrapper>
           </div>
         </div>
+
+
         {/* <ProductShowcase /> */}
         {/* Color Configurator */}
         {/* <div className="w-full flex justify-center bg-white">
@@ -619,6 +622,7 @@ export default function EcoPromMain({ onOpenCall }) {
           <WhyChooseUs />
         </Suspense>
 
+
         <Suspense fallback={<SkeletonLoader />}>
           <OurProduction />
         </Suspense>
@@ -634,7 +638,7 @@ export default function EcoPromMain({ onOpenCall }) {
         <Suspense fallback={<SkeletonLoader />}>
           <CookieConsentBanner />
         </Suspense>
-
+     
         <BackToTop />
       </div>
     </>

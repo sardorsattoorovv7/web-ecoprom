@@ -50,17 +50,13 @@ export default function Navbar({ onOpenCall }) {
     >
       <div className="container-pad h-16 flex items-center justify-between">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2">
+       <Link to="/" className="flex items-center">
           <img 
-            src="/logo.png" 
+            src="/logo1.png" 
             alt="EcoProm Logo" 
-            className="h-11 w-11 object-contain rounded-lg" 
+            className="h-40 w-40 object-contain rounded-lg" 
           />
-          <div className="leading-tight">
-            <div className="font-semibold text-slate-900">EcoProm</div>
-          </div>
         </Link>
-
         {/* Desktop nav - 1060px va undan katta ekranlarda ko'rinadi */}
         <nav className="hidden min-[1060px]:flex items-center gap-1">
           <NavLink
