@@ -50,13 +50,16 @@ export default function Navbar({ onOpenCall }) {
     >
       <div className="container-pad h-16 flex items-center justify-between">
         {/* Logo */}
-       <Link to="/" className="flex items-center">
-          <img 
-            src="/logo1.png" 
-            alt="EcoProm Logo" 
-            className="h-40 w-40 object-contain rounded-lg" 
-          />
-        </Link>
+       <Link to="/" className="flex items-center overflow-hidden h-16 w-32"> 
+  <img 
+    src="/logo1.png" 
+    alt="EcoProm Logo" 
+    /* scale-150 rasmni o'zini ichkarida kattalashtiradi, 
+       lekin Link (konteyner) o'lchami o'zgarmaydi.
+    */
+    className="h-full w-full object-cover scale-125" 
+  />
+</Link>
         {/* Desktop nav - 1060px va undan katta ekranlarda ko'rinadi */}
         <nav className="hidden min-[1060px]:flex items-center gap-1">
           <NavLink
