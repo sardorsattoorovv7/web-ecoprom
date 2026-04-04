@@ -419,7 +419,7 @@ export default function Contact() {
           variants={fade}
           className="mt-16"
         >
-          <div className="bg-gradient-to-r from-emerald-50 to-emerald-100/50 rounded-3xl p-8 md:p-12">
+          <div className="bg-emerald from-emerald-50 to-emerald-100/50 rounded-3xl p-8 md:p-12">
             <div className="text-center mb-8">
               <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3">
                 {t("contact.faq.title")}
