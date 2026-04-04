@@ -87,7 +87,7 @@ export default function FreeSamples() {
               variants={fadeUp}
               custom={5}
             >
-              <div className="bg-emerald-50 border border-emerald-100 rounded-[40px] p-8 md:p-10 shadow-lg">
+              <div className="bg-white/50 border border-emerald-100 rounded-[40px] p-8 md:p-10 shadow-lg">
                 <LeadForm compact={true} />
               </div>
             </motion.div>
