@@ -37,9 +37,9 @@ export default function OurProduction() {
   }, [t, i18n.language]);
 
   const stats = useMemo(() => {
-    const icons = [Factory, Users, Settings, Shield];
-    const keys = ["area", "employees", "lines", "quality"];
-    const values = ["10 000 m²", "100+", "5", "ISO 9001"];
+    const icons = [Factory, Users, Settings];
+    const keys = ["area", "employees", "lines"];
+    const values = ["10 000 m²", "100+", "5"];
     
     return keys.map((key, index) => ({
       id: index + 1,
@@ -119,7 +119,7 @@ export default function OurProduction() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-12"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-12"
         >
           {stats.map((stat, index) => {
             const Icon = stat.icon;
