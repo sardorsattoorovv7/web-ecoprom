@@ -579,5 +579,29 @@
       "specs": "Kompressor: Bitzer | Agregat: Komplekt",
       "details": ["Tayyor yechim: Barcha qismlari zavodda yig‘ilgan", "Avtomatika: To‘liq boshqaruv paneli bilan ta’minlangan", "Energiya: Maksimal darajada tejamkor", "Qo‘llanilishi: Meva-sabzavot omborlari va go‘sht sexlari"]
     }
-  }
+  },
+  "ai_assistant": {
+    "welcome_msg": "Assalomu alaykum! Men EcoProm virtual yordamchisiman. Sizga PIR panel, sovutkich kamera yoki montaj bo‘yicha yordam beraman.",
+    "tooltip": "Savolingiz bormi?",
+    "status": "Online 24/7",
+    "typing": "Yozmoqda...",
+    "placeholder": "Savolingizni yozing...",
+    "error_msg": "Kechirasiz, hozir javob olinmadi. Biz bilan bog‘laning: +998 78 555 86 18",
+    "connection_error": "Kechirasiz, hozir ulanishda muammo bor.",
+    "products": {
+      "pir_pur": "PIR va PUR farqi",
+      "cold_room": "Sovutgich kamera",
+      "doors": "Eshik turlari"
+    },
+    "quick_questions": [
+      "PIR panel nima?",
+      "Narxni qanday olsam bo‘ladi?",
+      "Montaj ham qilasizlarmi?",
+      "Yetkazib berish qancha vaqt?"
+    ],
+    "faq_items": [
+      { "question": "Kafolat muddati?", "answer": "13 yil" },
+      { "question": "Yetkazib berish?", "answer": "5-7 ish kuni" }
+    ]
+}
 }

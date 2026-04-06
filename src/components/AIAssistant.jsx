@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next"; // Saytingizdagi i18n kutubxonasi
 import {
   MessageCircle,
   X,
@@ -11,57 +12,82 @@ import {
   Package,
   Snowflake,
   DoorOpen,
-  Factory,
   AlertCircle,
 } from "lucide-react";
 
-const START_MESSAGES = [
-  {
-    role: "assistant",
-    content:
-      "Assalomu alaykum! Men EcoProm virtual yordamchisiman. Sizga PIR panel, sovutkich kamera yoki montaj bo‘yicha yordam beraman.",
-  },
-];
-
-const QUICK_QUESTIONS = [
-  "PIR panel nima?",
-  "Sovutkich kamera uchun qaysi qalinlik kerak?",
-  "Montaj ham qilasizlarmi?",
-  "Narxni qanday olsam bo‘ladi?",
-];
-
-const PRODUCT_QUESTIONS = [
-  { icon: Package, text: "PIR va PUR farqi", color: "text-emerald-600" },
-  { icon: Snowflake, text: "Sovutgich kamera hajmi", color: "text-blue-600" },
-  { icon: DoorOpen, text: "Eshik turlari", color: "text-amber-600" },
-];
-
-const FAQ_ITEMS = [
-  {
-    question: "Yetkazib berish muddati?",
-    answer: "5-7 ish kuni",
-    category: "yetkazib",
-  },
-  {
-    question: "Kafolat muddati?",
-    answer: "13 yil",
-    category: "kafolat",
-  },
-  {
-    question: "Namuna olish mumkinmi?",
-    answer: "Bepul namunalar",
-    category: "namuna",
-  },
-  {
-    question: "To'lov turlari?",
-    answer: "Naqd, plastik, bank o'tkazmasi",
-    category: "tolov",
-  },
-];
-
 export default function AiAssistant() {
+  const { i18n } = useTranslation();
+  const currentLang = i18n.language || "uz";
+
+  // --- TILGA MOS LUG'AT ---
+  const UI_TEXT = {
+    uz: {
+      welcome: "Assalomu alaykum! Men EcoProm virtual yordamchisiman. Sizga PIR panel, sovutkich kamera yoki montaj bo‘yicha yordam beraman.",
+      tooltip: "Savolingiz bormi?",
+      subtitle: "Savollaringizga tezkor javob",
+      history: "So'nggi mavzular",
+      newChat: "Yangi chat",
+      faq: "Tez-tez so'raladigan savollar",
+      placeholder: "Savolingizni yozing...",
+      online: "Online 24/7",
+      error: "Ulanishda muammo bo'ldi.",
+      questions: ["PIR panel nima?", "Sovutkich kamera qalinligi?", "Montaj qilasizlarmi?", "Narxni olish"],
+      products: [
+        { icon: Package, text: "PIR va PUR farqi", color: "text-emerald-600" },
+        { icon: Snowflake, text: "Kamera hajmi", color: "text-blue-600" },
+        { icon: DoorOpen, text: "Eshik turlari", color: "text-amber-600" },
+      ],
+      faqItems: [
+        { question: "Muddati?", answer: "5-7 ish kuni" },
+        { question: "Kafolat?", answer: "13 yil" }
+      ]
+    },
+    ru: {
+      welcome: "Здравствуйте! Я помощник EcoProm. Помогу с ПИР-панелями, камерами или монтажом.",
+      tooltip: "Есть вопросы?",
+      subtitle: "Быстрые ответы на вопросы",
+      history: "Последние темы",
+      newChat: "Новый чат",
+      faq: "Частые вопросы",
+      placeholder: "Напишите ваш вопрос...",
+      online: "В сети 24/7",
+      error: "Проблема с соединением.",
+      questions: ["Что такое ПИР?", "Толщина камер?", "Делаете монтаж?", "Как узнать цену?"],
+      products: [
+        { icon: Package, text: "ПИР или ПУР?", color: "text-emerald-600" },
+        { icon: Snowflake, text: "Объем камеры", color: "text-blue-600" },
+        { icon: DoorOpen, text: "Типы дверей", color: "text-amber-600" },
+      ],
+      faqItems: [
+        { question: "Сроки?", answer: "5-7 рабочих дней" },
+        { question: "Гарантия?", answer: "13 лет" }
+      ]
+    },
+    en: {
+      welcome: "Hello! I am EcoProm assistant. I can help with PIR panels, cold rooms, or installation.",
+      tooltip: "Have questions?",
+      subtitle: "Quick answers to your questions",
+      history: "Recent topics",
+      newChat: "New chat",
+      faq: "FAQ",
+      placeholder: "Type your question...",
+      online: "Online 24/7",
+      error: "Connection problem.",
+      questions: ["What is PIR?", "Room thickness?", "Do you install?", "Get a price"],
+      products: [
+        { icon: Package, text: "PIR vs PUR", color: "text-emerald-600" },
+        { icon: Snowflake, text: "Room volume", color: "text-blue-600" },
+        { icon: DoorOpen, text: "Door types", color: "text-amber-600" },
+      ],
+      faqItems: [
+        { question: "Delivery?", answer: "5-7 working days" },
+        { question: "Warranty?", answer: "13 years" }
+      ]
+    }
+  }[currentLang] || { /* default uz matnlari */ };
+
   const [open, setOpen] = useState(false);
-  const [messages, setMessages] = useState(START_MESSAGES);
+  const [messages, setMessages] = useState([{ role: "assistant", content: UI_TEXT.welcome }]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [showHistory, setShowHistory] = useState(false);
@@ -71,15 +97,14 @@ export default function AiAssistant() {
   const endRef = useRef(null);
   const inputRef = useRef(null);
 
+  // Til o'zgarganda chatni tozalash va xush kelibsiz xabarini yangilash
+  useEffect(() => {
+    setMessages([{ role: "assistant", content: UI_TEXT.welcome }]);
+  }, [currentLang]);
+
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, loading]);
-
-  useEffect(() => {
-    if (open) {
-      setTimeout(() => inputRef.current?.focus(), 300);
-    }
-  }, [open]);
 
   async function sendMessage(text) {
     const value = (text ?? input).trim();
@@ -92,311 +117,99 @@ export default function AiAssistant() {
     setInput("");
     setLoading(true);
     setError(null);
-    setShowFaq(false);
 
     try {
       const res = await fetch("/api/chat", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           messages: nextMessages,
+          lang: currentLang // BACKENDGA TILNI YUBORISH
         }),
       });
 
       const data = await res.json();
-      console.log("AI API response:", { status: res.status, data });
+      if (!res.ok) throw new Error(data?.error || "API Error");
 
-      if (!res.ok) {
-        throw new Error(data?.detail || data?.error || "API xatolik");
-      }
-
-      setMessages([
-        ...nextMessages,
-        {
-          role: "assistant",
-          content:
-            data.reply ||
-            "Kechirasiz, hozir javob olinmadi. Biz bilan bog‘laning: +998 78 555 86 18",
-        },
-      ]);
+      setMessages([...nextMessages, { role: "assistant", content: data.reply }]);
     } catch (err) {
-      console.error("AI API xatolik:", err);
-      setError(err.message);
-
-      setMessages([
-        ...nextMessages,
-        {
-          role: "assistant",
-          content:
-            "Kechirasiz, hozir ulanishda muammo bor. Biz bilan bog‘laning: +998 78 555 86 18",
-        },
-      ]);
+      setError(UI_TEXT.error);
+      setMessages([...nextMessages, { role: "assistant", content: `Call us: +998 78 555 86 18` }]);
     } finally {
       setLoading(false);
     }
   }
 
-  function onSubmit(e) {
-    e.preventDefault();
-    sendMessage();
-  }
-
-  function clearChat() {
-    setMessages(START_MESSAGES);
-    setShowHistory(false);
-    setError(null);
-  }
-
-  function handleFaqClick(question) {
-    sendMessage(question);
-    setShowFaq(false);
-  }
+  const clearChat = () => setMessages([{ role: "assistant", content: UI_TEXT.welcome }]);
 
   return (
     <>
       {!open && (
         <div className="fixed bottom-28 right-6 z-[100] flex items-center gap-3">
-
-            {/* Tooltip */}
-            <div className="hidden sm:block rounded-full bg-white px-4 py-2 text-xs font-medium text-slate-700 shadow-lg animate-fadeIn">
-            Savolingiz bormi?
-            </div>
-
-            {/* AI Button */}
-            <div className="relative">
-
-            {/* ripple halo */}
-            <span className="absolute inset-0 rounded-full bg-emerald-400/40 animate-ping"></span>
-            <span className="absolute inset-[-10px] rounded-full border border-emerald-300/40 animate-[ping_2.5s_ease-out_infinite]"></span>
-
-            {/* glow */}
-            <div className="absolute inset-[-12px] rounded-full bg-emerald-500/30 blur-xl"></div>
-
-            <button
-                onClick={() => setOpen(true)}
-                className="relative flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-emerald-500 to-emerald-600 text-white shadow-[0_15px_40px_rgba(16,185,129,0.45)] transition duration-300 hover:scale-110 hover:shadow-[0_20px_55px_rgba(16,185,129,0.55)]"
-            >
-                <MessageCircle className="h-6 w-6 " />
-            </button>
-
-            </div>
-
+          <div className="hidden sm:block rounded-full bg-white px-4 py-2 text-xs font-medium text-slate-700 shadow-lg">{UI_TEXT.tooltip}</div>
+          <button onClick={() => setOpen(true)} className="relative h-14 w-14 rounded-full bg-emerald-600 text-white shadow-xl flex items-center justify-center transition hover:scale-110">
+            <MessageCircle className="h-6 w-6" />
+          </button>
         </div>
-)}
+      )}
 
       {open && (
         <div className="fixed bottom-5 right-5 z-[100] w-[calc(100%-24px)] max-w-[400px] overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-2xl">
+          {/* Header */}
           <div className="flex items-center justify-between bg-gradient-to-r from-emerald-600 to-emerald-500 px-4 py-3 text-white">
             <div className="flex items-center gap-2">
               <Bot className="h-5 w-5" />
               <div>
-                <div className="flex items-center gap-1.5">
-                  <span className="text-sm font-semibold">EcoProm AI</span>
-                  <Sparkles className="h-3 w-3 text-emerald-200" />
-                </div>
-                <div className="text-xs text-emerald-100">
-                  Savollaringizga tezkor javob
-                </div>
+                <div className="text-sm font-semibold">EcoProm AI</div>
+                <div className="text-[10px] text-emerald-100">{UI_TEXT.subtitle}</div>
               </div>
             </div>
-
-            <div className="flex items-center gap-1">
-              <button
-                onClick={() => setShowHistory(!showHistory)}
-                className="rounded-lg p-1.5 transition hover:bg-white/10"
-                title="Tarix"
-              >
-                <History className="h-4 w-4" />
-              </button>
-              <button
-                onClick={() => setShowFaq(!showFaq)}
-                className="rounded-lg p-1.5 transition hover:bg-white/10"
-                title="Tez so'raladigan savollar"
-              >
-                <HelpCircle className="h-4 w-4" />
-              </button>
-              <button
-                onClick={() => setOpen(false)}
-                className="rounded-lg p-1.5 transition hover:bg-white/10"
-                aria-label="Yopish"
-              >
-                <X className="h-5 w-5" />
-              </button>
+            <div className="flex gap-1">
+              <button onClick={() => setShowHistory(!showHistory)} className="p-1.5 hover:bg-white/10 rounded-lg"><History size={16} /></button>
+              <button onClick={() => setShowFaq(!showFaq)} className="p-1.5 hover:bg-white/10 rounded-lg"><HelpCircle size={16} /></button>
+              <button onClick={() => setOpen(false)} className="p-1.5 hover:bg-white/10 rounded-lg"><X size={18} /></button>
             </div>
           </div>
 
-          {showHistory && (
-            <div className="border-b border-slate-200 bg-slate-50 p-3">
-              <div className="mb-2 flex items-center justify-between">
-                <span className="text-xs font-medium text-slate-500">
-                  So'nggi mavzular
-                </span>
-                <button
-                  onClick={clearChat}
-                  className="text-xs text-emerald-600 hover:text-emerald-700"
-                >
-                  Yangi chat
-                </button>
-              </div>
-              <div className="space-y-1.5">
-                {messages
-                  .filter((m) => m.role === "user")
-                  .slice(-3)
-                  .map((msg, idx) => (
-                    <button
-                      key={idx}
-                      onClick={() => sendMessage(msg.content)}
-                      className="w-full truncate rounded-lg bg-white px-3 py-2 text-left text-xs text-slate-600 shadow-sm hover:bg-emerald-50"
-                    >
-                      {msg.content}
-                    </button>
-                  ))}
-              </div>
-            </div>
-          )}
-
-          {showFaq && (
-            <div className="border-b border-slate-200 bg-slate-50 p-3">
-              <span className="mb-2 block text-xs font-medium text-slate-500">
-                Tez-tez so'raladigan savollar
-              </span>
-              <div className="grid grid-cols-2 gap-2">
-                {FAQ_ITEMS.map((item, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => handleFaqClick(item.question)}
-                    className="rounded-lg bg-white p-2 text-left shadow-sm hover:bg-emerald-50"
-                  >
-                    <div className="text-xs font-medium text-slate-700">
-                      {item.question}
+          {/* Chat Area */}
+          <div className="h-[380px] overflow-y-auto bg-slate-50 p-4 space-y-3">
+            {(showHistory || showFaq) && (
+                <div className="bg-white p-3 rounded-xl border border-slate-200 mb-4 animate-in slide-in-from-top">
+                    <span className="text-xs font-bold text-slate-500 block mb-2">{showHistory ? UI_TEXT.history : UI_TEXT.faq}</span>
+                    <div className="grid grid-cols-1 gap-2">
+                        {(showHistory ? messages.filter(m => m.role === 'user').slice(-3) : UI_TEXT.faqItems).map((item, i) => (
+                            <button key={i} onClick={() => { sendMessage(item.content || item.question); setShowHistory(false); setShowFaq(false); }} className="text-left text-xs p-2 bg-slate-50 rounded-lg hover:bg-emerald-50 truncate">
+                                {item.content || item.question}
+                            </button>
+                        ))}
                     </div>
-                    <div className="mt-0.5 text-[10px] text-emerald-600">
-                      {item.answer}
-                    </div>
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
-
-          <div className="max-h-[380px] space-y-3 overflow-y-auto bg-slate-50 p-4">
-            {messages.map((msg, idx) => {
-              const isAssistant = msg.role === "assistant";
-
-              return (
-                <div
-                  key={`${msg.role}-${idx}`}
-                  className={`flex ${
-                    isAssistant ? "justify-start" : "justify-end"
-                  }`}
-                >
-                  <div
-                    className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-6 ${
-                      isAssistant
-                        ? "bg-white text-slate-700 shadow-sm"
-                        : "bg-emerald-600 text-white"
-                    }`}
-                  >
-                    {msg.content}
-                  </div>
                 </div>
-              );
-            })}
-
-            {loading && (
-              <div className="flex justify-start">
-                <div className="flex items-center gap-2 rounded-2xl bg-white px-4 py-3 text-sm text-slate-500 shadow-sm">
-                  <div className="h-2 w-2 animate-bounce rounded-full bg-emerald-500 [animation-delay:-0.3s]"></div>
-                  <div className="h-2 w-2 animate-bounce rounded-full bg-emerald-500 [animation-delay:-0.15s]"></div>
-                  <div className="h-2 w-2 animate-bounce rounded-full bg-emerald-500"></div>
-                </div>
-              </div>
             )}
 
-            {error && (
-              <div className="flex justify-center">
-                <div className="flex items-center gap-2 rounded-full bg-red-50 px-3 py-1.5 text-xs text-red-600">
-                  <AlertCircle className="h-3 w-3" />
-                  {error}
+            {messages.map((msg, idx) => (
+              <div key={idx} className={`flex ${msg.role === "assistant" ? "justify-start" : "justify-end"}`}>
+                <div className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm ${msg.role === "assistant" ? "bg-white text-slate-700 shadow-sm" : "bg-emerald-600 text-white"}`}>
+                  {msg.content}
                 </div>
               </div>
-            )}
-
+            ))}
+            {loading && <div className="text-xs text-slate-400">AI is typing...</div>}
             <div ref={endRef} />
           </div>
 
+          {/* Footer / Input */}
           <div className="border-t border-slate-200 bg-white p-3">
-            <div className="mb-3 grid grid-cols-4 gap-2">
-              {PRODUCT_QUESTIONS.map((item, idx) => {
-                const Icon = item.icon;
-                return (
-                  <button
-                    key={idx}
-                    onClick={() => sendMessage(item.text)}
-                    className="flex flex-col items-center gap-1 rounded-xl border border-slate-200 bg-slate-50 p-2 transition hover:border-emerald-300 hover:bg-emerald-50"
-                  >
-                    <Icon className={`h-4 w-4 ${item.color}`} />
-                    <span className="text-center text-[10px] text-slate-600">
-                      {item.text}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-
             <div className="mb-3 flex flex-wrap gap-2">
-              {QUICK_QUESTIONS.map((q) => (
-                <button
-                  key={q}
-                  onClick={() => sendMessage(q)}
-                  className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs text-slate-700 transition hover:border-emerald-300 hover:bg-emerald-50"
-                >
-                  {q}
-                </button>
+              {UI_TEXT.questions.map((q) => (
+                <button key={q} onClick={() => sendMessage(q)} className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-[10px] hover:bg-emerald-50">{q}</button>
               ))}
             </div>
-
-            <form onSubmit={onSubmit} className="flex items-center gap-2">
-              <a
-                href="tel:+998785558618"
-                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-emerald-100 text-emerald-600 transition hover:bg-emerald-200"
-                aria-label="Qo‘ng‘iroq qilish"
-              >
-                <Phone className="h-5 w-5" />
-              </a>
-
-              <input
-                ref={inputRef}
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder="Savolingizni yozing..."
-                className="h-11 w-full rounded-xl border border-slate-200 px-4 text-sm outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20"
-              />
-
-              <button
-                type="submit"
-                disabled={loading}
-                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-emerald-600 text-white transition hover:bg-emerald-700 disabled:cursor-not-allowed disabled:opacity-60"
-                aria-label="Yuborish"
-              >
-                <Send className="h-4 w-4" />
+            <form onSubmit={(e) => { e.preventDefault(); sendMessage(); }} className="flex gap-2">
+              <input value={input} onChange={(e) => setInput(e.target.value)} placeholder={UI_TEXT.placeholder} className="h-11 flex-1 border rounded-xl px-4 text-sm focus:border-emerald-500 outline-none" />
+              <button type="submit" disabled={loading} className="h-11 w-11 bg-emerald-600 text-white rounded-xl flex items-center justify-center disabled:opacity-50">
+                <Send size={18} />
               </button>
             </form>
-
-            <div className="mt-3 flex items-center justify-between">
-              <div className="flex items-center gap-1.5">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
-                <span className="text-[10px] text-slate-400">Online 24/7</span>
-              </div>
-              <a
-                href="tel:+998785558618"
-                className="text-[10px] font-medium text-emerald-600 hover:text-emerald-700"
-              >
-                +998 78 555 86 18
-              </a>
-            </div>
           </div>
         </div>
       )}

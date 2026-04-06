@@ -579,6 +579,30 @@
       "description": "Professional cooling station for industrial freezers based on Bitzer compressor.",
       "specs": "Compressor: Bitzer | Unit: Complete set",
       "details": ["Ready Solution: All parts factory assembled", "Automation: Fully equipped control panel", "Energy: Maximum savings", "Application: Fruit-vegetable storage and meat processing"]
-    }
+    },
+  "ai_assistant": {
+    "welcome_msg": "Hello! I am EcoProm virtual assistant. I can help you with PIR panels, cold rooms, or installation.",
+    "tooltip": "Have a question?",
+    "status": "Online 24/7",
+    "typing": "Typing...",
+    "placeholder": "Type your message...",
+    "error_msg": "Sorry, no response received. Contact us: +998 78 555 86 18",
+    "connection_error": "Sorry, there is a connection problem.",
+    "products": {
+      "pir_pur": "PIR vs PUR",
+      "cold_room": "Cold rooms",
+      "doors": "Door types"
+    },
+    "quick_questions": [
+      "What is a PIR panel?",
+      "How to get the price?",
+      "Do you provide installation?",
+      "Delivery time?"
+    ],
+    "faq_items": [
+      { "question": "Warranty period?", "answer": "13 years" },
+      { "question": "Delivery time?", "answer": "5-7 working days" }
+    ]
+  }
   }
 }

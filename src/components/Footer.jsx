@@ -81,7 +81,7 @@ export default function Footer() {
             <div className="flex items-center gap-3">
               {/* Logo rasm */}
               <img 
-                src="/logo.png" 
+                src="/logo-white.png" 
                 alt="EcoProm Logo" 
                 className="w-24 h-24 object-contain rounded-xl"
               />
