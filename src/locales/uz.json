@@ -403,9 +403,11 @@
     "title_accent": "mahsulotlar",
     "subtitle": "Sifat va ishonch garovi - 13 yil kafolat",
     "details": "Batafsil",
+    "back_btn": "Orqaga qaytish",
     "about_product": "Mahsulot haqida",
     "warranty_text": "13 yil",
     "get_info": "Ma'lumot olish",
+    "order_btn": "Buyurtma berish",
     "tabs": {
       "specs": "Texnik",
       "features": "Xususiyat",
@@ -484,6 +486,98 @@
       "success": "Xabaringiz muvaffaqiyatli yuborildi! Tez orada siz bilan bog'lanamiz.",
       "error": "Xatolik yuz berdi. Iltimos, keyinroq qayta urinib ko'ring yoki biz bilan telefon orqali bog'lang.",
       "sending": "Yuborilmoqda..."
+    }
+  },
+  "items": {
+    "pir-devor": {
+      "name": "PIR Devor Paneli",
+      "description": "Bino devorlari uchun mo‘ljallangan, energiya tejamkor PIR sendvich panellari. Issiqlikni saqlash bo‘yicha eng yuqori ko‘rsatkichga ega.",
+      "specs": "Material: Poliizotsianurat | Qoplama: Ruxlangan po‘lat",
+      "details": ["Olovga chidamlilik: G1 klassi (yonmaydi)", "Zichlik: 40-42 kg/m³", "Qalinligi: 50mm dan 200mm gacha", "O‘rnatish: Yashirin va ochiq qulflash tizimi"]
+    },
+    "pur-tom": {
+      "name": "Tom yopish Paneli",
+      "description": "Yomg‘ir va qordan mukammal himoya qiluvchi, 5 qovurg‘ali (traposidal) tom sendvich panellari.",
+      "specs": "Turi: 5 qovurg‘ali | Qalinligi: 50-150mm",
+      "details": ["Gidroizolyatsiya: Suv o‘tkazmaslik kafolati", "Mustahkamlik: Yuqori yuklamalarga bardoshli", "Issiqlik saqlash: Sovuq va issiqdan himoya", "Ranglar: RAL katalogi bo‘yicha istalgan rang"]
+    },
+    "agregat": {
+      "name": "Zanglamaydigan PIR Panel",
+      "description": "Oziq-ovqat sanoati va farmatsevtika uchun maxsus, zanglamaydigan po‘latdan (nerjaveyka) ishlangan panellar.",
+      "specs": "Material: Nerjaveyka | To‘ldirgich: PIR",
+      "details": ["Gigiyena: Bakteriyalar ko‘paymaydigan silliq yuza", "Chidamlilik: Kislota va agressiv yuvish vositalariga bardoshli", "Standart: SanPiN talablariga to‘liq javob beradi", "Qoplama: AISI 304 yoki AISI 430 po‘lati"]
+    },
+    "eshik": {
+      "name": "Sovutgich Eshigi (Standart)",
+      "description": "O‘rtacha haroratli sovutgich kameralari uchun mo‘ljallangan, yengil va ishonchli eshik konstruksiyasi.",
+      "specs": "Turi: Bir tabaqali | Ochilish: O‘ngga/Chapga",
+      "details": ["Rama: Alyuminiy profilli", "Izolyatsiya: Penopoliuretan to‘ldirgichi", "Mexanizm: Xitoy yuqori sifatli furniturasi", "Uплотнитель: Sovuqqa chidamli rezina tasmalar"]
+    },
+    "profil": {
+      "name": "Sovutgich Eshigi (Alyuminiy)",
+      "description": "Alyuminiy rama bilan kuchaytirilgan, estetik jihatdan chiroyli va korroziyaga chidamli eshiklar.",
+      "specs": "Rama: Alyuminiy | To‘ldirgich: PUR",
+      "details": ["Material: Anodlangan alyuminiy", "Vazni: Juda yengil va qulay", "Xizmat muddati: 15 yildan ortiq", "O‘lchamlar: Mijoz xohishiga ko‘ra (Custom)"]
+    },
+    "burchak": {
+      "name": "Muzlatkich Eshigi (F3)",
+      "description": "Past haroratli (-25°C gacha) muzlatish kameralari uchun mo‘ljallangan maxsus eshik.",
+      "specs": "Harorat: -18°C dan -25°C gacha",
+      "details": ["Isitish: Eshik ramasi bo‘ylab isitish tili (TEN) mavjud", "Muzlashga qarshi: Eshik rezinalari muzlab qolmaydi", "Qalinligi: 100mm dan 120mm gacha", "Xavfsizlik: Ichkaridan ochish mexanizmi"]
+    },
+    "kondensator": {
+      "name": "Sanoat Eshigi (F4)",
+      "description": "Katta hajmdagi omborxonalar va zavodlar uchun mo‘ljallangan keng formatli sanoat eshiklari.",
+      "specs": "Turi: Sürgülü (Rulonli) yoki Menteşeli",
+      "details": ["Gabarit: Katta o‘lchamdagi texnikalar kirishi uchun qulay", "Mustahkamlik: Kuchaytirilgan petlyalar", "Himoya: Mexanik zarbalarga chidamlilik", "Avtomatika: Masofadan boshqarish imkoniyati (ixtiyoriy)"]
+    },
+    "kompressor": {
+      "name": "Kuchaytirilgan Eshik (F5)",
+      "description": "Doimiy va og‘ir yuklamalar ostida ishlovchi kameralar uchun 3 ta petlyali kuchaytirilgan model.",
+      "specs": "Rama: Chelik + Alyuminiy | Yuklama: Maksimal",
+      "details": ["Petlyalar: 3 ta yuqori yuklamaga chidamli petlya", "Konstruksiya: Deformatsiyaga uchramaydigan metall karkas", "Izolyatsiya: Yuqori zichlikdagi PUR", "Rang: RAL 9003 (Oq) yoki buyurtma asosida"]
+    },
+    "kopik": {
+      "name": "Maxsus Sovutish Eshigi",
+      "description": "Namlik va sovuqqa o‘ta chidamli, maxsus plastik qoplamali sovutish eshiklari.",
+      "specs": "Material: Kompozit | To‘ldirgich: PIR",
+      "details": ["Yuzasi: Namlikdan himoyalangan plastik/metall", "Tozalik: Tibbiyot va labaratoriyalar uchun mos", "Germetiklik: 100% havo o‘tkazmaslik", "Fiting: Zanglamaydigan furnitura"]
+    },
+    "fiting": {
+      "name": "Fitinglar va Mahkamlagichlar",
+      "description": "Sendvich panellar va sovutgich eshiklarini o‘rnatish uchun zarur bo‘lgan barcha butlovchi qismlar.",
+      "specs": "Turi: Komplektlovchi qismlar",
+      "details": ["Samorezlari: Har xil o‘lchamdagi panel buramalari", "Ugoloklar: Alyuminiy va plastik burchaklar", "Germetik: Sovuqqa chidamli silikonlar", "Petlyalar: Eshiklar uchun maxsus furnitura"]
+    },
+    "ventilyator": {
+      "name": "Sanoat Ventilyatori",
+      "description": "Sovutish tizimlari va kondensator bloklari uchun mo‘ljallangan yuqori unumdorlikdagi fanatlar.",
+      "specs": "Brend: Axial/Centrifugal | Kuchlanish: 220V/380V",
+      "details": ["Dvigatel: Kam energiya sarflovchi motor", "Shovqin: Past shovqin darajasi", "Himoya: IP54/IP55 suv va changdan himoya", "Pichoqlar: Alyuminiy yoki kompozit material"]
+    },
+    "panel": {
+      "name": "Sendvich Panel (Penoplast)",
+      "description": "Hamyonbop va yengil, penoplast (EPS) to‘ldirgichli sendvich panellar.",
+      "specs": "Zichlik: 15-25 kg/m³ | Narx: Tejamkor",
+      "details": ["Narxi: Eng arzon issiqlik izolyatsiya materiali", "Vazni: Juda yengil, montaj qilish oson", "Qo‘llanilishi: Vaqtinchalik binolar va do‘konlar", "To‘ldirgich: Ko‘piksimon polistirol (EPS)"]
+    },
+    "evaporator": {
+      "name": "Bitzer Porshenli Kompressori",
+      "description": "Germaniyaning Bitzer brendiga tegishli, sovutish tizimlarining yuragi hisoblangan ishonchli kompressor.",
+      "specs": "Brend: Bitzer (Germany) | Turi: Yarim germetik",
+      "details": ["Sifat: Dunyodagi 1-raqamli sovutish brendi", "Unumdorlik: Yuqori sovutish quvvati", "Ta’mirlash: Yarim germetik dizayn tufayli ta’mirlash oson", "Kafolat: Uzoq yillik xizmat muddati"]
+    },
+    "fiksator": {
+      "name": "Kondensator Agregati",
+      "description": "Havo bilan sovutiladigan, komplekt holatidagi tashqi sovutish bloki.",
+      "specs": "Turi: Havo sovutishli | Agregat",
+      "details": ["Tarkibi: Fanat, kondensator, resiver", "Sovutish agenti: R404A, R134a, R22 gazlariga mos", "Rama: Korroziyaga qarshi bo‘yalgan po‘lat", "Ishlash: Issiqlikni samarali chiqarib yuborish"]
+    },
+    "binolar": {
+      "name": "Bitzer Kondensatorli Agregat",
+      "description": "Bitzer kompressori asosida yig‘ilgan, sanoat muzlatkichlari uchun tayyor professional sovutish stansiyasi.",
+      "specs": "Kompressor: Bitzer | Agregat: Komplekt",
+      "details": ["Tayyor yechim: Barcha qismlari zavodda yig‘ilgan", "Avtomatika: To‘liq boshqaruv paneli bilan ta’minlangan", "Energiya: Maksimal darajada tejamkor", "Qo‘llanilishi: Meva-sabzavot omborlari va go‘sht sexlari"]
     }
   }
 }

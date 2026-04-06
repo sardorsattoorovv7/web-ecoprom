@@ -404,6 +404,7 @@
     "title_main": "Our",
     "title_accent": "products",
     "subtitle": "Quality and trust guarantee - 13 years warranty",
+    "back_btn": "Back to products list",
     "details": "Details",
     "about_product": "About product",
     "warranty_text": "13 years",
@@ -486,6 +487,98 @@
       "success": "Your message has been sent successfully! We will contact you shortly.",
       "error": "An error occurred. Please try again later or contact us by phone.",
       "sending": "Sending..."
+    }
+  },
+  "items": {
+    "pir-devor": {
+      "name": "PIR Wall Panel",
+      "description": "Energy-efficient PIR sandwich panels designed for building walls. Highest thermal insulation performance.",
+      "specs": "Material: Polyisocyanurate | Coating: Galvanized Steel",
+      "details": ["Fire Resistance: G1 Class", "Density: 40-42 kg/m³", "Thickness: 50mm to 200mm", "Installation: Hidden and open locking system"]
+    },
+    "pur-tom": {
+      "name": "Roofing Panel",
+      "description": "5-rib (trapezoidal) roof sandwich panels providing perfect protection against rain and snow.",
+      "specs": "Type: 5-rib | Thickness: 50-150mm",
+      "details": ["Waterproofing: Guaranteed non-leakage", "Strength: Resistant to high loads", "Thermal Retention: Protection from cold and heat", "Colors: Any color according to RAL catalog"]
+    },
+    "agregat": {
+      "name": "Stainless PIR Panel",
+      "description": "Special stainless steel panels for food industry and pharmaceutical applications.",
+      "specs": "Material: Stainless Steel | Filler: PIR",
+      "details": ["Hygiene: Smooth surface preventing bacterial growth", "Durability: Resistant to acids and aggressive detergents", "Standard: Full compliance with SanPiN regulations", "Coating: AISI 304 or AISI 430 steel"]
+    },
+    "eshik": {
+      "name": "Cooler Door (Standard)",
+      "description": "Lightweight and reliable door design for medium-temperature cold rooms.",
+      "specs": "Type: Single leaf | Opening: Right/Left",
+      "details": ["Frame: Aluminum profile", "Insulation: Polyurethane filler", "Mechanism: High-quality hardware", "Seal: Frost-resistant rubber strips"]
+    },
+    "profil": {
+      "name": "Cooler Door (Aluminum)",
+      "description": "Aluminum frame reinforced doors, aesthetically pleasing and corrosion-resistant.",
+      "specs": "Frame: Aluminum | Filler: PUR",
+      "details": ["Material: Anodized aluminum", "Weight: Very lightweight and convenient", "Service Life: Over 15 years", "Dimensions: Custom sizes available"]
+    },
+    "burchak": {
+      "name": "Freezer Door (F3)",
+      "description": "Special door designed for low-temperature freezing chambers (up to -25°C).",
+      "specs": "Temperature: -18°C to -25°C",
+      "details": ["Heating: Heating cable (HE) along the frame", "Anti-freeze: Door seals do not freeze", "Thickness: 100mm to 120mm", "Safety: Internal emergency release mechanism"]
+    },
+    "kondensator": {
+      "name": "Industrial Door (F4)",
+      "description": "Large-format industrial doors for big warehouses and factories.",
+      "specs": "Type: Sliding or Hinged",
+      "details": ["Dimensions: Suitable for large machinery entry", "Strength: Reinforced hinges", "Protection: Resistance to mechanical impacts", "Automation: Remote control option available"]
+    },
+    "kompressor": {
+      "name": "Reinforced Door (F5)",
+      "description": "Reinforced model with 3 hinges for rooms operating under constant heavy loads.",
+      "specs": "Frame: Steel + Aluminum | Load: Maximum",
+      "details": ["Hinges: 3 high-load reinforced hinges", "Construction: Non-deforming metal frame", "Insulation: High-density PUR", "Color: RAL 9003 (White) or custom"]
+    },
+    "kopik": {
+      "name": "Special Cooling Door",
+      "description": "Highly moisture and cold resistant doors with special plastic coating.",
+      "specs": "Material: Composite | Filler: PIR",
+      "details": ["Surface: Moisture-proof plastic/metal", "Cleanliness: Suitable for medical and lab use", "Airtight: 100% air-sealed", "Fittings: Stainless hardware"]
+    },
+    "fiting": {
+      "name": "Fittings and Fasteners",
+      "description": "All necessary components for installing sandwich panels and cold room doors.",
+      "specs": "Type: Component parts",
+      "details": ["Screws: Various sizes for panel fixing", "Corners: Aluminum and plastic corner profiles", "Sealant: Frost-resistant silicones", "Hinges: Special door hardware"]
+    },
+    "ventilyator": {
+      "name": "Industrial Fan",
+      "description": "High-performance fans for cooling systems and condenser blocks.",
+      "specs": "Brand: Axial/Centrifugal | Voltage: 220V/380V",
+      "details": ["Motor: Energy-saving motor", "Noise: Low noise level", "Protection: IP54/IP55 water and dust protection", "Blades: Aluminum or composite material"]
+    },
+    "panel": {
+      "name": "Sandwich Panel (EPS)",
+      "description": "Affordable and lightweight sandwich panels with expanded polystyrene (EPS) filler.",
+      "specs": "Density: 15-25 kg/m³ | Price: Budget",
+      "details": ["Cost: Cheapest thermal insulation material", "Weight: Very light, easy to install", "Application: Temporary buildings and shops", "Filler: Expanded polystyrene (EPS)"]
+    },
+    "evaporator": {
+      "name": "Bitzer Piston Compressor",
+      "description": "Reliable compressor from the German brand Bitzer, the heart of cooling systems.",
+      "specs": "Brand: Bitzer (Germany) | Type: Semi-hermetic",
+      "details": ["Quality: World's No. 1 cooling brand", "Performance: High cooling capacity", "Repair: Easy to repair due to semi-hermetic design", "Warranty: Long service life"]
+    },
+    "fiksator": {
+      "name": "Condensing Unit",
+      "description": "Air-cooled external cooling unit assembly.",
+      "specs": "Type: Air-cooled | Unit",
+      "details": ["Components: Fan, condenser, receiver", "Refrigerant: Compatible with R404A, R134a, R22", "Frame: Painted anti-corrosion steel", "Operation: Efficient heat dissipation"]
+    },
+    "binolar": {
+      "name": "Bitzer Condensing Unit",
+      "description": "Professional cooling station for industrial freezers based on Bitzer compressor.",
+      "specs": "Compressor: Bitzer | Unit: Complete set",
+      "details": ["Ready Solution: All parts factory assembled", "Automation: Fully equipped control panel", "Energy: Maximum savings", "Application: Fruit-vegetable storage and meat processing"]
     }
   }
 }
