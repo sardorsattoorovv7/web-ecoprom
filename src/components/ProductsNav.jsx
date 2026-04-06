@@ -54,17 +54,17 @@ export default function ProductsNav() {
         </div>
 
         {/* Tugmalarni ortaroqqa va rasm balandligiga moslab joylashtiramiz */}
-        <div className="absolute inset-x-0 top-[55%] -translate-y-1/2 flex justify-between px-2 md:px-20 z-30 pointer-events-none">
+        <div className="absolute inset-x-0 top-[65%] -translate-y-1/2 flex justify-between px-2 md:px-150 z-30 pointer-events-none">
           <button 
             onClick={() => scroll('left')}
-            className="pointer-events-auto bg-white/90 p-4 rounded-full shadow-xl border border-emerald-100 text-emerald-600 hover:bg-emerald-600 hover:text-white transition-all transform hover:scale-110 active:scale-95"
+            className="pointer-events-auto bg-white/0 p-4 rounded-full shadow-xl border border-emerald-100 text-emerald-600 hover:bg-emerald-600 hover:text-white transition-all transform hover:scale-110 active:scale-95"
           >
             <ArrowLeft size={24} />
           </button>
           
           <button 
             onClick={() => scroll('right')}
-            className="pointer-events-auto bg-white/90 p-4 rounded-full shadow-xl border border-emerald-100 text-emerald-600 hover:bg-emerald-600 hover:text-white transition-all transform hover:scale-110 active:scale-95"
+            className="pointer-events-auto bg-white/0 p-4 rounded-full shadow-xl border border-emerald-100 text-emerald-600 hover:bg-emerald-600 hover:text-white transition-all transform hover:scale-110 active:scale-95"
           >
             <ArrowRight size={24} />
           </button>
