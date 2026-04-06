@@ -19,6 +19,7 @@ const OurProduction = lazy(() => import("../components/OurProduction"));
 const AiAssistant = lazy(() => import("../components/AIAssistant"));
 const PartnerMarquee = lazy(() => import("../components/PartnerMarquee"));
 const CookieConsentBanner = lazy(() => import("../components/CookieConsentBanner"));
+import ProductsNav from '../components/ProductsNav';
 import ProductShowcase from "../components/ProductShowcase";
 /* ---------------- 1. COUNTER HOOK ---------------- */
 const useCounter = (end, duration = 2000) => {
@@ -509,7 +510,9 @@ export default function EcoPromMain({ onOpenCall }) {
             </div>
           </div>
         </section>
-              
+        <section id="products">
+          <ProductsNav />
+        </section>
         {/* Stats Section with Counters */}
         <div className="w-[full] flex justify-center bg-white">
           <div className="w-full max-w-7xl px-4 mb-10">

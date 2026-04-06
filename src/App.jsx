@@ -18,7 +18,7 @@ import News from "./pages/News";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
-
+import ProductDetail from "./pages/ProductDetail";
 // 1. Google Analytics-ni o'z ID raqamingiz bilan ishga tushiramiz
 ReactGA.initialize("G-8F1XE9QTXM");
 
@@ -55,6 +55,7 @@ export default function App() {
             
             {/* BU YERDA: /OurProducts ni kichik harfga o'zgartirdik */}
             <Route path="/ourproducts" element={<OurProducts />} />
+            <Route path="/products/:slug" element={<ProductDetail />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/news" element={<News />} />
             <Route path="/about" element={<About />} />

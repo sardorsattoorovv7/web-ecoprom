@@ -83,7 +83,7 @@ export default function Footer() {
               <img 
                 src="/logo.png" 
                 alt="EcoProm Logo" 
-                className="w-12 h-12 object-contain rounded-xl"
+                className="w-24 h-24 object-contain rounded-xl"
               />
               <div>
                 <span className="text-xl font-bold text-white">EcoProm</span>
