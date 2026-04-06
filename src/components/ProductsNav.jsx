@@ -29,7 +29,7 @@ export default function ProductsNav() {
   };
 
   return (
-    <div className="bg-white py-16 font-sans border-b border-gray-100 relative group">
+    <div className="bg-white w-[100%] d-flex justify-content-center py-16 font-sans border-b border-gray-100 relative group">
       <style>
         {`
           @keyframes float {
